@@ -8,21 +8,27 @@ with nixpkgs;
 
 pkgs.mkShell {
     buildInputs = [
+        stdenv
+        zlib
+        glib
+        pkg-config
+        libsoup
+        libappindicator
+        webkitgtk
+        openssl
+        patchelf
+        librsvg
+        gtk3
+        gdk-pixbuf
+        glib-networking
+    ];
+    nativeBuildInputs = with pkgs; [
         rust_channel
         cargo-edit
         nodejs
         yarn
-        libappindicator
+        appimage-run
         wget
         curl
-        webkitgtk
-        openssl
-        appimage-run
-        patchelf
-        librsvg
-        gtk3
-    ];
-    nativeBuildInputs = with pkgs; [
-        pkg-config
     ];
   }

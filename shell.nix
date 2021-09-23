@@ -31,4 +31,8 @@ pkgs.mkShell {
         wget
         curl
     ];
-  }
+}
+
+# https://github.com/NixOS/nixpkgs/issues/32580
+# It may be necessary to pass this variable before running:
+# WEBKIT_DISABLE_COMPOSITING_MODE=1 yarn tauri dev

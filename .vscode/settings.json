@@ -1,6 +1,9 @@
 {
-    "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
-    "rust-analyzer.diagnostics.disabled": [
-        "unresolved-macro-call"
-    ]
+  "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
+  "rust-analyzer.diagnostics.disabled": ["unresolved-macro-call"],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  }
 }

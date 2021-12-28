@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from "styled-components"
 
 export const AppWrapper = styled.div`
   text-align: center;
@@ -30,9 +30,9 @@ const SpinLogoAnimation = keyframes`
 `
 
 export const AppLogoRotate = styled(AppLogo)`
-    @media (prefers-reduced-motion: no-preference) {
-        animation: ${SpinLogoAnimation} infinite 20s linear;
-    }
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${SpinLogoAnimation} infinite 20s linear;
+  }
 `
 
 export const AppLink = styled.a`

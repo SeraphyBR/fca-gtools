@@ -21,6 +21,7 @@ pkgs.mkShell {
         gtk3
         gdk-pixbuf
         glib-networking
+        libselinux
     ];
     nativeBuildInputs = with pkgs; [
         rust_channel
@@ -30,6 +31,14 @@ pkgs.mkShell {
         appimage-run
         wget
         curl
+        # Use steam-run, for a fhs enviroment, allow vscode code-lldb debugger to run
+        # $ steam-run code .
+        # $ steam-run yarn cpyress:open
+        (steam.override {
+            extraPkgs = pkgs: [ pkg-config zsh ];
+            extraLibraries = pkgs: [ zlib openssl libselinux ];
+            nativeOnly = true;
+        }).run
     ];
 }
 

@@ -1,7 +1,7 @@
 import React from "react"
-import logo from "./logo.svg"
-import tauriCircles from "./tauri.svg"
-import tauriWord from "./wordmark.svg"
+import logo from "./assets/logo.svg"
+import tauriCircles from "./assets/tauri.svg"
+import tauriWord from "./assets/wordmark.svg"
 import { AppHeader, AppLink, AppLogo, AppLogoRotate, AppWrapper, InlineLogo } from "./App.style"
 
 const App: React.FC = () => {

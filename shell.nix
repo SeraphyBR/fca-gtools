@@ -2,6 +2,10 @@ let
     rust_overlay = import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz");
     nixpkgs = import <nixpkgs> { overlays = [ rust_overlay ]; };
     rust_channel = nixpkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+    my-python = nixpkgs.python3;
+    python-with-my-packages = my-python.withPackages (p: with p; [
+      xmltodict
+    ]);
 in
 
 with nixpkgs;
@@ -22,8 +26,13 @@ pkgs.mkShell {
         gdk-pixbuf
         glib-networking
         libselinux
+        # d-peeler
+        boost
+        # fca-tools
+        python-with-my-packages
     ];
     nativeBuildInputs = with pkgs; [
+        gcc
         rust_channel
         cargo-edit
         nodejs

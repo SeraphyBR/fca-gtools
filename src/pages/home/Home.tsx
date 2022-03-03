@@ -1,15 +1,17 @@
-import { emit, listen } from "@tauri-apps/api/event"
 import React, { useState } from "react"
 import logo from "../../assets/logo.svg"
 import tauriCircles from "../../assets/tauri.svg"
 import tauriWord from "../../assets/wordmark.svg"
+import { getTeste } from "../../services/backend"
 import * as S from "./Home.style"
 
 const Home: React.FC = () => {
   const [exibirTest, setExibirTest] = useState(false)
+  const [textoApi, setTextoApi] = useState("")
 
   const handleOnClick = () => {
     setExibirTest((v) => !v)
+    getTeste().then((value) => setTextoApi(value))
   }
 
   return (
@@ -29,6 +31,8 @@ const Home: React.FC = () => {
         {exibirTest && (
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
+            <br />
+            {textoApi}
           </p>
         )}
         <button onClick={handleOnClick}>teste tauri</button>

@@ -11,13 +11,13 @@ async fn hello_world() -> String {
 async fn hello_python() -> String {
   let gil = Python::acquire_gil();
   let py = gil.python();
-
-  String::from("")
+  let result = py.eval("'Hello Python'", None, None).unwrap();
+  result.to_string()
 }
 
 pub fn create_router() -> Router {
   Router::new()
-    .route("/", get(hello_world))
+    .route("/", get(hello_python))
     .layer(CorsLayer::new().allow_origin(cors::Any))
 }
 

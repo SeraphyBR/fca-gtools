@@ -4,7 +4,7 @@ import { DashboardTwoTone, InsertDriveFileTwoTone, SettingsTwoTone } from "@mui/
 
 const Sidebar: React.FC = () => {
   return (
-    <Drawer variant="persistent" anchor="left" open={true}>
+    <Drawer variant="permanent" anchor="left" open={true} PaperProps={{ sx: { width: "56px" } }}>
       <Tooltip title="Files" placement="right" arrow>
         <IconButton color="primary" size="large">
           <InsertDriveFileTwoTone sx={{ fontSize: "32px" }} />

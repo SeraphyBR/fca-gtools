@@ -1,7 +1,7 @@
 import { keyframes } from "@emotion/react"
 import styled from "@emotion/styled"
 
-export const AppWrapper = styled.div`
+export const HomeWrapper = styled.div`
   text-align: center;
 `
 

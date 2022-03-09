@@ -2781,6 +2781,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/roboto@npm:^4.5.3":
+  version: 4.5.3
+  resolution: "@fontsource/roboto@npm:4.5.3"
+  checksum: 5c25485184dcb9162834ef2633528b8c21812ae4bbb37e9a32f07b4db93226361d6b60fe71c61b60aeea7e9fe69be6c9d80b05eea477ec71f166a0fd3feb3df5
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1":
   version: 1.1.2
   resolution: "@gar/promisify@npm:1.1.2"
@@ -16602,6 +16609,7 @@ resolve@^2.0.0-next.3:
   dependencies:
     "@emotion/react": ^11.7.1
     "@emotion/styled": ^11.6.0
+    "@fontsource/roboto": ^4.5.3
     "@mui/icons-material": ^5.4.2
     "@mui/material": ^5.4.2
     "@tauri-apps/api": ^1.0.0-beta.8

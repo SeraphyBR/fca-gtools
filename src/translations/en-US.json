@@ -2,7 +2,13 @@
   "settings": {
     "title": "Settings",
     "options": {
-      "appearance": "Appearance",
+      "appearance": {
+        "label": "Appearance",
+        "values": {
+          "dark": "Dark",
+          "light": "Light"
+        }
+      },
       "language": "Language"
     }
   }

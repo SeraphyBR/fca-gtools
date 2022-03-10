@@ -9,36 +9,38 @@ import { useAppDispatch } from "../../redux/store"
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch()
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation("translation", { keyPrefix: "settings" })
 
   const themeMode = useSelector(getThemeSettings)
 
   return (
     <BasePage>
-      <div>
-        <Typography variant="h4">{t("settings.title")}</Typography>
-        <FormControl sx={{ marginTop: "8px" }}>
-          <Stack direction={"column"} spacing={4}>
-            <Stack direction={"row"} spacing={4}>
-              <p>{t("settings.options.appearance")}</p>
-              <Select
-                value={themeMode}
-                onChange={(event) => dispatch(settingsActions.setTheme(event.target.value as "light" | "dark"))}
-              >
-                <MenuItem value="dark">Dark</MenuItem>
-                <MenuItem value="light">Light</MenuItem>
-              </Select>
-            </Stack>
-            <Stack direction={"row"} spacing={4}>
-              <p>{t("settings.options.language")}</p>
-              <Select value={i18n.language} onChange={(event) => i18n.changeLanguage(event.target.value)}>
-                <MenuItem value="en-US">en-US</MenuItem>
-                <MenuItem value="pt-BR">pt-BR</MenuItem>
-              </Select>
-            </Stack>
+      <Typography variant="h4">{t("title")}</Typography>
+      <Stack direction={"column"} spacing={4} marginTop="8px">
+        <FormControl>
+          <Stack direction={"row"} spacing={4}>
+            <p>{t("options.appearance.label")}</p>
+            <Select
+              value={themeMode}
+              onChange={(event) => dispatch(settingsActions.setTheme(event.target.value as "light" | "dark"))}
+              sx={{ marginLeft: "auto" }}
+            >
+              <MenuItem value="dark">{t("options.appearance.values.dark")}</MenuItem>
+              <MenuItem value="light">{t("options.appearance.values.light")}</MenuItem>
+            </Select>
           </Stack>
         </FormControl>
-      </div>
+
+        <FormControl>
+          <Stack direction={"row"} spacing={4}>
+            <p>{t("options.language")}</p>
+            <Select value={i18n.language} onChange={(event) => i18n.changeLanguage(event.target.value)}>
+              <MenuItem value="en-US">en-US</MenuItem>
+              <MenuItem value="pt-BR">pt-BR</MenuItem>
+            </Select>
+          </Stack>
+        </FormControl>
+      </Stack>
     </BasePage>
   )
 }

@@ -3,6 +3,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { Route, Routes } from "react-router-dom"
 import Home from "./pages/home/Home"
+import Settings from "./pages/settings/Settings"
 import { getThemeSettings } from "./redux/settings/selectors"
 
 const App: React.FC = () => {
@@ -22,6 +23,7 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </ThemeProvider>
   )

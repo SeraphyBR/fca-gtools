@@ -16,7 +16,7 @@ const Home: React.FC = () => {
   return (
     <BasePage>
       <S.HomeWrapper>
-        <p>{textoApi}</p>
+        <p>teste</p>
         {exibirTest && (
           <p>
             Edit <code>src/App.tsx</code> and save to reload.

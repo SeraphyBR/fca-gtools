@@ -1,0 +1,9 @@
+{
+  "settings": {
+    "title": "Configurações",
+    "options": {
+      "appearance": "Aparência",
+      "language": "Linguagem"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
+import { useDispatch } from "react-redux"
 import settingsSlice from "./settings/slice"
 
 const store = configureStore({
@@ -8,5 +9,7 @@ const store = configureStore({
 })
 
 export type RootState = ReturnType<typeof store.getState>
+
+export const useAppDispatch = () => useDispatch<typeof store.dispatch>()
 
 export default store

@@ -14,6 +14,9 @@ const settingsSlice = createSlice({
   reducers: {
     setTheme: (state, action: PayloadAction<"light" | "dark">) => {
       state.theme = action.payload
+    },
+    toggleTheme: (state) => {
+      state.theme = state.theme === "light" ? "dark" : "light"
     }
   }
 })

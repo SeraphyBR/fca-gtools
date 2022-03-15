@@ -46,7 +46,6 @@ pkgs.mkShell {
         (steam.override {
             extraPkgs = pkgs: [ pkg-config zsh ];
             extraLibraries = pkgs: [ zlib openssl libselinux ];
-            nativeOnly = true;
         }).run
     ];
 }

@@ -9,14 +9,14 @@ import { useAppDispatch } from "../../redux/store"
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch()
-  const { t, i18n } = useTranslation("translation", { keyPrefix: "settings" })
+  const { t, i18n } = useTranslation("translation", { keyPrefix: "pages.settings" })
 
   const themeMode = useSelector(getThemeSettings)
 
   return (
     <BasePage>
       <Typography variant="h4">{t("title")}</Typography>
-      <Stack direction={"column"} spacing={4} marginTop="8px">
+      <Stack direction={"column"} spacing={4} marginTop="16px">
         <FormControl>
           <Stack direction={"row"} spacing={4}>
             <p>{t("options.appearance.label")}</p>
@@ -34,7 +34,10 @@ const Settings: React.FC = () => {
         <FormControl>
           <Stack direction={"row"} spacing={4}>
             <p>{t("options.language")}</p>
-            <Select value={i18n.language} onChange={(event) => i18n.changeLanguage(event.target.value)}>
+            <Select
+              value={i18n.language}
+              onChange={(event) => dispatch(settingsActions.setLanguage(event.target.value))}
+            >
               <MenuItem value="en-US">en-US</MenuItem>
               <MenuItem value="pt-BR">pt-BR</MenuItem>
             </Select>

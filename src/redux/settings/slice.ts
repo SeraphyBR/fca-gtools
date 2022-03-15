@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 type SettingsState = {
   theme: "light" | "dark"
+  language: string
 }
 
 const initialState: SettingsState = {
-  theme: "dark"
+  theme: "dark",
+  language: "en-US"
 }
 
 const settingsSlice = createSlice({
@@ -17,6 +19,9 @@ const settingsSlice = createSlice({
     },
     toggleTheme: (state) => {
       state.theme = state.theme === "light" ? "dark" : "light"
+    },
+    setLanguage: (state, action: PayloadAction<string>) => {
+      state.language = action.payload
     }
   }
 })

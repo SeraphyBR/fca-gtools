@@ -1,15 +1,20 @@
 {
-  "settings": {
-    "title": "Configurações",
-    "options": {
-      "appearance": {
-        "label": "Aparência",
-        "values": {
-          "dark": "Escuro",
-          "light": "Claro"
-        }
-      },
-      "language": "Linguagem"
+  "pages": {
+    "settings": {
+      "title": "Configurações",
+      "options": {
+        "appearance": {
+          "label": "Aparência",
+          "values": {
+            "dark": "Escuro",
+            "light": "Claro"
+          }
+        },
+        "language": "Linguagem"
+      }
+    },
+    "files": {
+      "title": "Arquivos"
     }
   }
 }

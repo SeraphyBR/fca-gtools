@@ -8,6 +8,7 @@ use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions};
 use sqlx::SqlitePool;
 
 mod router;
+mod routes;
 
 #[derive(Clone)]
 pub struct ApiContext {

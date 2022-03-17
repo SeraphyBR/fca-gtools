@@ -34,7 +34,9 @@ pkgs.mkShell {
     nativeBuildInputs = with pkgs; [
         gcc
         rust_channel
+        sqlite
         cargo-edit
+        sqlx-cli
         nodejs
         yarn
         appimage-run

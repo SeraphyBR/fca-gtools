@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { useDispatch } from "react-redux"
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist"
 import storage from "redux-persist/lib/storage"
+import filesSlice from "./files/slice"
 import settingsSlice from "./settings/slice"
 
 const persistedReducer = persistReducer(
@@ -9,7 +10,7 @@ const persistedReducer = persistReducer(
     key: "root",
     storage
   },
-  combineReducers({ settings: settingsSlice.reducer })
+  combineReducers({ settings: settingsSlice.reducer, files: filesSlice.reducer })
 )
 
 const store = configureStore({

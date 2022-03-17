@@ -1,6 +1,6 @@
 import React from "react"
 import { Drawer, IconButton, Tooltip } from "@mui/material"
-import { DashboardTwoTone, InsertDriveFileTwoTone, SettingsTwoTone } from "@mui/icons-material"
+import { AnalyticsTwoTone, DashboardTwoTone, InsertDriveFileTwoTone, SettingsTwoTone } from "@mui/icons-material"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
@@ -25,7 +25,7 @@ const Sidebar: React.FC = () => {
       </Tooltip>
       <Tooltip title="Data" placement="right" arrow>
         <IconButton color="primary" size="large">
-          <DashboardTwoTone sx={{ fontSize: "32px" }} />
+          <AnalyticsTwoTone sx={{ fontSize: "32px" }} />
         </IconButton>
       </Tooltip>
       <Tooltip title={t("settings.title").toString()} placement="right" arrow>

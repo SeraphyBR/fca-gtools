@@ -1,4 +1,4 @@
-import { FormControl, MenuItem, Select, Stack, Typography } from "@mui/material"
+import { Divider, FormControl, MenuItem, Select, Stack, Typography } from "@mui/material"
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
@@ -16,9 +16,10 @@ const Settings: React.FC = () => {
   return (
     <BasePage>
       <Typography variant="h4">{t("title")}</Typography>
-      <Stack direction={"column"} spacing={4} marginTop="16px">
+      <Divider sx={{ margin: "8px 0px" }} />
+      <Stack direction="column" spacing={4} marginTop="16px">
         <FormControl>
-          <Stack direction={"row"} spacing={4}>
+          <Stack direction="row" spacing={4}>
             <p>{t("options.appearance.label")}</p>
             <Select
               value={themeMode}
@@ -32,7 +33,7 @@ const Settings: React.FC = () => {
         </FormControl>
 
         <FormControl>
-          <Stack direction={"row"} spacing={4}>
+          <Stack direction="row" spacing={4}>
             <p>{t("options.language")}</p>
             <Select
               value={i18n.language}

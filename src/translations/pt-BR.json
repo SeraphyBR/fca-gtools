@@ -14,7 +14,10 @@
       }
     },
     "files": {
-      "title": "Arquivos"
+      "title": "Arquivos",
+      "filedrop": {
+        "label": "Arraste e solte o arquivo aqui, ou clique para selecionar"
+      }
     }
   }
 }

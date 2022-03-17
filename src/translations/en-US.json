@@ -14,7 +14,10 @@
       }
     },
     "files": {
-      "title": "Files"
+      "title": "Files",
+      "filedrop": {
+        "label": "Drag 'n' drop some files here, or click to select files"
+      }
     }
   }
 }

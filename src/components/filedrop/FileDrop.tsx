@@ -3,13 +3,13 @@ import { useDropzone } from "react-dropzone"
 import * as S from "./FileDrop.style"
 
 type FileDropProps = {
-  onDrop?: () => void
+  onDrop?: (files: File[]) => void
   label: string
 }
 
 const FileDrop: React.FC<FileDropProps> = (props) => {
   const handleOnDrop = (acceptedFiles: File[]) => {
-    console.log(acceptedFiles)
+    props.onDrop?.(acceptedFiles)
   }
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleOnDrop })

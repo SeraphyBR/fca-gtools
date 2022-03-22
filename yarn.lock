@@ -4122,6 +4122,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/uuid@npm:^8.3.4":
+  version: 8.3.4
+  resolution: "@types/uuid@npm:8.3.4"
+  checksum: 6f11f3ff70f30210edaa8071422d405e9c1d4e53abbe50fdce365150d3c698fe7bbff65c1e71ae080cbfb8fded860dbb5e174da96fdbbdfcaa3fb3daa474d20f
+  languageName: node
+  linkType: hard
+
 "@types/ws@npm:^8.2.2":
   version: 8.2.2
   resolution: "@types/ws@npm:8.2.2"
@@ -16782,6 +16789,7 @@ resolve@^2.0.0-next.3:
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     "@types/react-redux": ^7.1.23
+    "@types/uuid": ^8.3.4
     axios: ^0.26.0
     cypress: ^9.5.0
     husky: ^7.0.4
@@ -16797,6 +16805,7 @@ resolve@^2.0.0-next.3:
     react-scripts: 5.0.0
     redux-persist: ^6.0.0
     typescript: ^4.5.4
+    uuid: ^8.3.2
     web-vitals: ^1.0.1
   languageName: unknown
   linkType: soft

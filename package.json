@@ -24,6 +24,7 @@
     "react-scripts": "5.0.0",
     "redux-persist": "^6.0.0",
     "typescript": "^4.5.4",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -66,6 +67,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.23",
+    "@types/uuid": "^8.3.4",
     "cypress": "^9.5.0"
   },
   "packageManager": "yarn@3.1.1"

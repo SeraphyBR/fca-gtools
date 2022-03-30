@@ -7,8 +7,10 @@ use dotenv::dotenv;
 use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions};
 use sqlx::SqlitePool;
 
+mod models;
 mod router;
 mod routes;
+mod utils;
 
 #[derive(Clone)]
 pub struct ApiContext {

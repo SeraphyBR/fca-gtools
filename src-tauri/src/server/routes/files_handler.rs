@@ -1,7 +1,14 @@
 use std::sync::Arc;
 
-use crate::server::{models::AddProjectDto, utils::extract_struct_from_multipart, ApiContext};
-use axum::extract::{self, Multipart};
+use crate::server::{
+  models::{AddProjectDto, Project},
+  utils::extract_struct_from_multipart,
+  ApiContext,
+};
+use axum::{
+  extract::{self, Multipart},
+  Json,
+};
 use uuid::Uuid;
 
 type Context = extract::Extension<Arc<ApiContext>>;
@@ -10,6 +17,8 @@ pub async fn add_project_with_file_handler(ctx: Context, multipart: Multipart) {
   let new_project = extract_struct_from_multipart::<AddProjectDto>(multipart)
     .await
     .unwrap();
+
+  println!("{:?}", new_project);
 
   let new_project_id = Uuid::new_v4().to_string();
   let blob_ref = new_project.blob.as_ref();
@@ -27,4 +36,13 @@ pub async fn add_project_with_file_handler(ctx: Context, multipart: Multipart) {
   .execute(&ctx.db)
   .await
   .unwrap();
+}
+
+pub async fn get_projects_handler(ctx: Context) -> Json<Vec<Project>> {
+  let result = sqlx::query_as!(Project, "SELECT id, name FROM projects")
+    .fetch_all(&ctx.db)
+    .await
+    .unwrap();
+
+  Json(result)
 }

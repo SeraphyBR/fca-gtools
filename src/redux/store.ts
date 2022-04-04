@@ -5,12 +5,21 @@ import storage from "redux-persist/lib/storage"
 import filesSlice from "./files/slice"
 import settingsSlice from "./settings/slice"
 
+const filesPersistConfig = {
+  key: "files",
+  storage,
+  blacklist: ["projects"]
+}
+
 const persistedReducer = persistReducer(
   {
     key: "root",
     storage
   },
-  combineReducers({ settings: settingsSlice.reducer, files: filesSlice.reducer })
+  combineReducers({
+    settings: settingsSlice.reducer,
+    files: persistReducer(filesPersistConfig, filesSlice.reducer)
+  })
 )
 
 const store = configureStore({

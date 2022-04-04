@@ -3,7 +3,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import BasePage from "../../components/basepage/BasePage"
-import { getThemeSettings } from "../../redux/settings/selectors"
+import { getThemeSettingsSelector } from "../../redux/settings/selectors"
 import { settingsActions } from "../../redux/settings/slice"
 import { useAppDispatch } from "../../redux/store"
 
@@ -11,7 +11,7 @@ const Settings: React.FC = () => {
   const dispatch = useAppDispatch()
   const { t, i18n } = useTranslation("translation", { keyPrefix: "pages.settings" })
 
-  const themeMode = useSelector(getThemeSettings)
+  const themeMode = useSelector(getThemeSettingsSelector)
 
   return (
     <BasePage>

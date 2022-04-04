@@ -6,11 +6,11 @@ import { Route, Routes } from "react-router-dom"
 import Files from "./pages/files/Files"
 import Home from "./pages/home/Home"
 import Settings from "./pages/settings/Settings"
-import { getLanguageSettings, getThemeSettings } from "./redux/settings/selectors"
+import { getLanguageSettingsSelector, getThemeSettingsSelector } from "./redux/settings/selectors"
 
 const App: React.FC = () => {
-  const themeMode = useSelector(getThemeSettings)
-  const language = useSelector(getLanguageSettings)
+  const themeMode = useSelector(getThemeSettingsSelector)
+  const language = useSelector(getLanguageSettingsSelector)
   const { i18n } = useTranslation()
 
   useEffect(() => {

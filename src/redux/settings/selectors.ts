@@ -1,5 +1,5 @@
 import { RootState } from "../store"
 
-export const getThemeSettings = (state: RootState) => state.settings.theme
+export const getThemeSettingsSelector = (state: RootState) => state.settings.theme
 
-export const getLanguageSettings = (state: RootState) => state.settings.language
+export const getLanguageSettingsSelector = (state: RootState) => state.settings.language

@@ -1,3 +1,3 @@
 mod files;
 
-pub use files::AddProjectDto;
+pub use files::*;

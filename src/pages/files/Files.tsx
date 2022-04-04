@@ -1,23 +1,30 @@
 import { Divider, Grid, Typography } from "@mui/material"
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import BasePage from "../../components/basepage/BasePage"
 import FileDrop from "../../components/filedrop/FileDrop"
-import { Project } from "../../models/project"
 import FileCard from "./card/FileCard"
-import { v4 as uuidv4 } from "uuid"
-import { postNewProject } from "../../services/backend"
+import { postAddProject } from "../../services/backend"
+import { useSelector } from "react-redux"
+import { getProjectsSelector } from "../../redux/files/selectors"
+import { useAppDispatch } from "../../redux/store"
+import { fetchProjects } from "../../redux/files/actions"
 
 const Files: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
+  const dispatch = useAppDispatch()
 
-  const [projects, setProjects] = useState<Project[]>([])
+  const projects = useSelector(getProjectsSelector)
 
   const handleOnDropFile = (files: File[]) => {
-    postNewProject({ name: files[0].name, filename: files[0].name, blob: files[0] }).then(() =>
+    postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] }).then(() =>
       console.log("Adicionado")
     )
   }
+
+  useEffect(() => {
+    dispatch(fetchProjects)
+  }, [dispatch])
 
   const projectCounter = projects.length.toString().padStart(2, "0")
 

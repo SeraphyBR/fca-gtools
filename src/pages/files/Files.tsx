@@ -6,6 +6,7 @@ import FileDrop from "../../components/filedrop/FileDrop"
 import { Project } from "../../models/project"
 import FileCard from "./card/FileCard"
 import { v4 as uuidv4 } from "uuid"
+import { postNewProject } from "../../services/backend"
 
 const Files: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
@@ -13,11 +14,9 @@ const Files: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([])
 
   const handleOnDropFile = (files: File[]) => {
-    const newProjects: Project[] = files.map((file) => ({
-      id: uuidv4(),
-      name: file.name
-    }))
-    setProjects((p) => [...p, ...newProjects])
+    postNewProject({ name: files[0].name, filename: files[0].name, blob: files[0] }).then(() =>
+      console.log("Adicionado")
+    )
   }
 
   const projectCounter = projects.length.toString().padStart(2, "0")

@@ -1,6 +1,6 @@
-use std::{any::Any, borrow::Borrow};
+use std::any::Any;
 
-use axum::extract::Multipart;
+use axum::extract::{multipart::MultipartError, Multipart};
 
 pub trait FieldNames {
   fn field_names() -> &'static [&'static str];
@@ -12,7 +12,7 @@ macro_rules! zoom_and_enhance {
         use crate::server::utils::FieldNames;
         use std::any::Any;
 
-        #[derive(Default)]
+        #[derive(Default, Debug)]
         pub struct $name {
             $($v $fname: $ftype),*
         }
@@ -41,16 +41,21 @@ pub(crate) use zoom_and_enhance;
 
 pub async fn extract_struct_from_multipart<T: FieldNames + Default>(
   mut multipart: Multipart,
-) -> Result<T, String> {
+) -> Result<T, MultipartError> {
   let mut result_struct = T::default();
   let field_names = T::field_names();
 
-  while let Some(field) = multipart.next_field().await.unwrap() {
+  while let Some(field) = multipart.next_field().await? {
     let name = field.name().unwrap().to_string();
 
     if field_names.contains(&name.as_str()) {
-      let value = field.text().await.unwrap();
-      result_struct.set_field_by_name(&name.as_str(), &value)
+      if let Some(_) = field.file_name() {
+        let bytes = field.bytes().await?;
+        result_struct.set_field_by_name(&name.as_str(), &bytes)
+      } else {
+        let value = field.text().await?;
+        result_struct.set_field_by_name(&name.as_str(), &value)
+      }
     }
   }
 

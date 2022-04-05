@@ -18,6 +18,9 @@
       "filedrop": {
         "label": "Arraste e solte o arquivo aqui, ou clique para selecionar"
       }
+    },
+    "data": {
+      "title": "Dados"
     }
   }
 }

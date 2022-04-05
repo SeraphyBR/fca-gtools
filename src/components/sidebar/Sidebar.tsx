@@ -16,6 +16,10 @@ const Sidebar: React.FC = () => {
     navigate("/files")
   }
 
+  const handleOnClickDataIcon = () => {
+    navigate("/data")
+  }
+
   return (
     <Drawer variant="permanent" anchor="left" open={true} PaperProps={{ sx: { width: "56px" } }}>
       <Tooltip title={t("files.title").toString()} placement="right" arrow>
@@ -24,7 +28,7 @@ const Sidebar: React.FC = () => {
         </IconButton>
       </Tooltip>
       <Tooltip title="Data" placement="right" arrow>
-        <IconButton color="primary" size="large">
+        <IconButton color="primary" size="large" onClick={handleOnClickDataIcon}>
           <AnalyticsTwoTone sx={{ fontSize: "32px" }} />
         </IconButton>
       </Tooltip>

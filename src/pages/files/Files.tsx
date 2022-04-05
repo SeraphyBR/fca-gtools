@@ -16,15 +16,16 @@ const Files: React.FC = () => {
 
   const projects = useSelector(getProjectsSelector)
 
-  const handleOnDropFile = (files: File[]) => {
-    postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] }).then(() =>
-      console.log("Adicionado")
-    )
-  }
-
   useEffect(() => {
-    dispatch(fetchProjects)
+    dispatch(fetchProjects())
   }, [dispatch])
+
+  const handleOnDropFile = (files: File[]) => {
+    postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] }).then(() => {
+      console.log("Adicionado")
+      dispatch(fetchProjects())
+    })
+  }
 
   const projectCounter = projects.length.toString().padStart(2, "0")
 
@@ -36,7 +37,7 @@ const Files: React.FC = () => {
       <Divider sx={{ margin: "8px 0px" }} />
       <div>
         <Typography variant="subtitle1" mb="8px">
-          {projectCounter} Projetos carregados
+          {projectCounter} Projetos
         </Typography>
         <Grid container spacing={2}>
           {projects.map((p) => (

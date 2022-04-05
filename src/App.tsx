@@ -3,6 +3,7 @@ import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { Route, Routes } from "react-router-dom"
+import Data from "./pages/data/Data"
 import Files from "./pages/files/Files"
 import Home from "./pages/home/Home"
 import Settings from "./pages/settings/Settings"
@@ -32,6 +33,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/files" element={<Files />} />
+        <Route path="/data" element={<Data />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </ThemeProvider>

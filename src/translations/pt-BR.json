@@ -11,6 +11,9 @@
           }
         },
         "language": "Linguagem"
+      },
+      "buttons": {
+        "deleteAll": "Apagar todos os dados salvos"
       }
     },
     "files": {

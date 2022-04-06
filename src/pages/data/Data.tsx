@@ -1,5 +1,5 @@
 import { Divider, Typography } from "@mui/material"
-import React from "react"
+import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -12,9 +12,11 @@ const Data: React.FC = () => {
 
   const project = useSelector(getWorkingProject)
 
-  if (project === undefined) {
-    navigate("/files")
-  }
+  useEffect(() => {
+    if (project === undefined) {
+      navigate("/files")
+    }
+  }, [project, navigate])
 
   return (
     <BasePage>

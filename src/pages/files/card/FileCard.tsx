@@ -1,4 +1,4 @@
-import { Accordion, AccordionSummary, Card, CardContent, Typography } from "@mui/material"
+import { Card, CardContent } from "@mui/material"
 import React from "react"
 import { Project } from "../../../models/project"
 

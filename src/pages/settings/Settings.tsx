@@ -1,4 +1,5 @@
-import { Divider, FormControl, MenuItem, Select, Stack, Typography } from "@mui/material"
+import { DeleteForeverTwoTone } from "@mui/icons-material"
+import { Button, Divider, FormControl, MenuItem, Select, Stack, Typography } from "@mui/material"
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
@@ -44,6 +45,14 @@ const Settings: React.FC = () => {
             </Select>
           </Stack>
         </FormControl>
+
+        <Button
+          variant="contained"
+          startIcon={<DeleteForeverTwoTone />}
+          sx={{ width: "fit-content", textTransform: "none" }}
+        >
+          {t("buttons.deleteAll")}
+        </Button>
       </Stack>
     </BasePage>
   )

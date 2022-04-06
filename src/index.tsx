@@ -1,6 +1,6 @@
 import React from "react"
-import ReactDOM from "react-dom"
-import App from "./App"
+import { createRoot } from "react-dom/client"
+import AppRouter from "./AppRouter"
 import reportWebVitals from "./reportWebVitals"
 import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
@@ -15,17 +15,19 @@ import "@fontsource/roboto/400.css"
 import "@fontsource/roboto/500.css"
 import "@fontsource/roboto/700.css"
 
-ReactDOM.render(
+const container = document.getElementById("root")
+const root = createRoot(container as HTMLElement)
+
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          <App />
+          <AppRouter />
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 )
 
 // If you want to start measuring performance in your app, pass a function

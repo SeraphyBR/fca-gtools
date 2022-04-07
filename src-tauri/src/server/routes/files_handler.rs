@@ -7,13 +7,17 @@ use crate::server::{
 };
 use axum::{
   extract::{self, Multipart},
+  http::StatusCode,
   Json,
 };
 use uuid::Uuid;
 
 type Context = extract::Extension<Arc<ApiContext>>;
 
-pub async fn add_project_with_file_handler(ctx: Context, multipart: Multipart) {
+pub async fn add_project_with_file_handler(
+  ctx: Context,
+  multipart: Multipart,
+) -> Result<(), StatusCode> {
   let new_project = extract_struct_from_multipart::<AddProjectDto>(multipart)
     .await
     .unwrap();
@@ -36,6 +40,8 @@ pub async fn add_project_with_file_handler(ctx: Context, multipart: Multipart) {
   .execute(&ctx.db)
   .await
   .unwrap();
+
+  Ok(())
 }
 
 pub async fn get_projects_handler(ctx: Context) -> Json<Vec<Project>> {
@@ -45,4 +51,11 @@ pub async fn get_projects_handler(ctx: Context) -> Json<Vec<Project>> {
     .unwrap();
 
   Json(result)
+}
+
+pub async fn delete_all_projects(ctx: Context) {
+  sqlx::query!("DELETE FROM projects")
+    .execute(&ctx.db)
+    .await
+    .unwrap();
 }

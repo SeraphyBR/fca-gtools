@@ -31,7 +31,13 @@ const AppRouter: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <SnackbarProvider maxSnack={3}>
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right"
+        }}
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/files" element={<Files />} />

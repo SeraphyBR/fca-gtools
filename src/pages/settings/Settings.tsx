@@ -1,18 +1,43 @@
 import { DeleteForeverTwoTone } from "@mui/icons-material"
 import { Button, Divider, FormControl, MenuItem, Select, Stack, Typography } from "@mui/material"
-import React from "react"
+import { useSnackbar } from "notistack"
+import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import BasePage from "../../components/basepage/BasePage"
+import DeleteAllDialog from "../../dialogs/deleteAll/DeleteAll"
 import { getThemeSettingsSelector } from "../../redux/settings/selectors"
 import { settingsActions } from "../../redux/settings/slice"
 import { useAppDispatch } from "../../redux/store"
+import { deleteAllProjects } from "../../services/backend"
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch()
   const { t, i18n } = useTranslation("translation", { keyPrefix: "pages.settings" })
+  const { enqueueSnackbar } = useSnackbar()
 
+  const [openDeleteAllDialog, setOpenDeleteAllDialog] = useState(false)
   const themeMode = useSelector(getThemeSettingsSelector)
+
+  const handleOnCloseDeleteAllDialog = () => {
+    setOpenDeleteAllDialog(false)
+  }
+
+  const handleDeleteAllOnClick = () => {
+    setOpenDeleteAllDialog(true)
+  }
+
+  const handleOnDelete = () => {
+    handleOnCloseDeleteAllDialog()
+
+    deleteAllProjects()
+      .then(() => {
+        enqueueSnackbar("Deletado com sucesso", { variant: "success" })
+      })
+      .catch(() => {
+        enqueueSnackbar("Algo de errado ocorreu ao deletar", { variant: "error" })
+      })
+  }
 
   return (
     <BasePage>
@@ -50,10 +75,12 @@ const Settings: React.FC = () => {
           variant="contained"
           startIcon={<DeleteForeverTwoTone />}
           sx={{ width: "fit-content", textTransform: "none" }}
+          onClick={handleDeleteAllOnClick}
         >
           {t("buttons.deleteAll")}
         </Button>
       </Stack>
+      <DeleteAllDialog open={openDeleteAllDialog} onClose={handleOnCloseDeleteAllDialog} onDelete={handleOnDelete} />
     </BasePage>
   )
 }

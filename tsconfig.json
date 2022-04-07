@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": ["es2017", "dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vite/client"],
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -15,8 +16,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "sourceMap": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "composite": true
   },
-  "include": ["src", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", "vite.config.ts", "src/translations/*.json"]
 }

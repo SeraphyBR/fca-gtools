@@ -25,5 +25,13 @@
     "data": {
       "title": "Dados"
     }
+  },
+  "notifications": {
+    "success": {
+      "deleteAll": "Todos os dados foram apagados com sucesso!"
+    },
+    "error": {
+      "deleteAll": "Algo de errado ocorreu ao deletar"
+    }
   }
 }

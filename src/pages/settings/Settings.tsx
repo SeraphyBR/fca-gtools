@@ -14,6 +14,7 @@ import { deleteAllProjects } from "../../services/backend"
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch()
   const { t, i18n } = useTranslation("translation", { keyPrefix: "pages.settings" })
+  const { t: tn } = useTranslation("translation", { keyPrefix: "notifications" })
   const { enqueueSnackbar } = useSnackbar()
 
   const [openDeleteAllDialog, setOpenDeleteAllDialog] = useState(false)
@@ -32,10 +33,10 @@ const Settings: React.FC = () => {
 
     deleteAllProjects()
       .then(() => {
-        enqueueSnackbar("Deletado com sucesso", { variant: "success" })
+        enqueueSnackbar(tn("success.deleteAll"), { variant: "success" })
       })
       .catch(() => {
-        enqueueSnackbar("Algo de errado ocorreu ao deletar", { variant: "error" })
+        enqueueSnackbar(tn("error.deleteAll"), { variant: "error" })
       })
   }
 

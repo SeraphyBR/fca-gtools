@@ -25,5 +25,13 @@
     "data": {
       "title": "Data"
     }
+  },
+  "notifications": {
+    "success": {
+      "deleteAll": "All data has been sucessfully erased!"
+    },
+    "error": {
+      "deleteAll": "Something went wrong while deleting"
+    }
   }
 }

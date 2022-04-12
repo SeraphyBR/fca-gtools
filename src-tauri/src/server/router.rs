@@ -15,5 +15,10 @@ pub fn api_router() -> Router {
   Router::new()
     .route("/", get(hello_python))
     .nest("/files", routes::files_router())
-    .layer(CorsLayer::new().allow_origin(cors::Any))
+    .nest("/fca", routes::fca_tools_router())
+    .layer(
+      CorsLayer::new()
+        .allow_origin(cors::Any)
+        .allow_methods(cors::Any),
+    )
 }

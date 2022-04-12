@@ -1,18 +1,11 @@
-use std::sync::Arc;
-
 use crate::server::{
   models::{AddProjectDto, Project},
   utils::extract_struct_from_multipart,
-  ApiContext,
 };
-use axum::{
-  extract::{self, Multipart},
-  http::StatusCode,
-  Json,
-};
+use axum::{extract::Multipart, http::StatusCode, Json};
 use uuid::Uuid;
 
-type Context = extract::Extension<Arc<ApiContext>>;
+use crate::server::routes::Context;
 
 pub async fn add_project_with_file_handler(
   ctx: Context,

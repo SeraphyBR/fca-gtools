@@ -29,14 +29,6 @@ uuid = { version = "0.8", features = ["serde", "v4"] }
 tracing = "0.1"
 tracing-subscriber = { version="0.3", features = ["env-filter"] }
 
-[dependencies.pyo3]
-version = "0.16.2"
-features = ["auto-initialize"]
-
-#[dependencies.pyo3]
-#version = "0.15.1"
-#features = ["auto-initialize"]
-
 [features]
 default = [ "custom-protocol" ]
 custom-protocol = [ "tauri/custom-protocol" ]

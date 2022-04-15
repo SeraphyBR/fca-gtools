@@ -1,5 +1,13 @@
 use serde::{Deserialize, Serialize};
 
+// For convert TriadicContext::relations into Vec<TriadicIncidence>, used in python
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TriadicIncidence {
+  pub obj: String,
+  pub attr: String,
+  pub conditions: Vec<String>,
+}
+
 /// Model used by the json format of triadic input from lattice miner
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TriadicContext {
@@ -10,10 +18,21 @@ pub struct TriadicContext {
   pub relations: Vec<Vec<Vec<String>>>,
 }
 
-// For convert TriadicContext::relations into Vec<TriadicIncidence>, used in python
-#[derive(Serialize, Deserialize, Debug)]
-pub struct TriadicIncidence {
-  pub obj: String,
-  pub attr: String,
-  pub conditions: Vec<String>,
+impl TriadicContext {
+  pub fn get_list_incidences(&self) -> Vec<TriadicIncidence> {
+    let mut incidences: Vec<TriadicIncidence> = Vec::new();
+
+    for (o, x) in self.relations.iter().enumerate() {
+      for (a, y) in x.iter().enumerate() {
+        let incidence = TriadicIncidence {
+          obj: self.objects[o].clone(),
+          attr: self.attributes[a].clone(),
+          conditions: y.clone(),
+        };
+        incidences.push(incidence)
+      }
+    }
+
+    incidences
+  }
 }

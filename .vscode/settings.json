@@ -5,5 +5,9 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[svg]": {
     "editor.defaultFormatter": "jock.svg"
-  }
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "python.analysis.extraPaths": ["./src-flask/lib/fca-tools/src"]
 }

@@ -1,12 +1,13 @@
 from flask import Flask
-import sys
+from src.fcatools.dyadic.dyadic_incidence import DyadicIncidence
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    teste = DyadicIncidence("a", ["tes", "te23"])
+    return vars(teste)
 
 
 if __name__ == "__main__":

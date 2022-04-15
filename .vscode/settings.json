@@ -8,6 +8,5 @@
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.python"
-  },
-  "python.analysis.extraPaths": ["./src-flask/lib/fca-tools/src"]
+  }
 }

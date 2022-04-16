@@ -19,7 +19,14 @@ pub async fn get_fca_data(ctx: Context, Path(project_id): Path<Uuid>) {
   if let Some(blob) = query_data.fileblob {
     let triadic_context: TriadicContext = serde_json::from_slice(blob.as_slice()).unwrap();
 
-    println!("{:?}", triadic_context);
+    let resp = reqwest::Client::new()
+      .post("http://127.0.0.1:5000/fcatools")
+      .json(&triadic_context.get_python_struct())
+      .send()
+      .await
+      .unwrap();
+
+    println!("{:?}", resp);
   } else {
     todo!()
   }

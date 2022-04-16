@@ -29,3 +29,8 @@ export const getProjects = async () => {
 export const deleteAllProjects = async () => {
   await api.delete("/files")
 }
+
+export const getTeste2 = async (id: string) => {
+  const response = await api.get(`/fca/${id}`)
+  return response.data
+}

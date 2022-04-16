@@ -18,6 +18,15 @@ pub struct TriadicContext {
   pub relations: Vec<Vec<Vec<String>>>,
 }
 
+// Model used by pthon library fcatools
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TriadicContextPy {
+  pub objects: Vec<String>,
+  pub attributes: Vec<String>,
+  pub conditions: Vec<String>,
+  pub incidences: Vec<TriadicIncidence>,
+}
+
 impl TriadicContext {
   pub fn get_list_incidences(&self) -> Vec<TriadicIncidence> {
     let mut incidences: Vec<TriadicIncidence> = Vec::new();
@@ -34,5 +43,14 @@ impl TriadicContext {
     }
 
     incidences
+  }
+
+  pub fn get_python_struct(&self) -> TriadicContextPy {
+    TriadicContextPy {
+      objects: self.objects.clone(),
+      attributes: self.attributes.clone(),
+      conditions: self.conditions.clone(),
+      incidences: self.get_list_incidences(),
+    }
   }
 }

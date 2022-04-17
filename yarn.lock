@@ -1134,7 +1134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/hoist-non-react-statics@npm:^3.3.0, @types/hoist-non-react-statics@npm:^3.3.1":
+"@types/hoist-non-react-statics@npm:^3.3.1":
   version: 3.3.1
   resolution: "@types/hoist-non-react-statics@npm:3.3.1"
   dependencies:
@@ -1186,12 +1186,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^17.0.14":
-  version: 17.0.14
-  resolution: "@types/react-dom@npm:17.0.14"
+"@types/react-dom@npm:^18.0.1":
+  version: 18.0.1
+  resolution: "@types/react-dom@npm:18.0.1"
   dependencies:
     "@types/react": "*"
-  checksum: b54cd0ef573236b3d87fe7493e6d1c36d8b4ca37a3b46364272a5c91ac178e3296b68ea1aeb299ce68f12ad663c5720ee890d0539b14881c6754bdcbdb0befa0
+  checksum: 6c183e2e50240b77ed767cd968fe061ef4f2b47f84da5ec9e412a767d68c9a004d1f6ccca4295a5aa2c3ee723377e59006a2031f3767c00d8ac9e240a51bb142
   languageName: node
   linkType: hard
 
@@ -1201,18 +1201,6 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 6abb7c47d54f012272650df8a962a28bd82f219291e5ef8b4dfa7fe0bb98ae243b060bf9fbe8ceff6213141794855a006db194b490b00ffd15842ae19d0ce1f0
-  languageName: node
-  linkType: hard
-
-"@types/react-redux@npm:^7.1.23":
-  version: 7.1.23
-  resolution: "@types/react-redux@npm:7.1.23"
-  dependencies:
-    "@types/hoist-non-react-statics": ^3.3.0
-    "@types/react": "*"
-    hoist-non-react-statics: ^3.3.0
-    redux: ^4.0.0
-  checksum: 7cedb0f20806ce67255f676fab2d4d9534c12705d43636df95224cfa77fdf5a2e792dc76c6e072c02cad1c88030aea822c14f36fe85d459b898ee68fcff6f05c
   languageName: node
   linkType: hard
 
@@ -1236,14 +1224,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17.0.43":
-  version: 17.0.43
-  resolution: "@types/react@npm:17.0.43"
+"@types/react@npm:^18.0.5":
+  version: 18.0.5
+  resolution: "@types/react@npm:18.0.5"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 981b0993f5b3ea9d3488b8cc883201e8ae47ba7732929f788f450a79fd72829e658080d5084e67caa008e58d989b0abc1d5f36ff0a1cda09315ea3a3c0c9dc11
+  checksum: 70d3336d43ef25509fa89ef3278f57fdf1945fc921e69b7890a78ab9a52a55ee38e2f13aa71eb4f6032b7311e7557860ce8836c1acf3028304989571c9736a96
   languageName: node
   linkType: hard
 
@@ -2965,12 +2953,12 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"i18next@npm:^21.6.14":
-  version: 21.6.14
-  resolution: "i18next@npm:21.6.14"
+"i18next@npm:^21.6.16":
+  version: 21.6.16
+  resolution: "i18next@npm:21.6.16"
   dependencies:
     "@babel/runtime": ^7.17.2
-  checksum: bc6e117874d9b69a39d6ad322851d25f75908c7fa977c8771b98ba7b0273aceba96e82326ed0855b8db098b1490c5a0decbe62b4f61dac84fdc677c2fdc52bb8
+  checksum: f210130fd835ebd90bfdc6a497d3c1d992261174e030e995a03d070b099acba680e495a376eb9255bb8eb68b4e518fe8ea96ec71507e194fd043aecb3397c9a2
   languageName: node
   linkType: hard
 
@@ -3686,9 +3674,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"notistack@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "notistack@npm:2.0.3"
+"notistack@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "notistack@npm:2.0.4"
   dependencies:
     clsx: ^1.1.0
     hoist-non-react-statics: ^3.3.0
@@ -3696,14 +3684,14 @@ fsevents@~2.3.2:
     "@emotion/react": ^11.4.1
     "@emotion/styled": ^11.3.0
     "@mui/material": ^5.0.0
-    react: ^16.8.0 || ^17.0.0
-    react-dom: ^16.8.0 || ^17.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   peerDependenciesMeta:
     "@emotion/react":
       optional: true
     "@emotion/styled":
       optional: true
-  checksum: a01c72d877b7636a625ac0709d4160559e2abc5882592498841e300bf0b2a88d4983884a0e00296d119d33c5c37c0df8cb89cf5fe89b696293a947e363e5c2a2
+  checksum: 11e47b3f0359847362d9a78fe5866a55080d073a8e395bc7a24c95c7c8230893510334425f143607124833c9344de08049c04a90e59d33e9dbf5c00fe6fb997e
   languageName: node
   linkType: hard
 
@@ -4040,9 +4028,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^11.15.6":
-  version: 11.15.6
-  resolution: "react-i18next@npm:11.15.6"
+"react-i18next@npm:^11.16.6":
+  version: 11.16.6
+  resolution: "react-i18next@npm:11.16.6"
   dependencies:
     "@babel/runtime": ^7.14.5
     html-escaper: ^2.0.2
@@ -4055,7 +4043,7 @@ fsevents@~2.3.2:
       optional: true
     react-native:
       optional: true
-  checksum: ac9b903e411c2f1cdc544119678c6d902058acb6449534cb4bf751bf4caeaca8d935d66a85bd347709e8b010a0cd10b34ac88500ee077dbf7b9024acb512a019
+  checksum: ed9701036b4e0f446db0381d27162c82418e2244117f6a52b91c7603c6b5e9cb68434a7f625b4cf7287a7650b999916473dcbdf6ab7fc5dedbeaddc2fd03fc3c
   languageName: node
   linkType: hard
 
@@ -4080,9 +4068,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react-redux@npm:8.0.0-beta.4":
-  version: 8.0.0-beta.4
-  resolution: "react-redux@npm:8.0.0-beta.4"
+"react-redux@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "react-redux@npm:8.0.0"
   dependencies:
     "@babel/runtime": ^7.12.1
     "@types/hoist-non-react-statics": ^3.3.1
@@ -4091,13 +4079,21 @@ fsevents@~2.3.2:
     react-is: ^18.0.0
     use-sync-external-store: ^1.0.0
   peerDependencies:
-    react: ^18.0.0
+    "@types/react": ^16.8 || ^17.0 || ^18.0
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+    react-native: ">=0.59"
+    redux: ^4
   peerDependenciesMeta:
+    "@types/react":
+      optional: true
     react-dom:
       optional: true
     react-native:
       optional: true
-  checksum: 587def905039846ac369ec77c5efd069c646fa900c75893c68bd255c303e01de525bfd0c883000308f78c543fc7b16c71027befd4ea6a173ddb4b4cc31990887
+    redux:
+      optional: true
+  checksum: 466c36e49062fb71b7ea747d6a9d7e0f30ce3d2b657e04958fc35c3d66e5f7f277e3588b095cbb663b807f1ff6d826c3dc771586460610c8f916112d56b46281
   languageName: node
   linkType: hard
 
@@ -4201,7 +4197,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"redux@npm:^4.0.0, redux@npm:^4.1.2":
+"redux@npm:^4.1.2":
   version: 4.1.2
   resolution: "redux@npm:4.1.2"
   dependencies:
@@ -4747,24 +4743,23 @@ fsevents@~2.3.2:
     "@tauri-apps/api": ^1.0.0-rc.3
     "@tauri-apps/cli": ^1.0.0-rc.7
     "@types/node": ^12.0.0
-    "@types/react": ^17.0.43
-    "@types/react-dom": ^17.0.14
-    "@types/react-redux": ^7.1.23
+    "@types/react": ^18.0.5
+    "@types/react-dom": ^18.0.1
     "@types/uuid": ^8.3.4
     "@vitejs/plugin-react": ^1.3.0
     axios: ^0.26.0
     cypress: ^9.5.0
     husky: ^7.0.4
-    i18next: ^21.6.14
+    i18next: ^21.6.16
     lint-staged: ^12.1.4
-    notistack: ^2.0.3
+    notistack: ^2.0.4
     prettier: ^2.5.1
     react: ^18.0.0
     react-dom: ^18.0.0
     react-dropzone: ^12.0.4
     react-flow-renderer: ^10.1.0
-    react-i18next: ^11.15.6
-    react-redux: 8.0.0-beta.4
+    react-i18next: ^11.16.6
+    react-redux: ^8.0.0
     react-router-dom: 6
     redux-persist: ^6.0.0
     typescript: ^4.6.3

@@ -2,7 +2,11 @@ import { Paper } from "@mui/material"
 import React from "react"
 import Sidebar from "../sidebar/Sidebar"
 
-const BasePage: React.FC = (props) => {
+type BasePageProps = {
+  children: React.ReactNode
+}
+
+const BasePage: React.FC<BasePageProps> = (props) => {
   return (
     <div>
       <Sidebar />

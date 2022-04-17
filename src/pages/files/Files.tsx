@@ -9,20 +9,28 @@ import { useSelector } from "react-redux"
 import { getProjectsSelector } from "../../redux/files/selectors"
 import { useAppDispatch } from "../../redux/store"
 import { fetchProjects } from "../../redux/files/actions"
+import { useSnackbar } from "notistack"
 
 const Files: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
   const dispatch = useAppDispatch()
+  const { enqueueSnackbar } = useSnackbar()
 
   const projects = useSelector(getProjectsSelector)
 
   useEffect(() => {
-    dispatch(fetchProjects())
-  }, [dispatch])
+    if (projects.length === 0) {
+      dispatch(fetchProjects())
+        .unwrap()
+        .catch(() => {
+          enqueueSnackbar("Ocorreu um erro ao buscar os projetos", { variant: "error" })
+        })
+    }
+  }, [dispatch, projects.length])
 
   const handleOnDropFile = (files: File[]) => {
     postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] }).then(() => {
-      console.log("Adicionado")
+      enqueueSnackbar("Adicionado com sucesso!", { variant: "success" })
       dispatch(fetchProjects())
     })
   }

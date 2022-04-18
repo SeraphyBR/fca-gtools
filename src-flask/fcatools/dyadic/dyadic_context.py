@@ -6,6 +6,7 @@ import csv
 
 from .dyadic_incidence import DyadicIncidence
 
+
 class DyadicContext:
     def __init__(self, incidences, objects, attributes):
         self.incidences: List[DyadicIncidence] = incidences
@@ -29,13 +30,16 @@ class DyadicContext:
 
     def write_dyadic_context_data(self, path, entries_delimiter=' ', attributes_delimiter=','):
         with open(path, mode='w', newline='', encoding='utf-8') as dyadic_file:
-            writer = csv.writer(dyadic_file, delimiter=entries_delimiter)
+            writer = csv.writer(
+                dyadic_file, delimiter=entries_delimiter, lineterminator='\n')
 
             for i in self.incidences:
                 attrs = attributes_delimiter.join(i.attrs)
                 writer.writerow([i.obj, attrs])
-
-        dyadic_file.close()
+        with open(path) as myFile:
+            lines = myFile.readlines()
+        with open(path, mode='w', newline='', encoding='utf-8') as myFile:
+            myFile.writelines([item for item in lines[:-1]])
 
     @staticmethod
     def read_dyadic_context_data(path, entries_delimiter=' ', attrs_delimiter=',') -> DyadicContext:
@@ -47,7 +51,8 @@ class DyadicContext:
 
         incidences = []
         for rec in rdr:
-            assert len(rec) == 2, "Dyadic contexts should contain only objects and attributes"
+            assert len(
+                rec) == 2, "Dyadic contexts should contain only objects and attributes"
 
             obj = str(rec[0].strip())
             if obj not in objects:

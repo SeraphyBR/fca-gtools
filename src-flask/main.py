@@ -1,6 +1,8 @@
 from typing import List
 from flask import request
 from flask import Flask
+from flask import jsonify
+from flask.json import JSONEncoder
 from fcatools.triadic.triadic_context import TriadicContext
 from fcatools.dyadic.dyadic_concept import DyadicConcept
 from fcatools.triadic.triadic_incidence import TriadicIncidence
@@ -9,6 +11,22 @@ from fcatools.dyadic.dyadic_generator import DyadicGenerator
 from fcatools.triadic.triadic_association_rule import TriadicAssociationRule
 
 app = Flask(__name__)
+
+
+class MyJSONEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, TriadicAssociationRule):
+            return {
+                'left_side': list(obj.left_side),
+                'right_side': list(obj.right_side),
+                'condition': list(obj.condition),
+                'support': obj.support,
+                'confidence': obj.confidence
+            }
+        return super(MyJSONEncoder, self).default(obj)
+
+
+app.json_encoder = MyJSONEncoder
 
 
 @app.route("/")
@@ -39,26 +57,16 @@ def fca_tools():
             generators)
 
         bacars_implication_rules, bacars_association_rules = TriadicAssociationRule.calculate_bacars_from_dyadic_rules(
-            dyadic_association_rules, '-')
+            dyadic_association_rules, '.')
         bcaars_implication_rules, bcaars_association_rules = TriadicAssociationRule.calculate_bcaars_from_dyadic_rules(
-            dyadic_association_rules, '-')
-        print('\nBACARS Rules:')
-        print('implications:')
-        for value in bacars_implication_rules:
-            print(value)
-        print('associations:')
-        for value in bacars_association_rules:
-            print(value)
+            dyadic_association_rules, '.')
 
-        print('\nBCAARS Rules:')
-        print('implications:')
-        for value in bcaars_implication_rules:
-            print(value)
-        print('associations:')
-        for value in bcaars_association_rules:
-            print(value)
-
-        return vars(concepts[0])
+        return jsonify(
+            bacars_implication_rules=bacars_implication_rules,
+            bacars_association_rules=bacars_association_rules,
+            bcaars_association_rules=bcaars_association_rules,
+            bcaars_implication_rules=bcaars_implication_rules
+        )
     return
 
 

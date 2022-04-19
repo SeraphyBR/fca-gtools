@@ -19,14 +19,14 @@ const Files: React.FC = () => {
   const projects = useSelector(getProjectsSelector)
 
   useEffect(() => {
-    if (projects.length === 0) {
-      dispatch(fetchProjects())
-        .unwrap()
-        .catch(() => {
-          enqueueSnackbar("Ocorreu um erro ao buscar os projetos", { variant: "error" })
-        })
-    }
-  }, [dispatch, projects.length])
+    const promise = dispatch(fetchProjects())
+
+    promise.unwrap().catch(() => {
+      enqueueSnackbar("Ocorreu um erro ao buscar os projetos", { variant: "error" })
+    })
+
+    return () => promise.abort()
+  }, [dispatch])
 
   const handleOnDropFile = (files: File[]) => {
     postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] }).then(() => {

@@ -1,3 +1,4 @@
+import { FcatoolsTriadicData } from "../models/data"
 import { AddProjectDto, Project } from "../models/project"
 import api from "./api"
 
@@ -30,7 +31,8 @@ export const deleteAllProjects = async () => {
   await api.delete("/files")
 }
 
-export const getTeste2 = async (id: string) => {
-  const response = await api.get(`/fca/${id}`)
+export const getDataFromFcatools = async (id: string) => {
+  const response = await api.get<FcatoolsTriadicData>(`/fca/${id}`)
+  console.log(response.data)
   return response.data
 }

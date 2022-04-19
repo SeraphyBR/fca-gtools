@@ -1,9 +1,12 @@
-use axum::extract::Path;
+use axum::{extract::Path, Json};
 use uuid::Uuid;
 
-use crate::server::{models::TriadicContext, routes::Context};
+use crate::server::{
+  models::{FcatoolsTriadicData, TriadicContext},
+  routes::Context,
+};
 
-pub async fn get_fca_data(ctx: Context, Path(project_id): Path<Uuid>) {
+pub async fn get_fca_data(ctx: Context, Path(project_id): Path<Uuid>) -> Json<FcatoolsTriadicData> {
   let id = project_id.to_string();
 
   struct QueryData {
@@ -26,12 +29,10 @@ pub async fn get_fca_data(ctx: Context, Path(project_id): Path<Uuid>) {
       .await
       .unwrap();
 
-    println!("{:?}", resp);
+    let data = resp.json::<FcatoolsTriadicData>().await.unwrap();
+
+    Json(data)
   } else {
     todo!()
   }
-
-  // criar a struct python com os dados do arquivo em cada campo
-  // executar funções python do fca_tools
-  todo!()
 }

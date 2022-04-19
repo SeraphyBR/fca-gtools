@@ -27,6 +27,23 @@ pub struct TriadicContextPy {
   pub incidences: Vec<TriadicIncidence>,
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TriadicAssociationRule {
+  pub left_side: Vec<String>,
+  pub right_side: Vec<String>,
+  pub condition: Vec<String>,
+  pub support: f64,
+  pub confidence: f64,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct FcatoolsTriadicData {
+  pub bacars_implication_rules: Vec<TriadicAssociationRule>,
+  pub bacars_association_rules: Vec<TriadicAssociationRule>,
+  pub bcaars_implication_rules: Vec<TriadicAssociationRule>,
+  pub bcaars_association_rules: Vec<TriadicAssociationRule>,
+}
+
 impl TriadicContext {
   pub fn get_list_incidences(&self) -> Vec<TriadicIncidence> {
     let mut incidences: Vec<TriadicIncidence> = Vec::new();

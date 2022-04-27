@@ -9,7 +9,8 @@ export const Dropzone = styled.div`
   color: #bdbdbd;
   outline: none;
   display: flex;
-  min-height: 140px;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 100%;
 `

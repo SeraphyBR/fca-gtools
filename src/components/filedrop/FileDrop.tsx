@@ -1,3 +1,4 @@
+import { Box } from "@mui/material"
 import React from "react"
 import { useDropzone } from "react-dropzone"
 import * as S from "./FileDrop.style"
@@ -15,12 +16,12 @@ const FileDrop: React.FC<FileDropProps> = (props) => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleOnDrop })
 
   return (
-    <section>
+    <Box component="section" height="100%" width="100%">
       <S.Dropzone {...getRootProps()}>
         <input {...getInputProps()} />
         <span>{props.label}</span>
       </S.Dropzone>
-    </section>
+    </Box>
   )
 }
 

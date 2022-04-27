@@ -1,5 +1,5 @@
-import { Divider, Grid, Typography } from "@mui/material"
-import React, { useEffect } from "react"
+import { Box, Button, Divider, Grid, Typography } from "@mui/material"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import BasePage from "../../components/basepage/BasePage"
 import FileDrop from "../../components/filedrop/FileDrop"
@@ -10,11 +10,14 @@ import { getProjectsSelector } from "../../redux/files/selectors"
 import { useAppDispatch } from "../../redux/store"
 import { fetchProjects } from "../../redux/files/actions"
 import { useSnackbar } from "notistack"
+import DialogModal from "../../components/dialogmodal/DialogModal"
+import { Add, ArrowDownwardRounded } from "@mui/icons-material"
 
 const Files: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
   const dispatch = useAppDispatch()
   const { enqueueSnackbar } = useSnackbar()
+  const [openModal, setOpenModal] = useState(false)
 
   const projects = useSelector(getProjectsSelector)
 
@@ -41,12 +44,21 @@ const Files: React.FC = () => {
     <BasePage>
       <Typography variant="h4">{t("title")}</Typography>
       <Divider sx={{ margin: "8px 0px" }} />
-      <FileDrop label={t("filedrop.label")} onDrop={handleOnDropFile} />
-      <Divider sx={{ margin: "8px 0px" }} />
       <div>
-        <Typography variant="subtitle1" mb="8px">
-          {projectCounter} Projetos
-        </Typography>
+        <Box mb="8px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
+          <Typography variant="subtitle1">{projectCounter} Contextos adicionados</Typography>
+          <Button
+            variant="contained"
+            sx={{ ml: "auto" }}
+            startIcon={<ArrowDownwardRounded />}
+            onClick={() => setOpenModal(true)}
+          >
+            Importar contexto
+          </Button>
+          <Button variant="contained" startIcon={<Add />}>
+            Criar novo contexto
+          </Button>
+        </Box>
         <Grid container spacing={2}>
           {projects.map((p) => (
             <Grid item key={p.id}>
@@ -55,6 +67,11 @@ const Files: React.FC = () => {
           ))}
         </Grid>
       </div>
+      <DialogModal title="Adicione" open={openModal} onClose={() => setOpenModal(false)}>
+        <Box height="320px">
+          <FileDrop label={t("filedrop.label")} onDrop={handleOnDropFile} />
+        </Box>
+      </DialogModal>
     </BasePage>
   )
 }

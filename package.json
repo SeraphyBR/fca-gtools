@@ -37,6 +37,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "tauri": "tauri",
+    "flask:serve": "sh -c 'source ./src-flask/.venv/bin/activate && python src-flask/main.py'",
+    "dev:all": "concurrently 'yarn:start' 'yarn:flask:serve' 'yarn:tauri dev'",
     "cypress:open": "cypress open"
   },
   "eslintConfig": {
@@ -62,6 +64,7 @@
     "@types/react-dom": "^18.0.1",
     "@types/uuid": "^8.3.4",
     "@vitejs/plugin-react": "^1.3.0",
+    "concurrently": "^7.1.0",
     "cypress": "^9.5.0",
     "vite-plugin-svgr": "^1.1.0",
     "vite-tsconfig-paths": "^3.4.1"

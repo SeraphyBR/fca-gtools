@@ -45,7 +45,7 @@ const Sidebar: React.FC = () => {
   return (
     <Drawer variant="permanent" anchor="left" open={true} PaperProps={{ sx: { width: "56px", overflow: "hidden" } }}>
       {pageButtons.map((b) => (
-        <Box {...b.customBoxProps} {...activeBoxProps(b.id)}>
+        <Box key={b.id} {...b.customBoxProps} {...activeBoxProps(b.id)}>
           <Tooltip title={t(b.id + ".title").toString()} placement="right" arrow>
             <IconButton
               color="primary"

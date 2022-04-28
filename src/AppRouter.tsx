@@ -4,6 +4,7 @@ import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { Route, Routes } from "react-router-dom"
+import Sidebar from "./components/sidebar/Sidebar"
 import Data from "./pages/data/Data"
 import Files from "./pages/files/Files"
 import Home from "./pages/home/Home"
@@ -38,12 +39,15 @@ const AppRouter: React.FC = () => {
           horizontal: "right"
         }}
       >
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/files" element={<Files />} />
-          <Route path="/data" element={<Data />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
+        <Sidebar />
+        <div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/files" element={<Files />} />
+            <Route path="/data" element={<Data />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </div>
       </SnackbarProvider>
     </ThemeProvider>
   )

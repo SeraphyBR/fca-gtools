@@ -1,42 +1,63 @@
 import React from "react"
-import { Drawer, IconButton, Tooltip } from "@mui/material"
+import { Box, BoxProps, Drawer, IconButton, SxProps, Theme, Tooltip } from "@mui/material"
 import { AnalyticsTwoTone, DashboardTwoTone, InsertDriveFileTwoTone, SettingsTwoTone } from "@mui/icons-material"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const { t } = useTranslation("translation", { keyPrefix: "pages" })
 
-  const handleOnClickSettingsIcon = () => {
-    navigate("/settings")
+  const activeBoxProps = (route: string) => {
+    const isActive = location.pathname.includes(route)
+
+    return {
+      bgcolor: isActive ? (theme: Theme) => theme.palette.primary.main + "33" : undefined,
+      borderLeft: isActive ? (theme: Theme) => "3px solid " + theme.palette.primary.main : undefined
+    } as BoxProps
   }
 
-  const handleOnClickFilesIcon = () => {
-    navigate("/files")
+  const activeIconButtonSxProps = (route: string) => {
+    const isActive = location.pathname.includes(route)
+
+    return {
+      ml: isActive ? "-3px" : undefined
+    } as SxProps<Theme>
   }
 
-  const handleOnClickDataIcon = () => {
-    navigate("/data")
-  }
+  const pageButtons = [
+    {
+      id: "files",
+      IconComponent: InsertDriveFileTwoTone
+    },
+    {
+      id: "data",
+      IconComponent: AnalyticsTwoTone
+    },
+    {
+      id: "settings",
+      IconComponent: SettingsTwoTone,
+      customBoxProps: { mt: "auto" } as BoxProps
+    }
+  ]
 
   return (
-    <Drawer variant="permanent" anchor="left" open={true} PaperProps={{ sx: { width: "56px" } }}>
-      <Tooltip title={t("files.title").toString()} placement="right" arrow>
-        <IconButton color="primary" size="large" onClick={handleOnClickFilesIcon}>
-          <InsertDriveFileTwoTone sx={{ fontSize: "32px" }} />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Data" placement="right" arrow>
-        <IconButton color="primary" size="large" onClick={handleOnClickDataIcon}>
-          <AnalyticsTwoTone sx={{ fontSize: "32px" }} />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title={t("settings.title").toString()} placement="right" arrow>
-        <IconButton color="primary" size="large" onClick={handleOnClickSettingsIcon} sx={{ marginTop: "auto" }}>
-          <SettingsTwoTone sx={{ fontSize: "32px" }} />
-        </IconButton>
-      </Tooltip>
+    <Drawer variant="permanent" anchor="left" open={true} PaperProps={{ sx: { width: "56px", overflow: "hidden" } }}>
+      {pageButtons.map((b) => (
+        <Box {...b.customBoxProps} {...activeBoxProps(b.id)}>
+          <Tooltip title={t(b.id + ".title").toString()} placement="right" arrow>
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => navigate("/" + b.id)}
+              sx={activeIconButtonSxProps(b.id)}
+            >
+              <b.IconComponent sx={{ fontSize: "32px" }} />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      ))}
     </Drawer>
   )
 }

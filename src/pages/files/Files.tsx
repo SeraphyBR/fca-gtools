@@ -11,7 +11,7 @@ import { useAppDispatch } from "../../redux/store"
 import { fetchProjects } from "../../redux/files/actions"
 import { useSnackbar } from "notistack"
 import DialogModal from "../../components/dialogmodal/DialogModal"
-import { Add, ArrowDownwardRounded } from "@mui/icons-material"
+import { AddRounded, ArrowDownwardRounded } from "@mui/icons-material"
 
 const Files: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
@@ -45,7 +45,7 @@ const Files: React.FC = () => {
       <Typography variant="h4">{t("title")}</Typography>
       <Divider sx={{ margin: "8px 0px" }} />
       <div>
-        <Box mb="8px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
+        <Box mb="24px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
           <Typography variant="subtitle1">{projectCounter} Contextos adicionados</Typography>
           <Button
             variant="contained"
@@ -55,7 +55,7 @@ const Files: React.FC = () => {
           >
             Importar contexto
           </Button>
-          <Button variant="contained" startIcon={<Add />}>
+          <Button variant="contained" startIcon={<AddRounded />}>
             Criar novo contexto
           </Button>
         </Box>

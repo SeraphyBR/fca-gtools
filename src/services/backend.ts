@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from "axios"
 import { FcatoolsTriadicData } from "../models/data"
 import { AddProjectDto, Project } from "../models/project"
 import api from "./api"
@@ -21,9 +22,8 @@ export const postAddProject = async (newProject: AddProjectDto) => {
   })
 }
 
-export const getProjects = async () => {
-  const response = await api.get<Project[]>("/files")
-
+export const getProjects = async (config?: AxiosRequestConfig<any>) => {
+  const response = await api.get<Project[]>("/files", config)
   return response.data
 }
 

@@ -12,6 +12,8 @@ import { fetchProjects } from "../../redux/files/actions"
 import { useSnackbar } from "notistack"
 import DialogModal from "../../components/dialogmodal/DialogModal"
 import { AddRounded, ArrowDownwardRounded } from "@mui/icons-material"
+import { AxiosError } from "axios"
+import { TaskAbortError } from "@reduxjs/toolkit"
 
 const Files: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
@@ -24,7 +26,8 @@ const Files: React.FC = () => {
   useEffect(() => {
     const promise = dispatch(fetchProjects())
 
-    promise.unwrap().catch(() => {
+    promise.unwrap().catch((error: AxiosError | TaskAbortError) => {
+      if (error.name === "AbortError") return
       enqueueSnackbar("Ocorreu um erro ao buscar os projetos", { variant: "error" })
     })
 
@@ -32,10 +35,15 @@ const Files: React.FC = () => {
   }, [dispatch])
 
   const handleOnDropFile = (files: File[]) => {
-    postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] }).then(() => {
-      enqueueSnackbar("Adicionado com sucesso!", { variant: "success" })
-      dispatch(fetchProjects())
-    })
+    setOpenModal(false)
+    postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] })
+      .then(() => {
+        enqueueSnackbar("Adicionado com sucesso!", { variant: "success" })
+        dispatch(fetchProjects())
+      })
+      .catch(() => {
+        enqueueSnackbar("Ocorreu um erro ao adicionar!", { variant: "error" })
+      })
   }
 
   const projectCounter = projects.length.toString().padStart(2, "0")

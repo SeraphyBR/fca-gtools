@@ -1,3 +1,4 @@
+import os
 from typing import List
 from flask import request
 from flask import Flask
@@ -9,6 +10,7 @@ from fcatools.triadic.triadic_incidence import TriadicIncidence
 from fcatools.dyadic.dyadic_lattice import DyadicLattice
 from fcatools.dyadic.dyadic_generator import DyadicGenerator
 from fcatools.triadic.triadic_association_rule import TriadicAssociationRule
+import tempfile
 
 app = Flask(__name__)
 
@@ -45,10 +47,16 @@ def fca_tools():
         triadic_context = TriadicContext(
             incidences, data['objects'], data['attributes'], data['conditions'])
         dyadic_context_from_triadic = triadic_context.flat_triadic_to_dyadic()
-        dyadic_context_from_triadic.write_dyadic_context_data(
-            "dyadic_context.data")
+
+        tempdirname = tempfile.gettempdir()
+
+        filename_context = os.path.join(tempdirname, "context.data")
+        filename_concept = os.path.join(tempdirname, "concepts.data")
+
+        dyadic_context_from_triadic.write_dyadic_context_data(filename_context)
         concepts = DyadicConcept.get_concepts_d_peeler(
-            "dyadic_context.data", "dyadic_concepts.data")
+            filename_context, filename_concept)
+
         lattice, _ = DyadicLattice.build_lattice_iPred(concepts)
 
         generators = lattice.compute_generators()

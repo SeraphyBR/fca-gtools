@@ -8,31 +8,35 @@ import DialogActions from "@mui/material/DialogActions"
 import IconButton from "@mui/material/IconButton"
 import CloseIcon from "@mui/icons-material/Close"
 
-const StyledDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2)
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1)
-  }
-}))
-
 type DialogModalProps = {
   id?: string
   children: React.ReactNode
   title: string
   onClose: () => void
   open: boolean
-  showActions?: boolean
 }
 
-const DialogModal: React.FC<DialogModalProps> = (props) => {
+type ActionProps = {
+  label: string
+  onClick?: () => void
+  disabled?: boolean
+}
+
+type DialogModalWithActionsProps = DialogModalProps & {
+  showActions: boolean
+  actionLeft?: ActionProps
+  actionRight?: ActionProps
+}
+
+const DialogModal: React.FC<DialogModalProps | DialogModalWithActionsProps> = (props) => {
   const handleOnClose = () => {
     props.onClose()
   }
 
+  const withActions = "showActions" in props
+
   return (
-    <StyledDialog onClose={handleOnClose} open={props.open} maxWidth="md" fullWidth>
+    <Dialog onClose={handleOnClose} open={props.open} maxWidth="md" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2 }}>
         {props.title}
         <IconButton
@@ -47,15 +51,35 @@ const DialogModal: React.FC<DialogModalProps> = (props) => {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers>{props.children}</DialogContent>
-      {props.showActions && (
-        <DialogActions>
-          <Button autoFocus onClick={handleOnClose}>
-            Save changes
-          </Button>
+      <DialogContent dividers sx={{ p: "16px" }}>
+        {props.children}
+      </DialogContent>
+      {withActions && props.showActions && (
+        <DialogActions sx={{ p: "16px" }}>
+          {props.actionLeft && (
+            <Button
+              variant="outlined"
+              autoFocus
+              onClick={props.actionLeft.onClick}
+              disabled={props.actionLeft.disabled}
+              sx={{ mr: "auto" }}
+            >
+              {props.actionLeft.label}
+            </Button>
+          )}
+          {props.actionRight && (
+            <Button
+              variant="contained"
+              autoFocus
+              onClick={props.actionRight.onClick}
+              disabled={props.actionRight.disabled}
+            >
+              {props.actionRight.label}
+            </Button>
+          )}
         </DialogActions>
       )}
-    </StyledDialog>
+    </Dialog>
   )
 }
 

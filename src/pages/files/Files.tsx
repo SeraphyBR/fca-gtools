@@ -14,12 +14,14 @@ import DialogModal from "../../components/dialogmodal/DialogModal"
 import { AddRounded, ArrowDownwardRounded } from "@mui/icons-material"
 import { AxiosError } from "axios"
 import { TaskAbortError } from "@reduxjs/toolkit"
+import NewContextDialog from "../../dialogs/newContext/NewContext"
 
 const Files: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
   const dispatch = useAppDispatch()
   const { enqueueSnackbar } = useSnackbar()
-  const [openModal, setOpenModal] = useState(false)
+  const [openFileModal, setOpenFileModal] = useState(false)
+  const [openNewContextDialog, setOpenNewContextDialog] = useState(false)
 
   const projects = useSelector(getProjectsSelector)
 
@@ -35,7 +37,7 @@ const Files: React.FC = () => {
   }, [dispatch])
 
   const handleOnDropFile = (files: File[]) => {
-    setOpenModal(false)
+    setOpenFileModal(false)
     postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] })
       .then(() => {
         enqueueSnackbar("Adicionado com sucesso!", { variant: "success" })
@@ -59,11 +61,11 @@ const Files: React.FC = () => {
             variant="contained"
             sx={{ ml: "auto" }}
             startIcon={<ArrowDownwardRounded />}
-            onClick={() => setOpenModal(true)}
+            onClick={() => setOpenFileModal(true)}
           >
             Importar contexto
           </Button>
-          <Button variant="contained" startIcon={<AddRounded />}>
+          <Button variant="contained" startIcon={<AddRounded />} onClick={() => setOpenNewContextDialog(true)}>
             Criar novo contexto
           </Button>
         </Box>
@@ -75,7 +77,8 @@ const Files: React.FC = () => {
           ))}
         </Grid>
       </div>
-      <DialogModal title="Adicione" open={openModal} onClose={() => setOpenModal(false)}>
+      <NewContextDialog open={openNewContextDialog} onClose={() => setOpenNewContextDialog(false)} />
+      <DialogModal title="Adicione" open={openFileModal} onClose={() => setOpenFileModal(false)}>
         <Box height="320px">
           <FileDrop label={t("filedrop.label")} onDrop={handleOnDropFile} />
         </Box>

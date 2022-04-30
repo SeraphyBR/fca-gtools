@@ -36,9 +36,10 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
+    "vite": "vite",
     "tauri": "tauri",
     "flask:serve": "sh -c 'source ./src-flask/.venv/bin/activate && python src-flask/main.py'",
-    "dev:all": "concurrently 'yarn:start' 'yarn:flask:serve' 'yarn:tauri dev'",
+    "dev:all": "concurrently 'yarn:vite' 'yarn:flask:serve' 'yarn:tauri dev'",
     "cypress:open": "cypress open"
   },
   "eslintConfig": {

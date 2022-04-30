@@ -17,13 +17,11 @@ const NewContextDialog: React.FC<NewContextDialogProps> = (props) => {
   }
 
   const handleTextFieldOnChange = (field: keyof typeof input) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value.replace(/[^0-9]/g, "")
-    setInput((old) => {
-      const input = { ...old }
-      input[field] = newValue
-      return input
-    })
+    const newValue = event.target.value.replace(/[^0-9]/g, "").replace(/^0+/, "")
+    setInput((old) => ({ ...old, [field]: newValue }))
   }
+
+  const disableActionRight = Object.values(input).some((v) => v === "")
 
   return (
     <DialogModal
@@ -32,7 +30,7 @@ const NewContextDialog: React.FC<NewContextDialogProps> = (props) => {
       onClose={handleOnClose}
       showActions
       actionLeft={{ label: "Cancelar", onClick: handleOnClose }}
-      actionRight={{ label: "Criar contexto" }}
+      actionRight={{ label: "Criar contexto", disabled: disableActionRight }}
     >
       <Box component="form" display="flex" gap="16px" flexDirection="column">
         <Typography mb="8px">Preencha as informações abaixo: </Typography>

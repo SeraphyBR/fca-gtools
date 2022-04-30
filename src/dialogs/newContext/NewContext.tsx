@@ -21,7 +21,7 @@ const NewContextDialog: React.FC<NewContextDialogProps> = (props) => {
     setInput((old) => ({ ...old, [field]: newValue }))
   }
 
-  const disableActionRight = Object.values(input).some((v) => v === "")
+  const disabledActionRight = Object.values(input).some((v) => v === "")
 
   return (
     <DialogModal
@@ -30,7 +30,7 @@ const NewContextDialog: React.FC<NewContextDialogProps> = (props) => {
       onClose={handleOnClose}
       showActions
       actionLeft={{ label: "Cancelar", onClick: handleOnClose }}
-      actionRight={{ label: "Criar contexto", disabled: disableActionRight }}
+      actionRight={{ label: "Criar contexto", disabled: disabledActionRight }}
     >
       <Box component="form" display="flex" gap="16px" flexDirection="column">
         <Typography mb="8px">Preencha as informações abaixo: </Typography>

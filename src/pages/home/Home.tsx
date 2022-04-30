@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import BasePage from "../../components/basepage/BasePage"
-import ContextDataGrid from "../../components/contextdatagrid/ContextDataGrid"
-import DataGrid from "../../components/datagrid/DataGrid"
-import Flow from "../../components/flow/Flow"
+import ContextDataGrid from "../../components/datagrid/ContextDataGrid"
 import * as S from "./Home.style"
 
 const Home: React.FC = () => {
@@ -11,7 +9,10 @@ const Home: React.FC = () => {
       <S.HomeWrapper>
         <p>teste</p>
         <div>
-          <DataGrid style={{ height: "400px", width: "600px" }} />
+          <ContextDataGrid
+            style={{ height: "400px", width: "600px" }}
+            context={{ objects: ["a", "b", "c"], attributes: ["g", "h"], conditions: ["A", "B"] }}
+          />
         </div>
       </S.HomeWrapper>
     </BasePage>

@@ -15,10 +15,14 @@ import { AddRounded, ArrowDownwardRounded } from "@mui/icons-material"
 import { AxiosError } from "axios"
 import { TaskAbortError } from "@reduxjs/toolkit"
 import NewContextDialog from "../../dialogs/newContext/NewContext"
+import { TriadicContextData, TriadicObjectData } from "../../models/context"
+import { editorActions } from "../../redux/editor/slice"
+import { useNavigate } from "react-router-dom"
 
 const Files: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
   const [openFileModal, setOpenFileModal] = useState(false)
   const [openNewContextDialog, setOpenNewContextDialog] = useState(false)
@@ -46,6 +50,23 @@ const Files: React.FC = () => {
       .catch(() => {
         enqueueSnackbar("Ocorreu um erro ao adicionar!", { variant: "error" })
       })
+  }
+
+  const handleOnCreateContext = (name: string, objects: number, attributes: number, conditions: number) => {
+    let newContext: TriadicContextData = {
+      name,
+      attributes: Array.from(Array(attributes)).map((_, i) => {
+        const alpha = i + 65
+        return String.fromCharCode(alpha).toLowerCase()
+      }),
+      conditions: Array.from(Array(conditions)).map((_, i) => {
+        const alpha = i + 65
+        return String.fromCharCode(alpha).toUpperCase()
+      }),
+      objects: Array.from(Array(objects)).map((_, i) => ({ name: i.toString(), relation: [] } as TriadicObjectData))
+    }
+    dispatch(editorActions.setEditableContext(newContext))
+    navigate("/editor")
   }
 
   const projectCounter = projects.length.toString().padStart(2, "0")
@@ -77,7 +98,11 @@ const Files: React.FC = () => {
           ))}
         </Grid>
       </div>
-      <NewContextDialog open={openNewContextDialog} onClose={() => setOpenNewContextDialog(false)} />
+      <NewContextDialog
+        open={openNewContextDialog}
+        onCreateContext={handleOnCreateContext}
+        onClose={() => setOpenNewContextDialog(false)}
+      />
       <DialogModal title="Adicione" open={openFileModal} onClose={() => setOpenFileModal(false)}>
         <Box height="320px">
           <FileDrop label={t("filedrop.label")} onDrop={handleOnDropFile} />

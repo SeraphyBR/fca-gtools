@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 import dataSlice from "./data/slice"
+import editorSlice from "./editor/slice"
 import filesSlice from "./files/slice"
 import settingsSlice from "./settings/slice"
 
@@ -15,7 +16,8 @@ const persistedReducer = persistReducer(
   combineReducers({
     settings: settingsSlice.reducer,
     files: filesSlice.reducer,
-    data: dataSlice.reducer
+    data: dataSlice.reducer,
+    editor: editorSlice.reducer
   })
 )
 

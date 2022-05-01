@@ -9,11 +9,16 @@ import {
 } from "@mui/icons-material"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useSelector } from "react-redux"
+import { getEditorContext } from "../../redux/editor/selectors"
+import { RootState } from "../../redux/store"
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { t } = useTranslation("translation", { keyPrefix: "pages" })
+
+  const haveContext = useSelector((state: RootState) => getEditorContext(state) !== undefined)
 
   const activeBoxProps = (route: string) => {
     const isActive = location.pathname.includes(route)
@@ -43,7 +48,8 @@ const Sidebar: React.FC = () => {
     },
     {
       id: "editor",
-      IconComponent: GridOnTwoTone
+      IconComponent: GridOnTwoTone,
+      disabled: !haveContext
     },
     {
       id: "settings",
@@ -57,14 +63,17 @@ const Sidebar: React.FC = () => {
       {pageButtons.map((b) => (
         <Box key={b.id} {...b.customBoxProps} {...activeBoxProps(b.id)}>
           <Tooltip title={t(b.id + ".title").toString()} placement="right" arrow>
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => navigate("/" + b.id)}
-              sx={activeIconButtonSxProps(b.id)}
-            >
-              <b.IconComponent sx={{ fontSize: "32px" }} />
-            </IconButton>
+            <span>
+              <IconButton
+                color="primary"
+                size="large"
+                onClick={() => navigate("/" + b.id)}
+                sx={activeIconButtonSxProps(b.id)}
+                disabled={b.disabled}
+              >
+                <b.IconComponent sx={{ fontSize: "32px" }} />
+              </IconButton>
+            </span>
           </Tooltip>
         </Box>
       ))}

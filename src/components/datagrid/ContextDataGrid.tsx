@@ -10,36 +10,41 @@ import * as S from "./ContextDataGrid.style"
 import CheckboxCellRenderer, { CheckboxCellEditor } from "./components/CheckboxCell"
 import { useSelector } from "react-redux"
 import { getThemeSettingsSelector } from "../../redux/settings/selectors"
-
-type ContextData = {
-  objects: string[]
-  attributes: string[]
-  conditions: string[]
-}
+import { TriadicContextData } from "../../models/context"
 
 type ContextDataGridProps = {
   style?: CSSProperties
-  context: ContextData
+  context: TriadicContextData
   editable?: boolean
 }
 
-const autoGenMockRowData = (context: ContextData) => {
-  let obj: { [k: string]: boolean } = {}
-  context.conditions.forEach((condition) => {
-    context.attributes.forEach((attr) => {
-      obj[`${condition}_${attr}`] = Math.random() < 0.5
+const transformContextToRows = (context: TriadicContextData) => {
+  let rows = context.objects.map((obj) => {
+    let rowData: Record<string, any> = {}
+
+    rowData.name = obj.name
+
+    context.conditions.forEach((condition, cidx) => {
+      context.attributes.forEach((attr, aidx) => {
+        rowData[`${condition}_${attr}`] = obj.relation.some((r) => {
+          r.attributeIdx === aidx && r.conditionIdx === cidx
+        })
+      })
     })
+
+    return rowData
   })
-  return Array.from({ length: context.objects.length }, () => ({ ...obj }))
+
+  return rows
 }
 
 const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
   const gridRef = useRef<AgGridReact>(null) // Optional - for accessing Grid's API
-  const [rowData, setRowData] = useState(autoGenMockRowData(props.context)) // Set rowData to Array of Objects, one Object per Row
+  const [rowData, setRowData] = useState(transformContextToRows(props.context)) // Set rowData to Array of Objects, one Object per Row
 
   const themeMode = useSelector(getThemeSettingsSelector)
 
-  const transformContextToColumns = (context: ContextData) => {
+  const transformContextToColumns = (context: TriadicContextData) => {
     const columns: (ColDef | ColGroupDef)[] = context.conditions.map((condition) => {
       return {
         headerName: condition,

@@ -1,3 +1,4 @@
+import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material"
 import { Box, Checkbox } from "@mui/material"
 import { ICellEditorParams, ICellRendererParams } from "ag-grid-community"
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react"
@@ -7,9 +8,11 @@ type CheckboxCellRendererProps = ICellRendererParams
 type CheckboxCellEditorProps = ICellEditorParams
 
 export const CheckboxCellRenderer: React.FC<CheckboxCellRendererProps> = (props) => {
+  const checked = props.value as boolean
+
   return (
-    <Box display="inline-flex" width="100%" justifyContent="center">
-      <Checkbox checked={props.value as boolean} sx={{ cursor: "auto" }} />
+    <Box display="inline-flex" height="100%" width="100%" justifyContent="center" alignItems="center">
+      {checked ? <CheckBox color="primary" /> : <CheckBoxOutlineBlank />}
     </Box>
   )
 }

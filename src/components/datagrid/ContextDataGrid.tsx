@@ -6,6 +6,7 @@ import "ag-grid-community/dist/styles/ag-grid.css"
 import "ag-grid-community/dist/styles/ag-theme-alpine.css"
 
 import * as S from "./ContextDataGrid.style"
+import CheckboxCellRenderer from "./components/CheckboxCellRenderer"
 
 type ContextData = {
   objects: string[]
@@ -40,7 +41,8 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
         children: context.attributes.map((attr) => ({
           field: `${condition}_${attr}`,
           headerName: attr,
-          resizable: true
+          resizable: true,
+          cellRenderer: "checkboxRenderer"
         }))
       }
     })
@@ -67,6 +69,9 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
           rowData={rowData} // Row Data for Rows
           columnDefs={columnDefs} // Column Defs for Columns
           onCellClicked={cellClickedListener} // Optional - registering for Grid Event
+          components={{
+            checkboxRenderer: CheckboxCellRenderer
+          }}
         />
       </div>
     </S.StyledGrid>

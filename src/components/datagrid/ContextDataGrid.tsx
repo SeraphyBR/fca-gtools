@@ -94,6 +94,8 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
           onCellClicked={cellClickedListener}
           onFirstDataRendered={handleOnFirstDataRendered}
           stopEditingWhenCellsLoseFocus={true}
+          pagination={true}
+          paginationAutoPageSize={true}
           components={{
             checkboxRenderer: CheckboxCellRenderer,
             checkboxEditor: CheckboxCellEditor

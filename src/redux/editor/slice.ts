@@ -18,7 +18,8 @@ const editorSlice = createSlice({
     setEditableContext: (state, action: PayloadAction<TriadicContextData>) => {
       state.context = action.payload
       state.editMode = true
-    }
+    },
+    clean: () => initialState
   }
 })
 

@@ -56,11 +56,11 @@ const Files: React.FC = () => {
     let newContext: TriadicContextData = {
       name,
       attributes: Array.from(Array(attributes)).map((_, i) => {
-        const alpha = i + 65
+        const alpha = i + "A".charCodeAt(0)
         return String.fromCharCode(alpha).toLowerCase()
       }),
       conditions: Array.from(Array(conditions)).map((_, i) => {
-        const alpha = i + 65
+        const alpha = i + "A".charCodeAt(0)
         return String.fromCharCode(alpha).toUpperCase()
       }),
       objects: Array.from(Array(objects)).map((_, i) => ({ name: i.toString(), relation: [] } as TriadicObjectData))
@@ -75,7 +75,7 @@ const Files: React.FC = () => {
     <BasePage>
       <Typography variant="h4">{t("title")}</Typography>
       <Divider sx={{ margin: "8px 0px" }} />
-      <div>
+      <Box>
         <Box mb="24px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
           <Typography variant="subtitle1">{projectCounter} Contextos adicionados</Typography>
           <Button
@@ -97,7 +97,7 @@ const Files: React.FC = () => {
             </Grid>
           ))}
         </Grid>
-      </div>
+      </Box>
       <NewContextDialog
         open={openNewContextDialog}
         onCreateContext={handleOnCreateContext}

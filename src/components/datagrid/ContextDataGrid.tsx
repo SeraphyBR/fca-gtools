@@ -7,7 +7,7 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css"
 import "ag-grid-community/dist/styles/ag-theme-alpine-dark.css"
 
 import * as S from "./ContextDataGrid.style"
-import CheckboxCellRenderer from "./components/CheckboxCellRenderer"
+import CheckboxCellRenderer, { CheckboxCellEditor } from "./components/CheckboxCell"
 import { useSelector } from "react-redux"
 import { getThemeSettingsSelector } from "../../redux/settings/selectors"
 
@@ -20,6 +20,7 @@ type ContextData = {
 type ContextDataGridProps = {
   style?: CSSProperties
   context: ContextData
+  editable?: boolean
 }
 
 const autoGenMockRowData = (context: ContextData) => {
@@ -29,7 +30,7 @@ const autoGenMockRowData = (context: ContextData) => {
       obj[`${condition}_${attr}`] = Math.random() < 0.5
     })
   })
-  return Array(context.objects.length).fill(obj)
+  return Array.from({ length: context.objects.length }, () => ({ ...obj }))
 }
 
 const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
@@ -43,12 +44,18 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
       return {
         headerName: condition,
         resizable: true,
-        children: context.attributes.map((attr) => ({
-          field: `${condition}_${attr}`,
-          headerName: attr,
-          resizable: true,
-          cellRenderer: "checkboxRenderer"
-        }))
+        children: context.attributes.map(
+          (attr) =>
+            ({
+              field: `${condition}_${attr}`,
+              headerName: attr,
+              resizable: true,
+              editable: props.editable,
+              singleClickEdit: true,
+              cellRenderer: "checkboxRenderer",
+              cellEditor: "checkboxEditor"
+            } as ColDef)
+        )
       }
     })
 
@@ -81,8 +88,10 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
           columnDefs={columnDefs} // Column Defs for Columns
           onCellClicked={cellClickedListener}
           onFirstDataRendered={handleOnFirstDataRendered}
+          stopEditingWhenCellsLoseFocus={true}
           components={{
-            checkboxRenderer: CheckboxCellRenderer
+            checkboxRenderer: CheckboxCellRenderer,
+            checkboxEditor: CheckboxCellEditor
           }}
         />
       </div>

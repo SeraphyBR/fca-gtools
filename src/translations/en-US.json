@@ -24,6 +24,9 @@
     },
     "data": {
       "title": "Data"
+    },
+    "editor": {
+      "title": "Context Editor"
     }
   },
   "notifications": {

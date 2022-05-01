@@ -1,6 +1,12 @@
 import React from "react"
 import { Box, BoxProps, Drawer, IconButton, SxProps, Theme, Tooltip } from "@mui/material"
-import { AnalyticsTwoTone, DashboardTwoTone, InsertDriveFileTwoTone, SettingsTwoTone } from "@mui/icons-material"
+import {
+  AnalyticsTwoTone,
+  DashboardTwoTone,
+  GridOnTwoTone,
+  InsertDriveFileTwoTone,
+  SettingsTwoTone
+} from "@mui/icons-material"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
@@ -34,6 +40,10 @@ const Sidebar: React.FC = () => {
     {
       id: "data",
       IconComponent: AnalyticsTwoTone
+    },
+    {
+      id: "editor",
+      IconComponent: GridOnTwoTone
     },
     {
       id: "settings",

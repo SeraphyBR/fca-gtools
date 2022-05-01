@@ -10,7 +10,7 @@ const Home: React.FC = () => {
         <p>teste</p>
         <div>
           <ContextDataGrid
-            style={{ height: "400px", width: "600px" }}
+            style={{ height: "400px", width: "auto" }}
             context={{ objects: ["a", "b", "c"], attributes: ["g", "h"], conditions: ["A", "B"] }}
           />
         </div>

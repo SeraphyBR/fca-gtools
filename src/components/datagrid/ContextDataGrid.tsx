@@ -1,12 +1,15 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback, CSSProperties } from "react"
+import React, { useState, useRef, useCallback, CSSProperties } from "react"
 import { AgGridReact } from "ag-grid-react"
-import { ColDef, ColGroupDef } from "ag-grid-community"
+import { ColDef, ColGroupDef, FirstDataRenderedEvent } from "ag-grid-community"
 
 import "ag-grid-community/dist/styles/ag-grid.css"
 import "ag-grid-community/dist/styles/ag-theme-alpine.css"
+import "ag-grid-community/dist/styles/ag-theme-alpine-dark.css"
 
 import * as S from "./ContextDataGrid.style"
 import CheckboxCellRenderer from "./components/CheckboxCellRenderer"
+import { useSelector } from "react-redux"
+import { getThemeSettingsSelector } from "../../redux/settings/selectors"
 
 type ContextData = {
   objects: string[]
@@ -23,7 +26,7 @@ const autoGenMockRowData = (context: ContextData) => {
   let obj: { [k: string]: boolean } = {}
   context.conditions.forEach((condition) => {
     context.attributes.forEach((attr) => {
-      obj[`${condition}_${attr}`] = false
+      obj[`${condition}_${attr}`] = Math.random() < 0.5
     })
   })
   return Array(context.objects.length).fill(obj)
@@ -32,6 +35,8 @@ const autoGenMockRowData = (context: ContextData) => {
 const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
   const gridRef = useRef<AgGridReact>(null) // Optional - for accessing Grid's API
   const [rowData, setRowData] = useState(autoGenMockRowData(props.context)) // Set rowData to Array of Objects, one Object per Row
+
+  const themeMode = useSelector(getThemeSettingsSelector)
 
   const transformContextToColumns = (context: ContextData) => {
     const columns: (ColDef | ColGroupDef)[] = context.conditions.map((condition) => {
@@ -47,7 +52,7 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
       }
     })
 
-    columns.unshift({ headerName: "", valueGetter: "node.rowIndex + 1", resizable: true })
+    columns.unshift({ headerName: "", valueGetter: "node.rowIndex + 1", resizable: true, colId: "RowIndexColumn" })
 
     return columns
   }
@@ -60,15 +65,22 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
     console.log("cellClicked")
   }, [])
 
+  const handleOnFirstDataRendered = useCallback((params: FirstDataRenderedEvent) => {
+    gridRef.current?.columnApi.autoSizeColumn("RowIndexColumn")
+  }, [])
+
+  const gridTheme = themeMode === "dark" ? "ag-theme-alpine-dark" : "ag-theme-alpine"
+
   return (
     <S.StyledGrid>
       {/* On div wrapping Grid a) specify theme CSS Class Class and b) sets Grid size */}
-      <div className="ag-theme-alpine" style={props.style}>
+      <div className={gridTheme} style={props.style}>
         <AgGridReact
           ref={gridRef} // Ref for accessing Grid's API
           rowData={rowData} // Row Data for Rows
           columnDefs={columnDefs} // Column Defs for Columns
-          onCellClicked={cellClickedListener} // Optional - registering for Grid Event
+          onCellClicked={cellClickedListener}
+          onFirstDataRendered={handleOnFirstDataRendered}
           components={{
             checkboxRenderer: CheckboxCellRenderer
           }}

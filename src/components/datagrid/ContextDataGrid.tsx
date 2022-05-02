@@ -26,9 +26,7 @@ const transformContextToRows = (context: TriadicContextData) => {
 
     context.conditions.forEach((condition, cidx) => {
       context.attributes.forEach((attr, aidx) => {
-        rowData[`${condition}_${attr}`] = obj.relation.some((r) => {
-          r.attributeIdx === aidx && r.conditionIdx === cidx
-        })
+        rowData[`${condition}_${attr}`] = obj.relation.some((r) => r.attributeIdx === aidx && r.conditionIdx === cidx)
       })
     })
 

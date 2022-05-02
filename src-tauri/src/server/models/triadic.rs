@@ -27,6 +27,31 @@ pub struct TriadicContextPy {
   pub incidences: Vec<TriadicIncidence>,
 }
 
+// Model used by react frontend to display data
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TriadicObjectRelationData {
+  #[serde(rename(serialize = "attributeIdx"))]
+  attribute_idx: usize,
+  #[serde(rename(serialize = "conditionIdx"))]
+  condition_idx: usize,
+}
+
+// Model used by react frontend to display data
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TriadicObjectData {
+  pub name: String,
+  pub relation: Vec<TriadicObjectRelationData>,
+}
+
+// Model used by react frontend to display data
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TriadicContextData {
+  pub name: String,
+  pub attributes: Vec<String>,
+  pub conditions: Vec<String>,
+  pub objects: Vec<TriadicObjectData>,
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TriadicAssociationRule {
   pub left_side: Vec<String>,
@@ -68,6 +93,37 @@ impl TriadicContext {
       attributes: self.attributes.clone(),
       conditions: self.conditions.clone(),
       incidences: self.get_list_incidences(),
+    }
+  }
+
+  pub fn get_front_struct(&self) -> TriadicContextData {
+    let mut objects: Vec<TriadicObjectData> = Vec::new();
+
+    for (o, x) in self.relations.iter().enumerate() {
+      let mut relation: Vec<TriadicObjectRelationData> = Vec::new();
+
+      for (a, y) in x.iter().enumerate() {
+        for (_c, z) in y.iter().enumerate() {
+          relation.push(TriadicObjectRelationData {
+            attribute_idx: a,
+            condition_idx: self.conditions.iter().position(|ci| ci.eq(z)).unwrap(),
+          })
+        }
+      }
+
+      let object = TriadicObjectData {
+        name: self.objects[o].clone(),
+        relation,
+      };
+
+      objects.push(object)
+    }
+
+    TriadicContextData {
+      name: self.name.clone(),
+      attributes: self.attributes.clone(),
+      conditions: self.conditions.clone(),
+      objects,
     }
   }
 }

@@ -1,8 +1,12 @@
 use crate::server::{
-  models::{AddProjectDto, Project},
+  models::{AddProjectDto, Project, TriadicContext, TriadicContextData},
   utils::extract_struct_from_multipart,
 };
-use axum::{extract::Multipart, http::StatusCode, Json};
+use axum::{
+  extract::{Multipart, Path},
+  http::StatusCode,
+  Json,
+};
 use uuid::Uuid;
 
 use crate::server::routes::Context;
@@ -51,4 +55,29 @@ pub async fn delete_all_projects(ctx: Context) {
     .execute(&ctx.db)
     .await
     .unwrap();
+}
+
+pub async fn get_context_from_project(
+  ctx: Context,
+  Path(project_id): Path<Uuid>,
+) -> Json<TriadicContextData> {
+  let id = project_id.to_string();
+  struct QueryData {
+    fileblob: Option<Vec<u8>>,
+  }
+
+  let query_data = sqlx::query_as!(QueryData, "SELECT fileblob FROM projects WHERE id = ?", id)
+    .fetch_one(&ctx.db)
+    .await
+    .unwrap();
+
+  if let Some(blob) = query_data.fileblob {
+    let triadic_context: TriadicContext = serde_json::from_slice(blob.as_slice()).unwrap();
+
+    let triadic_data = triadic_context.get_front_struct();
+
+    return Json(triadic_data);
+  }
+
+  todo!()
 }

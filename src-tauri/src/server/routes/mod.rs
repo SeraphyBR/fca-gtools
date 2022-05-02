@@ -18,6 +18,10 @@ pub fn files_router() -> Router {
     .route("/", post(files_handler::add_project_with_file_handler))
     .route("/", get(files_handler::get_projects_handler))
     .route("/", delete(files_handler::delete_all_projects))
+    .route(
+      "/context/:project_id",
+      get(files_handler::get_context_from_project),
+    )
 }
 
 pub fn fca_tools_router() -> Router {

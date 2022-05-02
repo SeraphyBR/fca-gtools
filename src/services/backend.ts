@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from "axios"
+import { TriadicContextData } from "../models/context"
 import { FcatoolsTriadicData } from "../models/data"
 import { AddProjectDto, Project } from "../models/project"
 import api from "./api"
@@ -34,5 +35,10 @@ export const deleteAllProjects = async () => {
 export const getDataFromFcatools = async (id: string) => {
   const response = await api.get<FcatoolsTriadicData>(`/fca/${id}`)
   console.log(response.data)
+  return response.data
+}
+
+export const getContextData = async (project_id: string) => {
+  const response = await api.get<TriadicContextData>(`/files/context/${project_id}`)
   return response.data
 }

@@ -20,7 +20,7 @@ type ContextDataGridProps = {
 
 const transformContextToRows = (context: TriadicContextData) => {
   let rows = context.objects.map((obj) => {
-    let rowData: Record<string, any> = {}
+    let rowData: Record<string, string | boolean> = {}
 
     rowData.name = obj.name
 
@@ -40,7 +40,8 @@ const transformContextToRows = (context: TriadicContextData) => {
 
 const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
   const gridRef = useRef<AgGridReact>(null) // Optional - for accessing Grid's API
-  const [rowData, setRowData] = useState(transformContextToRows(props.context)) // Set rowData to Array of Objects, one Object per Row
+  // Set rowData to Array of Objects, one Object per Row
+  const rowDataRef = useRef(transformContextToRows(props.context))
 
   const themeMode = useSelector(getThemeSettingsSelector)
 
@@ -57,6 +58,7 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
               resizable: true,
               editable: props.editable,
               singleClickEdit: true,
+              suppressMovable: true,
               cellRenderer: "checkboxRenderer",
               cellEditor: "checkboxEditor"
             } as ColDef)
@@ -64,7 +66,13 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
       }
     })
 
-    columns.unshift({ headerName: "", valueGetter: "node.rowIndex + 1", resizable: true, colId: "RowIndexColumn" })
+    columns.push({
+      headerName: "",
+      valueGetter: "node.rowIndex + 1",
+      resizable: true,
+      lockPosition: "left",
+      colId: "RowIndexColumn"
+    })
 
     return columns
   }
@@ -89,7 +97,7 @@ const ContextDataGrid: React.FC<ContextDataGridProps> = (props) => {
       <div className={gridTheme} style={props.style}>
         <AgGridReact
           ref={gridRef} // Ref for accessing Grid's API
-          rowData={rowData} // Row Data for Rows
+          rowData={rowDataRef.current} // Row Data for Rows
           columnDefs={columnDefs} // Column Defs for Columns
           onCellClicked={cellClickedListener}
           onFirstDataRendered={handleOnFirstDataRendered}

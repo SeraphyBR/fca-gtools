@@ -1,4 +1,5 @@
-import { Button, Card, CardContent } from "@mui/material"
+import { Analytics, Delete, Edit, GridOn } from "@mui/icons-material"
+import { Badge, Button, Card, CardActions, CardContent, Chip, IconButton, Tooltip, Typography } from "@mui/material"
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { Project } from "../../../models/project"
@@ -30,14 +31,26 @@ const FileCard: React.FC<FileCardProps> = (props) => {
   return (
     <Card variant="outlined" sx={{ width: 275 }}>
       <CardContent>
-        <span>{props.project.name}</span>
-        <Button variant="contained" onClick={handleOnClickOpenData}>
-          Abrir detalhes
-        </Button>
-        <Button variant="contained" onClick={handleOnClickOpenContext}>
-          Abrir contexto
-        </Button>
+        <Typography>{props.project.name}</Typography>
+        <Chip variant="outlined" color="info" size="small" sx={{ borderRadius: "4px", mt: "4px" }} label="Triadico" />
       </CardContent>
+      <CardActions>
+        <IconButton color="primary" onClick={handleOnClickOpenData}>
+          <Tooltip arrow title="Visualizar dados">
+            <Analytics />
+          </Tooltip>
+        </IconButton>
+        <IconButton color="primary" onClick={handleOnClickOpenContext}>
+          <Tooltip arrow title="Abrir no editor de contexto">
+            <GridOn />
+          </Tooltip>
+        </IconButton>
+        <IconButton color="primary" sx={{ ml: "auto!important" }}>
+          <Tooltip arrow title="Deletar contexto">
+            <Delete />
+          </Tooltip>
+        </IconButton>
+      </CardActions>
     </Card>
   )
 }

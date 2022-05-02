@@ -1,11 +1,11 @@
 import { SaveRounded, SaveTwoTone } from "@mui/icons-material"
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material"
-import React, { useEffect } from "react"
+import React, { createRef, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import BasePage from "../../components/basepage/BasePage"
-import ContextDataGrid from "../../components/datagrid/ContextDataGrid"
+import ContextDataGrid, { ContextDataGridRef } from "../../components/datagrid/ContextDataGrid"
 import { TriadicContextData } from "../../models/context"
 import { getEditorContext, getEditorEditMode } from "../../redux/editor/selectors"
 import { editorActions } from "../../redux/editor/slice"
@@ -16,6 +16,8 @@ const Editor: React.FC = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
+  const contextDataGrifRef = createRef<ContextDataGridRef>()
+
   const context = useSelector(getEditorContext)
   const editMode = useSelector(getEditorEditMode)
 
@@ -25,6 +27,14 @@ const Editor: React.FC = () => {
 
   const handleOnClickCancel = () => {
     dispatch(editorActions.clean())
+  }
+
+  const handleOnClickSave = () => {
+    const grid = contextDataGrifRef.current
+    if (grid) {
+      let editedContext = grid.getContextWithChanges()
+      console.log(editedContext)
+    }
   }
 
   return (
@@ -44,10 +54,11 @@ const Editor: React.FC = () => {
             style={{ height: "calc(100vh - 200px)", width: "auto" }}
             context={context}
             editable={editMode}
+            ref={contextDataGrifRef}
           />
 
           <Box mt="24px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
-            <Button variant="outlined" startIcon={<SaveRounded />}>
+            <Button variant="outlined" startIcon={<SaveRounded />} onClick={handleOnClickSave}>
               Salvar contexto
             </Button>
             <Button variant="outlined" onClick={handleOnClickCancel}>

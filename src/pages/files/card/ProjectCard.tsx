@@ -1,5 +1,5 @@
-import { Analytics, Delete, Edit, GridOn } from "@mui/icons-material"
-import { Badge, Button, Card, CardActions, CardContent, Chip, IconButton, Tooltip, Typography } from "@mui/material"
+import { Analytics, Delete, GridOn } from "@mui/icons-material"
+import { Card, CardActions, CardContent, Chip, IconButton, Tooltip, Typography } from "@mui/material"
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { Project } from "../../../models/project"
@@ -8,11 +8,11 @@ import { editorActions } from "../../../redux/editor/slice"
 import { useAppDispatch } from "../../../redux/store"
 import { getContextData } from "../../../services/backend"
 
-type FileCardProps = {
+type ProjectCardProps = {
   project: Project
 }
 
-const FileCard: React.FC<FileCardProps> = (props) => {
+const ProjectCard: React.FC<ProjectCardProps> = (props) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -55,4 +55,4 @@ const FileCard: React.FC<FileCardProps> = (props) => {
   )
 }
 
-export default FileCard
+export default ProjectCard

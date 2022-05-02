@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import BasePage from "../../components/basepage/BasePage"
 import FileDrop from "../../components/filedrop/FileDrop"
-import FileCard from "./card/FileCard"
+import ProjectCard from "./card/ProjectCard"
 import { postAddProject } from "../../services/backend"
 import { useSelector } from "react-redux"
 import { getProjectsSelector } from "../../redux/files/selectors"
@@ -93,7 +93,7 @@ const Files: React.FC = () => {
         <Grid container spacing={2}>
           {projects.map((p) => (
             <Grid item key={p.id}>
-              <FileCard project={p} key={p.id} />
+              <ProjectCard project={p} key={p.id} />
             </Grid>
           ))}
         </Grid>

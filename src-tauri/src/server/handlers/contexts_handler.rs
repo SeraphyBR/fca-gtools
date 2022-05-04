@@ -9,14 +9,12 @@ use axum::{
 };
 use uuid::Uuid;
 
-use crate::server::routes::State;
+use super::State;
 
 pub async fn add_context_with_file(state: State, multipart: Multipart) -> Result<(), StatusCode> {
   let new_context = extract_struct_from_multipart::<AddContextDto>(multipart)
     .await
     .unwrap();
-
-  println!("{:?}", new_context);
 
   let new_context_id = Uuid::new_v4().to_string();
   let blob_ref = new_context.blob.as_ref();
@@ -38,7 +36,7 @@ pub async fn add_context_with_file(state: State, multipart: Multipart) -> Result
   Ok(())
 }
 
-pub async fn get_contexts_handler(state: State) -> Json<Vec<Context>> {
+pub async fn get_contexts(state: State) -> Json<Vec<Context>> {
   let result = sqlx::query_as!(Context, "SELECT id, name FROM contexts")
     .fetch_all(&state.db)
     .await

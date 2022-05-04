@@ -1,10 +1,9 @@
 use axum::{extract::Path, Json};
 use uuid::Uuid;
 
-use crate::server::{
-  models::{FcatoolsTriadicData, TriadicContext},
-  routes::State,
-};
+use super::State;
+
+use crate::server::models::{FcatoolsTriadicData, TriadicContext};
 
 pub async fn get_fca_data(state: State, Path(project_id): Path<Uuid>) -> Json<FcatoolsTriadicData> {
   let id = project_id.to_string();

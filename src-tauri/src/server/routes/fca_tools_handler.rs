@@ -3,19 +3,18 @@ use uuid::Uuid;
 
 use crate::server::{
   models::{FcatoolsTriadicData, TriadicContext},
-  routes::Context,
+  routes::State,
 };
 
-pub async fn get_fca_data(ctx: Context, Path(project_id): Path<Uuid>) -> Json<FcatoolsTriadicData> {
+pub async fn get_fca_data(state: State, Path(project_id): Path<Uuid>) -> Json<FcatoolsTriadicData> {
   let id = project_id.to_string();
 
   struct QueryData {
     fileblob: Option<Vec<u8>>,
   }
 
-  // obter arquivo json válido exemplo atilio
-  let query_data = sqlx::query_as!(QueryData, "SELECT fileblob FROM projects WHERE id = ?", id)
-    .fetch_one(&ctx.db)
+  let query_data = sqlx::query_as!(QueryData, "SELECT fileblob FROM contexts WHERE id = ?", id)
+    .fetch_one(&state.db)
     .await
     .unwrap();
 

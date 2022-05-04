@@ -5,7 +5,7 @@ use tower_http::cors::CorsLayer;
 
 pub fn api_router() -> Router {
   Router::new()
-    .nest("/files", routes::files_router())
+    .nest("/contexts", routes::contexts_router())
     .nest("/fca", routes::fca_tools_router())
     .layer(
       CorsLayer::new()

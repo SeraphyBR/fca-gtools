@@ -1,5 +1,5 @@
 -- Add migration script here
-CREATE TABLE IF NOT EXISTS projects (
+CREATE TABLE IF NOT EXISTS contexts (
   id TEXT NOT NULL PRIMARY KEY,
   name TEXT NOT NULL,
   filename TEXT,

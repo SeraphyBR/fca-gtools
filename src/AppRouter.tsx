@@ -5,11 +5,11 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { Route, Routes } from "react-router-dom"
 import Sidebar from "./components/sidebar/Sidebar"
-import Data from "./pages/data/Data"
-import Editor from "./pages/editor/Editor"
-import Files from "./pages/files/Files"
-import Home from "./pages/home/Home"
-import Settings from "./pages/settings/Settings"
+import DataPage from "./pages/data/Data"
+import EditorPage from "./pages/editor/Editor"
+import ContextsPage from "./pages/contexts/Contexts"
+import HomePage from "./pages/home/Home"
+import SettingsPage from "./pages/settings/Settings"
 import { getLanguageSettingsSelector, getThemeSettingsSelector } from "./redux/settings/selectors"
 
 const AppRouter: React.FC = () => {
@@ -43,11 +43,11 @@ const AppRouter: React.FC = () => {
         <Sidebar />
         <div>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/files" element={<Files />} />
-            <Route path="/data" element={<Data />} />
-            <Route path="/editor" element={<Editor />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/contexts" element={<ContextsPage />} />
+            <Route path="/data" element={<DataPage />} />
+            <Route path="/editor" element={<EditorPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
           </Routes>
         </div>
       </SnackbarProvider>

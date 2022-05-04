@@ -6,22 +6,19 @@ use axum::{
   Router,
 };
 
-use crate::server::ApiContext;
+use crate::server::ApiState;
 
 mod fca_tools_handler;
 mod files_handler;
 
-pub type Context = extract::Extension<Arc<ApiContext>>;
+pub type State = extract::Extension<Arc<ApiState>>;
 
-pub fn files_router() -> Router {
+pub fn contexts_router() -> Router {
   Router::new()
-    .route("/", post(files_handler::add_project_with_file_handler))
-    .route("/", get(files_handler::get_projects_handler))
-    .route("/", delete(files_handler::delete_all_projects))
-    .route(
-      "/context/:project_id",
-      get(files_handler::get_context_from_project),
-    )
+    .route("/", post(files_handler::add_context_with_file_handler))
+    .route("/", get(files_handler::get_contexts_handler))
+    .route("/", delete(files_handler::delete_all_contexts))
+    .route("/:context_id", get(files_handler::get_context_data_by_id))
 }
 
 pub fn fca_tools_router() -> Router {

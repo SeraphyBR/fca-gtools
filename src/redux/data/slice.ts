@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Project } from "../../models/project"
+import { Context } from "../../models/project"
 
 type DataState = {
-  project?: Project
+  context?: Context
 }
 
 const initialState: DataState = {
-  project: undefined
+  context: undefined
 }
 
 const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    setWorkingProject: (state, action: PayloadAction<Project>) => {
-      state.project = action.payload
+    setWorkingContext: (state, action: PayloadAction<Context>) => {
+      state.context = action.payload
     }
   }
 })

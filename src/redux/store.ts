@@ -4,7 +4,7 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import storage from "redux-persist/lib/storage"
 import dataSlice from "./data/slice"
 import editorSlice from "./editor/slice"
-import filesSlice from "./files/slice"
+import contextsSlice from "./contexts/slice"
 import settingsSlice from "./settings/slice"
 
 const persistedReducer = persistReducer(
@@ -15,7 +15,7 @@ const persistedReducer = persistReducer(
   },
   combineReducers({
     settings: settingsSlice.reducer,
-    files: filesSlice.reducer,
+    contexts: contextsSlice.reducer,
     data: dataSlice.reducer,
     editor: editorSlice.reducer
   })

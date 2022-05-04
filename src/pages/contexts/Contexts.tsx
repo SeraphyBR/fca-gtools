@@ -6,9 +6,9 @@ import FileDrop from "../../components/filedrop/FileDrop"
 import ProjectCard from "./card/ProjectCard"
 import { postAddProject } from "../../services/backend"
 import { useSelector } from "react-redux"
-import { getProjectsSelector } from "../../redux/files/selectors"
+import { getContextsSelector } from "../../redux/contexts/selectors"
 import { useAppDispatch } from "../../redux/store"
-import { fetchProjects } from "../../redux/files/actions"
+import { fetchProjects } from "../../redux/contexts/actions"
 import { useSnackbar } from "notistack"
 import DialogModal from "../../components/dialogmodal/DialogModal"
 import { AddRounded, ArrowDownwardRounded } from "@mui/icons-material"
@@ -19,7 +19,7 @@ import { TriadicContextData, TriadicObjectData } from "../../models/context"
 import { editorActions } from "../../redux/editor/slice"
 import { useNavigate } from "react-router-dom"
 
-const Files: React.FC = () => {
+const ContextsPage: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -27,7 +27,7 @@ const Files: React.FC = () => {
   const [openFileModal, setOpenFileModal] = useState(false)
   const [openNewContextDialog, setOpenNewContextDialog] = useState(false)
 
-  const projects = useSelector(getProjectsSelector)
+  const contexts = useSelector(getContextsSelector)
 
   useEffect(() => {
     const promise = dispatch(fetchProjects())
@@ -69,7 +69,7 @@ const Files: React.FC = () => {
     navigate("/editor")
   }
 
-  const projectCounter = projects.length.toString().padStart(2, "0")
+  const contextCounter = contexts.length.toString().padStart(2, "0")
 
   return (
     <BasePage>
@@ -77,7 +77,7 @@ const Files: React.FC = () => {
       <Divider sx={{ margin: "8px 0px" }} />
       <Box>
         <Box mb="24px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
-          <Typography variant="subtitle1">{projectCounter} Contextos adicionados</Typography>
+          <Typography variant="subtitle1">{contextCounter} Contextos adicionados</Typography>
           <Button
             variant="contained"
             sx={{ ml: "auto" }}
@@ -91,7 +91,7 @@ const Files: React.FC = () => {
           </Button>
         </Box>
         <Grid container spacing={2}>
-          {projects.map((p) => (
+          {contexts.map((p) => (
             <Grid item key={p.id}>
               <ProjectCard project={p} key={p.id} />
             </Grid>
@@ -112,4 +112,4 @@ const Files: React.FC = () => {
   )
 }
 
-export default Files
+export default ContextsPage

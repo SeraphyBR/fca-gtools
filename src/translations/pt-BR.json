@@ -16,8 +16,8 @@
         "deleteAll": "Apagar todos os dados salvos"
       }
     },
-    "files": {
-      "title": "Arquivos",
+    "contexts": {
+      "title": "Contextos",
       "filedrop": {
         "label": "Arraste e solte o arquivo aqui, ou clique para selecionar"
       }

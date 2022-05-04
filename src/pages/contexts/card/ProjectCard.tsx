@@ -2,14 +2,14 @@ import { Analytics, Delete, GridOn } from "@mui/icons-material"
 import { Card, CardActions, CardContent, Chip, IconButton, Tooltip, Typography } from "@mui/material"
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import { Project } from "../../../models/project"
+import { Context } from "../../../models/project"
 import { dataActions } from "../../../redux/data/slice"
 import { editorActions } from "../../../redux/editor/slice"
 import { useAppDispatch } from "../../../redux/store"
 import { getContextData } from "../../../services/backend"
 
 type ProjectCardProps = {
-  project: Project
+  project: Context
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = (props) => {
@@ -17,7 +17,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
   const navigate = useNavigate()
 
   const handleOnClickOpenData = () => {
-    dispatch(dataActions.setWorkingProject(props.project))
+    dispatch(dataActions.setWorkingContext(props.project))
     navigate("/data")
   }
 

@@ -16,8 +16,8 @@
         "deleteAll": "Delete all saved data"
       }
     },
-    "files": {
-      "title": "Files",
+    "contexts": {
+      "title": "Contexts",
       "filedrop": {
         "label": "Drag 'n' drop some files here, or click to select files"
       }

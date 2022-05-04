@@ -3,6 +3,7 @@ use std::str::FromStr;
 use std::sync::Arc;
 
 use axum::extract::Extension;
+use directories::ProjectDirs;
 use dotenv::dotenv;
 use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions};
 use sqlx::SqlitePool;
@@ -13,7 +14,7 @@ mod routes;
 mod utils;
 
 #[derive(Clone)]
-pub struct ApiContext {
+pub struct ApiState {
   db: SqlitePool,
 }
 
@@ -21,7 +22,20 @@ pub struct ApiContext {
 pub async fn start(addr: &'static str) {
   dotenv().ok();
 
-  let db_connection_options = SqliteConnectOptions::from_str(&env::var("DATABASE_URL").unwrap())
+  let database_url: String;
+
+  if cfg!(debug_assertions) {
+    database_url = env::var("DATABASE_URL").unwrap()
+  } else {
+    let project_dirs = ProjectDirs::from("", "", "tauri-app").unwrap();
+    let data_local_dir = project_dirs.data_local_dir();
+    database_url = String::from(format!(
+      "sqlite://{}/storage.sqlite",
+      data_local_dir.to_str().unwrap()
+    ));
+  }
+
+  let db_connection_options = SqliteConnectOptions::from_str(&database_url)
     .unwrap()
     .create_if_missing(true);
 
@@ -32,7 +46,7 @@ pub async fn start(addr: &'static str) {
 
   sqlx::migrate!().run(&db).await.unwrap();
 
-  let shared_state = Arc::new(ApiContext { db });
+  let shared_state = Arc::new(ApiState { db });
   let app = router::api_router().layer(Extension(shared_state));
 
   axum::Server::bind(&addr.parse().unwrap())

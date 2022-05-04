@@ -11,7 +11,7 @@ import { settingsActions } from "../../redux/settings/slice"
 import { useAppDispatch } from "../../redux/store"
 import { deleteAllProjects } from "../../services/backend"
 
-const Settings: React.FC = () => {
+const SettingsPage: React.FC = () => {
   const dispatch = useAppDispatch()
   const { t, i18n } = useTranslation("translation", { keyPrefix: "pages.settings" })
   const { t: tn } = useTranslation("translation", { keyPrefix: "notifications" })
@@ -86,4 +86,4 @@ const Settings: React.FC = () => {
   )
 }
 
-export default Settings
+export default SettingsPage

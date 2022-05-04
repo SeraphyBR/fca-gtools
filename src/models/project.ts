@@ -1,9 +1,9 @@
-export type Project = {
+export type Context = {
   id: string
   name: string
 }
 
-export type AddProjectDto = {
+export type AddContextDto = {
   name: string
   filename: string
   blob: Blob

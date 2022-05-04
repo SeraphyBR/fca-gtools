@@ -8,7 +8,7 @@ import { FcatoolsTriadicData } from "../../models/data"
 import { getWorkingProject } from "../../redux/data/selectors"
 import { getDataFromFcatools } from "../../services/backend"
 
-const Data: React.FC = () => {
+const DataPage: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.data" })
   const navigate = useNavigate()
 
@@ -18,7 +18,7 @@ const Data: React.FC = () => {
 
   useEffect(() => {
     if (project === undefined) {
-      navigate("/files")
+      navigate("/contexts")
     }
   }, [project, navigate])
 
@@ -89,4 +89,4 @@ const Data: React.FC = () => {
   )
 }
 
-export default Data
+export default DataPage

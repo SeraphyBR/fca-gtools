@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Project } from "../../models/project"
+import { Context } from "../../models/project"
 import { fetchProjects } from "./actions"
 
-type FilesState = {
-  projects: Project[]
+type ContextsState = {
+  contexts: Context[]
   recentOpenFiles: string[]
 }
 
-const initialState: FilesState = {
-  projects: [],
+const initialState: ContextsState = {
+  contexts: [],
   recentOpenFiles: []
 }
 
-const filesSlice = createSlice({
-  name: "files",
+const contextsSlice = createSlice({
+  name: "contexts",
   initialState,
   reducers: {
     addRecentOpenFile: (state, action: PayloadAction<string>) => {
@@ -22,11 +22,11 @@ const filesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProjects.fulfilled, (state, action) => {
-      state.projects = action.payload
+      state.contexts = action.payload
     })
   }
 })
 
-export const filesActions = filesSlice.actions
+export const contextsActions = contextsSlice.actions
 
-export default filesSlice
+export default contextsSlice

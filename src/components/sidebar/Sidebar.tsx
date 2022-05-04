@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { getEditorContext } from "../../redux/editor/selectors"
 import { RootState } from "../../redux/store"
+import { getWorkingProject } from "../../redux/data/selectors"
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate()
@@ -19,6 +20,7 @@ const Sidebar: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages" })
 
   const haveContext = useSelector((state: RootState) => getEditorContext(state) !== undefined)
+  const haveWorkingProject = useSelector((state: RootState) => getWorkingProject(state) !== undefined)
 
   const activeBoxProps = (route: string) => {
     const isActive = location.pathname.includes(route)
@@ -39,12 +41,13 @@ const Sidebar: React.FC = () => {
 
   const pageButtons = [
     {
-      id: "files",
+      id: "contexts",
       IconComponent: InsertDriveFileTwoTone
     },
     {
       id: "data",
-      IconComponent: AnalyticsTwoTone
+      IconComponent: AnalyticsTwoTone,
+      disabled: !haveWorkingProject
     },
     {
       id: "editor",

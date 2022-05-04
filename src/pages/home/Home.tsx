@@ -2,7 +2,7 @@ import React from "react"
 import BasePage from "../../components/basepage/BasePage"
 import * as S from "./Home.style"
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
     <BasePage>
       <S.HomeWrapper>
@@ -12,4 +12,4 @@ const Home: React.FC = () => {
   )
 }
 
-export default Home
+export default HomePage

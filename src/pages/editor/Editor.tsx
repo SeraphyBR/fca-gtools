@@ -11,7 +11,7 @@ import { getEditorContext, getEditorEditMode } from "../../redux/editor/selector
 import { editorActions } from "../../redux/editor/slice"
 import { useAppDispatch } from "../../redux/store"
 
-const Editor: React.FC = () => {
+const EditorPage: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.editor" })
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -22,7 +22,7 @@ const Editor: React.FC = () => {
   const editMode = useSelector(getEditorEditMode)
 
   useEffect(() => {
-    if (context === undefined) navigate("/files")
+    if (context === undefined) navigate("/contexts")
   }, [context])
 
   const handleOnClickCancel = () => {
@@ -71,4 +71,4 @@ const Editor: React.FC = () => {
   )
 }
 
-export default Editor
+export default EditorPage

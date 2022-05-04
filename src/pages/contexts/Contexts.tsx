@@ -20,7 +20,7 @@ import { editorActions } from "../../redux/editor/slice"
 import { useNavigate } from "react-router-dom"
 
 const ContextsPage: React.FC = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "pages.files" })
+  const { t } = useTranslation("translation", { keyPrefix: "pages.contexts" })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()

@@ -1,4 +1,5 @@
 use std::env;
+use std::fs;
 use std::str::FromStr;
 use std::sync::Arc;
 
@@ -29,10 +30,8 @@ pub async fn start(addr: &'static str) {
   } else {
     let project_dirs = ProjectDirs::from("", "", "tauri-app").unwrap();
     let data_local_dir = project_dirs.data_local_dir();
-    database_url = String::from(format!(
-      "sqlite://{}/storage.sqlite",
-      data_local_dir.to_str().unwrap()
-    ));
+    fs::create_dir_all(data_local_dir).unwrap();
+    database_url = format!("sqlite:{}/storage.sqlite", data_local_dir.to_str().unwrap());
   }
 
   let db_connection_options = SqliteConnectOptions::from_str(&database_url)

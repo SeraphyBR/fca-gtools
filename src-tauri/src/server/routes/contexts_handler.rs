@@ -11,10 +11,7 @@ use uuid::Uuid;
 
 use crate::server::routes::State;
 
-pub async fn add_context_with_file_handler(
-  state: State,
-  multipart: Multipart,
-) -> Result<(), StatusCode> {
+pub async fn add_context_with_file(state: State, multipart: Multipart) -> Result<(), StatusCode> {
   let new_context = extract_struct_from_multipart::<AddContextDto>(multipart)
     .await
     .unwrap();

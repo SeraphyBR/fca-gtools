@@ -3,6 +3,7 @@ from __future__ import annotations
 import subprocess
 from typing import List
 from fcatools import EMPTY_VALUE
+from fcatools import resource_path
 
 
 class DyadicConcept:
@@ -31,9 +32,8 @@ class DyadicConcept:
 
     @staticmethod
     def get_concepts_d_peeler(context_file, output_file) -> List[DyadicConcept]:
-        p = subprocess.Popen(['d-peeler', context_file, '--out', output_file],
-                             executable='/home/seraphybr/Git/tauri-app/src-flask/fcatools/d-peeler/d-peeler')
-        p.wait()
+        subprocess.run([resource_path('d-peeler'),
+                       context_file, '--out', output_file])
         return DyadicConcept.read_concepts_from_file(output_file)
 
     @staticmethod

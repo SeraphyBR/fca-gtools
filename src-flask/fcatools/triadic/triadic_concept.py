@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 from typing import List
-import os
 import subprocess
+from fcatools import resource_path
 
 
 class TriadicConcept:
@@ -13,8 +13,8 @@ class TriadicConcept:
 
     @staticmethod
     def get_concepts_d_peeler(context_file, output_file) -> List[TriadicConcept]:
-        subprocess.Popen(['d-peeler', context_file, '--out', output_file],
-                         executable='/home/seraphybr/Git/tauri-app/src-flask/fcatools/d-peeler/d-peeler')
+        subprocess.run([resource_path('d-peeler'),
+                       context_file, '--out', output_file])
         return TriadicConcept.read_concepts_from_file(output_file)
 
     @staticmethod

@@ -97,6 +97,8 @@ pub async fn update_context_data(
     .execute(&state.db)
     .await
     .unwrap();
+
+    return;
   }
 
   todo!()

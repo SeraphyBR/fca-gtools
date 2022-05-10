@@ -30,9 +30,9 @@ pub struct TriadicContextPy {
 // Model used by react frontend to display data
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TriadicObjectRelationData {
-  #[serde(rename(serialize = "attributeIdx"))]
+  #[serde(rename = "attributeIdx")]
   attribute_idx: usize,
-  #[serde(rename(serialize = "conditionIdx"))]
+  #[serde(rename = "conditionIdx")]
   condition_idx: usize,
 }
 
@@ -130,12 +130,29 @@ impl TriadicContext {
   pub fn from_front_struct(data: TriadicContextData) -> Self {
     let objects_names: Vec<String> = data.objects.iter().map(|o| o.name.clone()).collect();
 
+    let mut relations: Vec<Vec<Vec<String>>> = Vec::new();
+
+    for object in data.objects.iter() {
+      let mut rel1 = Vec::new();
+      for (aidx, _attribute) in data.attributes.iter().enumerate() {
+        let mut rel2 = Vec::new();
+
+        if let Some(r) = object.relation.iter().find(|r| r.attribute_idx == aidx) {
+          rel2.push(data.conditions[r.condition_idx].clone())
+        }
+
+        rel1.push(rel2)
+      }
+
+      relations.push(rel1);
+    }
+
     Self {
       name: data.name,
       attributes: data.attributes,
       conditions: data.conditions,
       objects: objects_names,
-      relations: todo!(),
+      relations,
     }
   }
 }

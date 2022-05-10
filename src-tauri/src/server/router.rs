@@ -30,6 +30,7 @@ pub fn api_router() -> Router {
     .layer(
       CorsLayer::new()
         .allow_origin(cors::Any)
-        .allow_methods(cors::Any),
+        .allow_methods(cors::Any)
+        .allow_headers(cors::Any),
     )
 }

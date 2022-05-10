@@ -39,9 +39,10 @@
     "vite": "vite",
     "vite:pvbuild": "tsc && vite build && vite preview --port 3000",
     "tauri": "tauri",
+    "dev:all": "concurrently 'yarn:vite' 'yarn:tauri dev'",
+    "release:all": "concurrently 'yarn:vite:pvbuild'  'yarn:tauri dev --release'",
     "flask:serve": "sh -c 'source ./src-flask/.venv/bin/activate && python src-flask/main.py'",
-    "dev:all": "concurrently 'yarn:vite' 'yarn:tauri dev' 'yarn:flask:serve'",
-    "release:all": "concurrently 'yarn:vite:pvbuild'  'yarn:tauri dev --release' 'yarn:flask:serve'",
+    "flask:build": "sh -c 'source ./src-flask/.venv/bin/activate && python src-flask/build.py'",
     "cypress:open": "cypress open"
   },
   "eslintConfig": {

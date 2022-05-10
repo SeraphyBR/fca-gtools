@@ -1,29 +1,32 @@
 import { SaveRounded, SaveTwoTone } from "@mui/icons-material"
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material"
+import { useSnackbar } from "notistack"
 import React, { createRef, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import BasePage from "../../components/basepage/BasePage"
 import ContextDataGrid, { ContextDataGridRef } from "../../components/datagrid/ContextDataGrid"
-import { TriadicContextData } from "../../models/context"
-import { getEditorContext, getEditorEditMode } from "../../redux/editor/selectors"
+import { getEditorContextData, getEditorEditMode, getEditorIdContext } from "../../redux/editor/selectors"
 import { editorActions } from "../../redux/editor/slice"
 import { useAppDispatch } from "../../redux/store"
+import { updateContextData } from "../../services/backend"
 
 const EditorPage: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.editor" })
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const { enqueueSnackbar } = useSnackbar()
 
   const contextDataGrifRef = createRef<ContextDataGridRef>()
 
-  const context = useSelector(getEditorContext)
+  const idContext = useSelector(getEditorIdContext)
+  const contextData = useSelector(getEditorContextData)
   const editMode = useSelector(getEditorEditMode)
 
   useEffect(() => {
-    if (context === undefined) navigate("/contexts")
-  }, [context])
+    if (contextData === undefined) navigate("/contexts")
+  }, [contextData])
 
   const handleOnClickCancel = () => {
     dispatch(editorActions.clean())
@@ -31,9 +34,21 @@ const EditorPage: React.FC = () => {
 
   const handleOnClickSave = () => {
     const grid = contextDataGrifRef.current
-    if (grid) {
-      let editedContext = grid.getContextWithChanges()
-      console.log(editedContext)
+    if (!grid) return
+
+    let editedContext = grid.getContextWithChanges()
+    console.log(editedContext)
+
+    enqueueSnackbar("Salvando...", { variant: "info" })
+
+    if (idContext) {
+      updateContextData(idContext, editedContext)
+        .then(() => {
+          enqueueSnackbar("As mudanças foram salvas com sucesso", { variant: "success" })
+        })
+        .catch(() => {
+          enqueueSnackbar("Não foi possivel salvar", { variant: "error" })
+        })
     }
   }
 
@@ -41,18 +56,18 @@ const EditorPage: React.FC = () => {
     <BasePage>
       <Typography variant="h4">{t("title")}</Typography>
       <Divider sx={{ margin: "8px 0px" }} />
-      {context && (
+      {contextData && (
         <Box>
           <Box display="inline-flex" gap="8px" mb="16px">
-            <Typography>Contexto: {context.name}</Typography>
-            <Typography>Objetos: {context.objects.length}</Typography>
-            <Typography>Atributos: {context.attributes.length}</Typography>
-            <Typography>Condições: {context.conditions.length}</Typography>
+            <Typography>Contexto: {contextData.name}</Typography>
+            <Typography>Objetos: {contextData.objects.length}</Typography>
+            <Typography>Atributos: {contextData.attributes.length}</Typography>
+            <Typography>Condições: {contextData.conditions.length}</Typography>
           </Box>
 
           <ContextDataGrid
             style={{ height: "calc(100vh - 200px)", width: "auto" }}
-            context={context}
+            context={contextData}
             editable={editMode}
             ref={contextDataGrifRef}
           />

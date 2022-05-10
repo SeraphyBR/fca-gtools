@@ -1,5 +1,7 @@
 import { RootState } from "../store"
 
-export const getEditorContext = (state: RootState) => state.editor.context
+export const getEditorContextData = (state: RootState) => state.editor.contextData
+
+export const getEditorIdContext = (state: RootState) => state.editor.idContext
 
 export const getEditorEditMode = (state: RootState) => state.editor.editMode

@@ -10,7 +10,7 @@ import {
 import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
-import { getEditorContext } from "../../redux/editor/selectors"
+import { getEditorContextData } from "../../redux/editor/selectors"
 import { RootState } from "../../redux/store"
 import { getWorkingProject } from "../../redux/data/selectors"
 
@@ -19,7 +19,7 @@ const Sidebar: React.FC = () => {
   const location = useLocation()
   const { t } = useTranslation("translation", { keyPrefix: "pages" })
 
-  const haveContext = useSelector((state: RootState) => getEditorContext(state) !== undefined)
+  const haveContext = useSelector((state: RootState) => getEditorContextData(state) !== undefined)
   const haveWorkingProject = useSelector((state: RootState) => getWorkingProject(state) !== undefined)
 
   const activeBoxProps = (route: string) => {

@@ -32,13 +32,17 @@ export const deleteAllProjects = async () => {
   await api.delete("/contexts")
 }
 
-export const getDataFromFcatools = async (id: string) => {
-  const response = await api.get<FcatoolsTriadicData>(`/fca/${id}`)
-  console.log(response.data)
+export const getContextData = async (id: string) => {
+  const response = await api.get<TriadicContextData>(`/contexts/${id}`)
   return response.data
 }
 
-export const getContextData = async (id: string) => {
-  const response = await api.get<TriadicContextData>(`/contexts/${id}`)
+export const updateContextData = async (id: string, data: TriadicContextData) => {
+  await api.put(`/contexts/${id}`, data)
+}
+
+export const getDataFromFcatools = async (id: string) => {
+  const response = await api.get<FcatoolsTriadicData>(`/fca/${id}`)
+  console.log(response.data)
   return response.data
 }

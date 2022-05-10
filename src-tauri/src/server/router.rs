@@ -1,5 +1,5 @@
 use axum::{
-  routing::{delete, get, post},
+  routing::{delete, get, post, put},
   Router,
 };
 use tower_http::cors;
@@ -16,6 +16,7 @@ pub fn contexts_router() -> Router {
       "/:context_id",
       get(contexts_handler::get_context_data_by_id),
     )
+    .route("/:context_id", put(contexts_handler::update_context_data))
 }
 
 pub fn fca_tools_router() -> Router {

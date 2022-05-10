@@ -76,3 +76,28 @@ pub async fn get_context_data_by_id(
 
   todo!()
 }
+
+pub async fn update_context_data(
+  state: State,
+  Path(context_id): Path<Uuid>,
+  Json(context_data): Json<TriadicContextData>,
+) {
+  let id = context_id.to_string();
+
+  let context = TriadicContext::from_front_struct(context_data);
+
+  if let Ok(json_blob) = serde_json::to_vec(&context) {
+    let fileblob = json_blob.as_slice();
+
+    sqlx::query!(
+      "UPDATE contexts SET fileblob = ? WHERE id = ?",
+      fileblob,
+      id
+    )
+    .execute(&state.db)
+    .await
+    .unwrap();
+  }
+
+  todo!()
+}

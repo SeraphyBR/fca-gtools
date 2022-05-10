@@ -9,7 +9,7 @@ import { useAppDispatch } from "../../../redux/store"
 import { getContextData } from "../../../services/backend"
 
 type ProjectCardProps = {
-  project: Context
+  context: Context
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = (props) => {
@@ -17,13 +17,13 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
   const navigate = useNavigate()
 
   const handleOnClickOpenData = () => {
-    dispatch(dataActions.setWorkingContext(props.project))
+    dispatch(dataActions.setWorkingContext(props.context))
     navigate("/data")
   }
 
   const handleOnClickOpenContext = () => {
-    getContextData(props.project.id).then((context) => {
-      dispatch(editorActions.setEditableContext(context))
+    getContextData(props.context.id).then((contextData) => {
+      dispatch(editorActions.setEditableContext({ id: props.context.id, data: contextData }))
       navigate("/editor")
     })
   }
@@ -31,7 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
   return (
     <Card variant="outlined" sx={{ width: 275 }}>
       <CardContent>
-        <Typography>{props.project.name}</Typography>
+        <Typography>{props.context.name}</Typography>
         <Chip variant="outlined" color="info" size="small" sx={{ borderRadius: "4px", mt: "4px" }} label="Triadico" />
       </CardContent>
       <CardActions>

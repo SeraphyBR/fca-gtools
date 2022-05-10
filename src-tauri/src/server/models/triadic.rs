@@ -126,4 +126,16 @@ impl TriadicContext {
       objects,
     }
   }
+
+  pub fn from_front_struct(data: TriadicContextData) -> Self {
+    let objects_names: Vec<String> = data.objects.iter().map(|o| o.name.clone()).collect();
+
+    Self {
+      name: data.name,
+      attributes: data.attributes,
+      conditions: data.conditions,
+      objects: objects_names,
+      relations: todo!(),
+    }
+  }
 }

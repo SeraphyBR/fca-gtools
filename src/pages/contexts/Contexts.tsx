@@ -65,7 +65,7 @@ const ContextsPage: React.FC = () => {
       }),
       objects: Array.from(Array(objects)).map((_, i) => ({ name: i.toString(), relation: [] } as TriadicObjectData))
     }
-    dispatch(editorActions.setEditableContext(newContext))
+    dispatch(editorActions.setEditableContext({ data: newContext }))
     navigate("/editor")
   }
 
@@ -91,9 +91,9 @@ const ContextsPage: React.FC = () => {
           </Button>
         </Box>
         <Grid container spacing={2}>
-          {contexts.map((p) => (
-            <Grid item key={p.id}>
-              <ProjectCard project={p} key={p.id} />
+          {contexts.map((c) => (
+            <Grid item key={c.id}>
+              <ProjectCard context={c} key={c.id} />
             </Grid>
           ))}
         </Grid>

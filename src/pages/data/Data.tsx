@@ -6,32 +6,32 @@ import { useNavigate } from "react-router-dom"
 import BasePage from "../../components/basepage/BasePage"
 import RulesDataGrid from "../../components/rulesdatagrid/RulesDataGrid"
 import { FcatoolsTriadicData } from "../../models/data"
-import { getWorkingProject } from "../../redux/data/selectors"
+import { getWorkingContext } from "../../redux/data/selectors"
 import { getDataFromFcatools } from "../../services/backend"
 
 const DataPage: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.data" })
   const navigate = useNavigate()
 
-  const project = useSelector(getWorkingProject)
+  const context = useSelector(getWorkingContext)
 
   const [fcaTriadicData, setFcaTriadicData] = useState<FcatoolsTriadicData>()
 
   useEffect(() => {
-    if (project === undefined) {
+    if (context === undefined) {
       navigate("/contexts")
     }
-  }, [project, navigate])
+  }, [context, navigate])
 
   useEffect(() => {
-    if (project !== undefined) {
-      getDataFromFcatools(project.id).then((data) => setFcaTriadicData(data))
+    if (context !== undefined) {
+      getDataFromFcatools(context.id).then((data) => setFcaTriadicData(data))
     }
-  }, [project])
+  }, [context])
 
   return (
     <BasePage>
-      <Typography variant="h4">{t("title") + " - " + project?.name}</Typography>
+      <Typography variant="h4">{t("title") + " - " + context?.name}</Typography>
       <Divider sx={{ margin: "8px 0px" }} />
       <Box mb="24px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
         <Button variant="outlined">Gerar regras BACARS</Button>

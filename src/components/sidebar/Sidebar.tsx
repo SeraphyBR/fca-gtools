@@ -12,15 +12,15 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { getEditorContextData } from "../../redux/editor/selectors"
 import { RootState } from "../../redux/store"
-import { getWorkingProject } from "../../redux/data/selectors"
+import { getWorkingContext } from "../../redux/data/selectors"
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { t } = useTranslation("translation", { keyPrefix: "pages" })
 
-  const haveContext = useSelector((state: RootState) => getEditorContextData(state) !== undefined)
-  const haveWorkingProject = useSelector((state: RootState) => getWorkingProject(state) !== undefined)
+  const haveContextData = useSelector((state: RootState) => getEditorContextData(state) !== undefined)
+  const haveWorkingContext = useSelector((state: RootState) => getWorkingContext(state) !== undefined)
 
   const activeBoxProps = (route: string) => {
     const isActive = location.pathname.includes(route)
@@ -47,12 +47,12 @@ const Sidebar: React.FC = () => {
     {
       id: "data",
       IconComponent: AnalyticsTwoTone,
-      disabled: !haveWorkingProject
+      disabled: !haveWorkingContext
     },
     {
       id: "editor",
       IconComponent: GridOnTwoTone,
-      disabled: !haveContext
+      disabled: !haveContextData
     },
     {
       id: "settings",

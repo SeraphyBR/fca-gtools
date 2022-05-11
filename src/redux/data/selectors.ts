@@ -1,3 +1,3 @@
 import { RootState } from "../store"
 
-export const getWorkingProject = (state: RootState) => state.data.context
+export const getWorkingContext = (state: RootState) => state.data.context

@@ -84,7 +84,7 @@ pub async fn update_context_data(
 ) {
   let id = context_id.to_string();
 
-  let context = TriadicContext::from_front_struct(context_data);
+  let context = TriadicContext::from_data(context_data);
 
   if let Ok(json_blob) = serde_json::to_vec(&context) {
     let fileblob = json_blob.as_slice();

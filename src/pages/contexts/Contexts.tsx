@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import BasePage from "../../components/basepage/BasePage"
 import FileDrop from "../../components/filedrop/FileDrop"
-import ProjectCard from "./card/ProjectCard"
+import ContextCard from "./card/ProjectCard"
 import { postAddProject } from "../../services/backend"
 import { useSelector } from "react-redux"
 import { getContextsSelector } from "../../redux/contexts/selectors"
@@ -93,7 +93,7 @@ const ContextsPage: React.FC = () => {
         <Grid container spacing={2}>
           {contexts.map((c) => (
             <Grid item key={c.id}>
-              <ProjectCard context={c} key={c.id} />
+              <ContextCard context={c} key={c.id} />
             </Grid>
           ))}
         </Grid>

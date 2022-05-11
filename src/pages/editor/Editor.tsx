@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import BasePage from "../../components/basepage/BasePage"
-import ContextDataGrid, { ContextDataGridRef } from "../../components/datagrid/ContextDataGrid"
+import ContextDataGrid, { ContextDataGridRef } from "../../components/contextdatagrid/ContextDataGrid"
 import { getEditorContextData, getEditorEditMode, getEditorIdContext } from "../../redux/editor/selectors"
 import { editorActions } from "../../redux/editor/slice"
 import { useAppDispatch } from "../../redux/store"
@@ -37,7 +37,6 @@ const EditorPage: React.FC = () => {
     if (!grid) return
 
     let editedContext = grid.getContextWithChanges()
-    console.log(editedContext)
 
     enqueueSnackbar("Salvando...", { variant: "info" })
 
@@ -45,6 +44,8 @@ const EditorPage: React.FC = () => {
       updateContextData(idContext, editedContext)
         .then(() => {
           enqueueSnackbar("As mudanças foram salvas com sucesso", { variant: "success" })
+          navigate("/contexts")
+          dispatch(editorActions.clean())
         })
         .catch(() => {
           enqueueSnackbar("Não foi possivel salvar", { variant: "error" })

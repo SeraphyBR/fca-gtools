@@ -34,7 +34,7 @@ const AppRouter: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider
-        maxSnack={3}
+        maxSnack={1}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right"

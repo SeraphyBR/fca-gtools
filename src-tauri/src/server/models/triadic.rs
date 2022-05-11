@@ -127,7 +127,7 @@ impl TriadicContext {
     }
   }
 
-  pub fn from_front_struct(data: TriadicContextData) -> Self {
+  pub fn from_data(data: TriadicContextData) -> Self {
     let objects_names: Vec<String> = data.objects.iter().map(|o| o.name.clone()).collect();
 
     let mut relations: Vec<Vec<Vec<String>>> = Vec::new();
@@ -137,8 +137,10 @@ impl TriadicContext {
       for (aidx, _attribute) in data.attributes.iter().enumerate() {
         let mut rel2 = Vec::new();
 
-        if let Some(r) = object.relation.iter().find(|r| r.attribute_idx == aidx) {
-          rel2.push(data.conditions[r.condition_idx].clone())
+        let relations = object.relation.iter().filter(|r| r.attribute_idx == aidx);
+
+        for relation in relations {
+          rel2.push(data.conditions[relation.condition_idx].clone())
         }
 
         rel1.push(rel2)

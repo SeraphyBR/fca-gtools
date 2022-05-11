@@ -8,11 +8,11 @@ import { editorActions } from "../../../redux/editor/slice"
 import { useAppDispatch } from "../../../redux/store"
 import { getContextData } from "../../../services/backend"
 
-type ProjectCardProps = {
+type ContextCardProps = {
   context: Context
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = (props) => {
+const ContextCard: React.FC<ContextCardProps> = (props) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -35,14 +35,19 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
         <Chip variant="outlined" color="info" size="small" sx={{ borderRadius: "4px", mt: "4px" }} label="Triadico" />
       </CardContent>
       <CardActions>
+        <IconButton color="primary" onClick={handleOnClickOpenContext}>
+          <Tooltip arrow title="Abrir contexto">
+            <GridOn />
+          </Tooltip>
+        </IconButton>
         <IconButton color="primary" onClick={handleOnClickOpenData}>
-          <Tooltip arrow title="Visualizar dados">
+          <Tooltip arrow title="Extrair regras">
             <Analytics />
           </Tooltip>
         </IconButton>
-        <IconButton color="primary" onClick={handleOnClickOpenContext}>
-          <Tooltip arrow title="Abrir no editor de contexto">
-            <GridOn />
+        <IconButton color="primary" onClick={handleOnClickOpenData}>
+          <Tooltip arrow title="Extrair conceitos">
+            <Analytics />
           </Tooltip>
         </IconButton>
         <IconButton color="primary" sx={{ ml: "auto!important" }}>
@@ -55,4 +60,4 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
   )
 }
 
-export default ProjectCard
+export default ContextCard

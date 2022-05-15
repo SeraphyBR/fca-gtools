@@ -16,14 +16,16 @@ const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
       headerName: "Implicações",
       headerAlign: "center",
       align: "center",
-      width: 200
+      width: 200,
+      hideable: false
     },
     {
       field: "conditions",
       headerName: "Condições",
       headerAlign: "center",
       align: "center",
-      width: 200
+      width: 200,
+      hideable: false
     },
     {
       field: "support",
@@ -31,7 +33,8 @@ const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
       headerAlign: "center",
       type: "number",
       align: "center",
-      width: 140
+      width: 200,
+      hideable: false
     },
     {
       field: "confidence",
@@ -39,7 +42,8 @@ const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
       headerAlign: "center",
       type: "number",
       align: "center",
-      width: 140
+      width: 200,
+      hideable: false
     }
   ]
 

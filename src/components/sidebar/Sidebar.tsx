@@ -45,14 +45,14 @@ const Sidebar: React.FC = () => {
       IconComponent: InsertDriveFileTwoTone
     },
     {
-      id: "data",
-      IconComponent: AnalyticsTwoTone,
-      disabled: !haveWorkingContext
-    },
-    {
       id: "editor",
       IconComponent: GridOnTwoTone,
       disabled: !haveContextData
+    },
+    {
+      id: "data",
+      IconComponent: AnalyticsTwoTone,
+      disabled: !haveWorkingContext
     },
     {
       id: "settings",

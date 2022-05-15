@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Context } from "../../models/project"
-import { fetchProjects } from "./actions"
+import { fetchContexts } from "./actions"
 
 type ContextsState = {
   contexts: Context[]
@@ -21,7 +21,7 @@ const contextsSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchProjects.fulfilled, (state, action) => {
+    builder.addCase(fetchContexts.fulfilled, (state, action) => {
       state.contexts = action.payload
     })
   }

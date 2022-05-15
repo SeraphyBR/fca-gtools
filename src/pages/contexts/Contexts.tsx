@@ -8,7 +8,7 @@ import { postAddContext } from "../../services/backend"
 import { useSelector } from "react-redux"
 import { getContextsSelector } from "../../redux/contexts/selectors"
 import { useAppDispatch } from "../../redux/store"
-import { fetchProjects } from "../../redux/contexts/actions"
+import { fetchContexts } from "../../redux/contexts/actions"
 import { useSnackbar } from "notistack"
 import DialogModal from "../../components/dialogmodal/DialogModal"
 import { AddRounded, ArrowDownwardRounded } from "@mui/icons-material"
@@ -30,7 +30,7 @@ const ContextsPage: React.FC = () => {
   const contexts = useSelector(getContextsSelector)
 
   useEffect(() => {
-    const promise = dispatch(fetchProjects())
+    const promise = dispatch(fetchContexts())
 
     promise.unwrap().catch((error: AxiosError | TaskAbortError) => {
       if (error.name === "AbortError") return
@@ -45,7 +45,7 @@ const ContextsPage: React.FC = () => {
     postAddContext({ name: files[0].name, filename: files[0].name, blob: files[0] })
       .then(() => {
         enqueueSnackbar("Adicionado com sucesso!", { variant: "success" })
-        dispatch(fetchProjects())
+        dispatch(fetchContexts())
       })
       .catch(() => {
         enqueueSnackbar("Ocorreu um erro ao adicionar!", { variant: "error" })

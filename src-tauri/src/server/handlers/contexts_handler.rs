@@ -45,6 +45,15 @@ pub async fn get_contexts(state: State) -> Json<Vec<Context>> {
   Json(result)
 }
 
+pub async fn delete_context_by_id(state: State, Path(context_id): Path<Uuid>) {
+  let id = context_id.to_string();
+
+  sqlx::query!("DELETE FROM contexts WHERE id = ?", id)
+    .execute(&state.db)
+    .await
+    .unwrap();
+}
+
 pub async fn delete_all_contexts(state: State) {
   sqlx::query!("DELETE FROM contexts")
     .execute(&state.db)

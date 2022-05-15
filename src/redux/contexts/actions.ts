@@ -1,4 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { getProjects } from "../../services/backend"
+import { getContexts } from "../../services/backend"
 
-export const fetchProjects = createAsyncThunk("fetch/projects", async (_, { signal }) => await getProjects({ signal }))
+export const fetchContexts = createAsyncThunk("fetch/contexts", async (_, { signal }) => await getContexts({ signal }))

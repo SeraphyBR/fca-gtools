@@ -9,7 +9,7 @@ import DeleteAllDialog from "../../dialogs/deleteAll/DeleteAll"
 import { getThemeSettingsSelector } from "../../redux/settings/selectors"
 import { settingsActions } from "../../redux/settings/slice"
 import { useAppDispatch } from "../../redux/store"
-import { deleteAllProjects } from "../../services/backend"
+import { deleteAllContexts } from "../../services/backend"
 
 const SettingsPage: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -31,7 +31,7 @@ const SettingsPage: React.FC = () => {
   const handleOnDelete = () => {
     handleOnCloseDeleteAllDialog()
 
-    deleteAllProjects()
+    deleteAllContexts()
       .then(() => {
         enqueueSnackbar(tn("success.deleteAll"), { variant: "success" })
       })

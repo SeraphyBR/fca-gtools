@@ -23,13 +23,17 @@ export const postAddContext = async (newContext: AddContextDto) => {
   })
 }
 
-export const getProjects = async (config?: AxiosRequestConfig<any>) => {
+export const getContexts = async (config?: AxiosRequestConfig<any>) => {
   const response = await api.get<Context[]>("/contexts", config)
   return response.data
 }
 
-export const deleteAllProjects = async () => {
+export const deleteAllContexts = async () => {
   await api.delete("/contexts")
+}
+
+export const deleteContext = async (id: string) => {
+  await api.delete("/contexts/" + id)
 }
 
 export const getContextData = async (id: string) => {

@@ -5,14 +5,12 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import BasePage from "../../components/basepage/BasePage"
 import RulesDataGrid from "../../components/rulesdatagrid/RulesDataGrid"
-import { FcatoolsTriadicData, TriadicAssociationRule } from "../../models/data"
-import { getWorkingContext } from "../../redux/data/selectors"
+import { FcatoolsTriadicData, TriadicAssociationRule } from "../../models/rule"
+import { getWorkingContext } from "../../redux/rules/selectors"
 import { getDataFromFcatools } from "../../services/backend"
 
-type RuleType = "bacars-i" | "bacars-a" | "bcaars-i" | "bcaars-a"
-
-const DataPage: React.FC = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "pages.data" })
+const RulesPage: React.FC = () => {
+  const { t } = useTranslation("translation", { keyPrefix: "pages.rules" })
   const navigate = useNavigate()
 
   const context = useSelector(getWorkingContext)
@@ -99,4 +97,4 @@ const DataPage: React.FC = () => {
   )
 }
 
-export default DataPage
+export default RulesPage

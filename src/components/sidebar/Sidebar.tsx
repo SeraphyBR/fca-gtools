@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { getEditorContextData } from "../../redux/editor/selectors"
 import { RootState } from "../../redux/store"
-import { getWorkingContext } from "../../redux/data/selectors"
+import { getWorkingContext } from "../../redux/rules/selectors"
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate()
@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
       disabled: !haveContextData
     },
     {
-      id: "data",
+      id: "rules",
       IconComponent: AnalyticsTwoTone,
       disabled: !haveWorkingContext
     },

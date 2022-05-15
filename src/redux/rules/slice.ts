@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Context } from "../../models/project"
+import { Context } from "../../models/context"
 
-type DataState = {
+type RulesState = {
   context?: Context
 }
 
-const initialState: DataState = {
+const initialState: RulesState = {
   context: undefined
 }
 
-const dataSlice = createSlice({
-  name: "data",
+const rulesSlice = createSlice({
+  name: "rules",
   initialState,
   reducers: {
     setWorkingContext: (state, action: PayloadAction<Context>) => {
@@ -19,6 +19,6 @@ const dataSlice = createSlice({
   }
 })
 
-export const dataActions = dataSlice.actions
+export const rulesActions = rulesSlice.actions
 
-export default dataSlice
+export default rulesSlice

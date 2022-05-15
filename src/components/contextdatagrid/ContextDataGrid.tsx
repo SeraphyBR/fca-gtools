@@ -10,7 +10,7 @@ import * as S from "./ContextDataGrid.style"
 import CheckboxCellRenderer, { CheckboxCellEditor } from "./components/CheckboxCell"
 import { useSelector } from "react-redux"
 import { getThemeSettingsSelector } from "../../redux/settings/selectors"
-import { TriadicContextData } from "../../models/context"
+import { TriadicContextData } from "../../models/data"
 
 const transformContextToRows = (context: TriadicContextData) => {
   let rows = context.objects.map((obj) => {

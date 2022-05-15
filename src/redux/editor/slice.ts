@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { TriadicContextData } from "../../models/context"
+import { TriadicContextData } from "../../models/data"
 
 type EditorState = {
   idContext?: string

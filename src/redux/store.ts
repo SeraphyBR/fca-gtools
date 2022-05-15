@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { useDispatch } from "react-redux"
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist"
 import storage from "redux-persist/lib/storage"
-import dataSlice from "./data/slice"
+import rulesSlice from "./rules/slice"
 import editorSlice from "./editor/slice"
 import contextsSlice from "./contexts/slice"
 import settingsSlice from "./settings/slice"
@@ -16,7 +16,7 @@ const persistedReducer = persistReducer(
   combineReducers({
     settings: settingsSlice.reducer,
     contexts: contextsSlice.reducer,
-    data: dataSlice.reducer,
+    rules: rulesSlice.reducer,
     editor: editorSlice.reducer
   })
 )

@@ -1,5 +1,5 @@
 import React from "react"
-import { TriadicAssociationRule } from "../../models/data"
+import { TriadicAssociationRule } from "../../models/rule"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
 import { Box, SxProps, Theme } from "@mui/material"
 

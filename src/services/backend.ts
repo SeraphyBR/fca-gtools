@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios"
-import { TriadicContextData } from "../models/context"
-import { FcatoolsTriadicData } from "../models/data"
-import { AddContextDto, Context } from "../models/project"
+import { TriadicContextData } from "../models/data"
+import { FcatoolsTriadicData } from "../models/rule"
+import { AddContextDto, Context } from "../models/context"
 import api from "./api"
 
 export const getTeste = async () => {

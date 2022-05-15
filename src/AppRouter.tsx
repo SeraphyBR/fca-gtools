@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { Route, Routes } from "react-router-dom"
 import Sidebar from "./components/sidebar/Sidebar"
-import DataPage from "./pages/data/Data"
+import RulesPage from "./pages/rules/Rules"
 import EditorPage from "./pages/editor/Editor"
 import ContextsPage from "./pages/contexts/Contexts"
 import HomePage from "./pages/home/Home"
@@ -45,7 +45,7 @@ const AppRouter: React.FC = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/contexts" element={<ContextsPage />} />
-            <Route path="/data" element={<DataPage />} />
+            <Route path="/rules" element={<RulesPage />} />
             <Route path="/editor" element={<EditorPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Routes>

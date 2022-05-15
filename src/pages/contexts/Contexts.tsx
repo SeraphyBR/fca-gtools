@@ -15,7 +15,7 @@ import { AddRounded, ArrowDownwardRounded } from "@mui/icons-material"
 import { AxiosError } from "axios"
 import { TaskAbortError } from "@reduxjs/toolkit"
 import NewContextDialog from "../../dialogs/newContext/NewContext"
-import { TriadicContextData, TriadicObjectData } from "../../models/context"
+import { TriadicContextData, TriadicObjectData } from "../../models/data"
 import { editorActions } from "../../redux/editor/slice"
 import { useNavigate } from "react-router-dom"
 

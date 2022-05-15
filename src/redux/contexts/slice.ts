@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Context } from "../../models/project"
+import { Context } from "../../models/context"
 import { fetchContexts } from "./actions"
 
 type ContextsState = {

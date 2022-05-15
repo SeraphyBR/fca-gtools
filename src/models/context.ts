@@ -1,14 +1,10 @@
-export type TriadicObjectData = {
+export type Context = {
+  id: string
   name: string
-  relation: {
-    attributeIdx: number
-    conditionIdx: number
-  }[]
 }
 
-export type TriadicContextData = {
-  name: String
-  attributes: string[]
-  conditions: string[]
-  objects: TriadicObjectData[]
+export type AddContextDto = {
+  name: string
+  filename: string
+  blob: Blob
 }

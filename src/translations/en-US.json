@@ -22,8 +22,8 @@
         "label": "Drag 'n' drop some files here, or click to select files"
       }
     },
-    "data": {
-      "title": "Data"
+    "rules": {
+      "title": "Rules"
     },
     "editor": {
       "title": "Context Editor"

@@ -10,7 +10,7 @@ import ContextDataGrid, { ContextDataGridRef } from "../../components/contextdat
 import { getEditorContextData, getEditorEditMode, getEditorIdContext } from "../../redux/editor/selectors"
 import { editorActions } from "../../redux/editor/slice"
 import { useAppDispatch } from "../../redux/store"
-import { updateContextData } from "../../services/backend"
+import { postContextData, updateContextData } from "../../services/backend"
 
 const EditorPage: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.editor" })
@@ -50,6 +50,16 @@ const EditorPage: React.FC = () => {
         .catch(() => {
           enqueueSnackbar("Não foi possivel salvar", { variant: "error" })
         })
+    } else {
+      postContextData(editedContext)
+        .then(() => {
+          enqueueSnackbar("Novo contexto criado com sucesso", { variant: "success" })
+          navigate("/contexts")
+          dispatch(editorActions.clean())
+        })
+        .catch(() => {
+          enqueueSnackbar("Não foi possivel salvar", { variant: "error" })
+        })
     }
   }
 
@@ -60,7 +70,7 @@ const EditorPage: React.FC = () => {
       {contextData && (
         <Box>
           <Box display="inline-flex" gap="8px" mb="16px">
-            <Typography>Contexto: {contextData.name}</Typography>
+            <Typography>Nome: {contextData.name}</Typography>
             <Typography>Objetos: {contextData.objects.length}</Typography>
             <Typography>Atributos: {contextData.attributes.length}</Typography>
             <Typography>Condições: {contextData.conditions.length}</Typography>

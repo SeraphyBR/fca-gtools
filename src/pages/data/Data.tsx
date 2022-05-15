@@ -39,7 +39,7 @@ const DataPage: React.FC = () => {
       </Box>
       <Box>
         <RulesDataGrid
-          rules={fcaTriadicData ? fcaTriadicData.bacars_implication_rules : []}
+          rules={fcaTriadicData ? fcaTriadicData.bacars_association_rules : []}
           loading={fcaTriadicData === undefined}
           sx={{ height: "calc(100vh - 200px)" }}
         />

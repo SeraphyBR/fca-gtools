@@ -9,14 +9,14 @@ export const getTeste = async () => {
   return response.data
 }
 
-export const postAddProject = async (newProject: AddContextDto) => {
+export const postAddContext = async (newContext: AddContextDto) => {
   const formData = new FormData()
 
-  formData.append("name", newProject.name)
-  formData.append("filename", newProject.filename)
-  formData.append("blob", newProject.blob, newProject.filename)
+  formData.append("name", newContext.name)
+  formData.append("filename", newContext.filename)
+  formData.append("blob", newContext.blob, newContext.filename)
 
-  await api.post("/contexts", formData, {
+  await api.post("/contexts/file", formData, {
     headers: {
       "Content-Type": "multipart/form-data"
     }
@@ -39,6 +39,10 @@ export const getContextData = async (id: string) => {
 
 export const updateContextData = async (id: string, data: TriadicContextData) => {
   await api.put(`/contexts/${id}`, data)
+}
+
+export const postContextData = async (data: TriadicContextData) => {
+  await api.post(`/contexts`, data)
 }
 
 export const getDataFromFcatools = async (id: string) => {

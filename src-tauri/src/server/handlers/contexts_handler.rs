@@ -103,3 +103,31 @@ pub async fn update_context_data(
 
   todo!()
 }
+
+pub async fn add_context_with_data(state: State, Json(context_data): Json<TriadicContextData>) {
+  let context = TriadicContext::from_data(context_data);
+  let new_context_id = Uuid::new_v4().to_string();
+  let new_context_filename = format!("{}.json", context.name);
+
+  if let Ok(json_blob) = serde_json::to_vec(&context) {
+    let fileblob = json_blob.as_slice();
+
+    sqlx::query!(
+      r#"
+      INSERT INTO contexts (id, name, filename, fileblob, deleted, created_timestamp)
+      VALUES ($1, $2, $3, $4, FALSE, strftime('%s','now'))
+      "#,
+      new_context_id,
+      context.name,
+      new_context_filename,
+      fileblob
+    )
+    .execute(&state.db)
+    .await
+    .unwrap();
+
+    return;
+  }
+
+  todo!()
+}

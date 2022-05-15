@@ -9,7 +9,8 @@ use super::handlers::*;
 
 pub fn contexts_router() -> Router {
   Router::new()
-    .route("/", post(contexts_handler::add_context_with_file))
+    .route("/", post(contexts_handler::add_context_with_data))
+    .route("/file", post(contexts_handler::add_context_with_file))
     .route("/", get(contexts_handler::get_contexts))
     .route("/", delete(contexts_handler::delete_all_contexts))
     .route(

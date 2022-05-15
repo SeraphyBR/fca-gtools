@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import BasePage from "../../components/basepage/BasePage"
 import FileDrop from "../../components/filedrop/FileDrop"
 import ContextCard from "./card/ContextCard"
-import { postAddProject } from "../../services/backend"
+import { postAddContext } from "../../services/backend"
 import { useSelector } from "react-redux"
 import { getContextsSelector } from "../../redux/contexts/selectors"
 import { useAppDispatch } from "../../redux/store"
@@ -42,7 +42,7 @@ const ContextsPage: React.FC = () => {
 
   const handleOnDropFile = (files: File[]) => {
     setOpenFileModal(false)
-    postAddProject({ name: files[0].name, filename: files[0].name, blob: files[0] })
+    postAddContext({ name: files[0].name, filename: files[0].name, blob: files[0] })
       .then(() => {
         enqueueSnackbar("Adicionado com sucesso!", { variant: "success" })
         dispatch(fetchProjects())

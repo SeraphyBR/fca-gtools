@@ -1,6 +1,13 @@
 import React from "react"
 import { TriadicAssociationRule } from "../../models/rule"
-import { DataGrid, GridColDef } from "@mui/x-data-grid"
+import {
+  DataGrid,
+  GridColDef,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+  GridToolbarFilterButton
+} from "@mui/x-data-grid"
 import { Box, SxProps, Theme } from "@mui/material"
 
 type RulesDataGridProps = {
@@ -55,9 +62,25 @@ const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
     confidence: r.confidence
   }))
 
+  const DataGridToolbar: React.FC = () => {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarDensitySelector />
+        <GridToolbarFilterButton />
+      </GridToolbarContainer>
+    )
+  }
+
   return (
     <Box sx={props.sx}>
-      <DataGrid rows={rows} columns={columns} loading={props.loading} disableSelectionOnClick autoPageSize />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        loading={props.loading}
+        components={{ Toolbar: DataGridToolbar }}
+        disableSelectionOnClick
+        autoPageSize
+      />
     </Box>
   )
 }

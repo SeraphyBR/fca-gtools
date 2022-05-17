@@ -1,4 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { getDataFromFcatools } from "../../services/backend"
+import { getRulesFromFcatools } from "../../services/backend"
 
-export const fetchDataFromFcatools = createAsyncThunk("fetch/fcatoolsData", getDataFromFcatools)
+export const fetchDataFromFcatools = createAsyncThunk("fetch/fcatoolsData", getRulesFromFcatools)

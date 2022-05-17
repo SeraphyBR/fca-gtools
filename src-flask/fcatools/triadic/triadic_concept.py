@@ -34,4 +34,4 @@ class TriadicConcept:
         return concepts
 
     def __repr__(self):
-        return f'TriadicConcept({self.incidences}, {self.objects}, {self.attrs}, {self.conditions})'
+        return f'TriadicConcept({self.objects}, {self.attrs}, {self.conditions})'

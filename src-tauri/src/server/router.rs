@@ -25,7 +25,15 @@ pub fn contexts_router() -> Router {
 }
 
 pub fn fca_tools_router() -> Router {
-  Router::new().route("/:project_id", get(fca_tools_handler::get_fca_data))
+  Router::new()
+    .route(
+      "/:context_id/rules",
+      get(fcatools_handler::get_fca_data_rules),
+    )
+    .route(
+      "/:context_id/concepts",
+      get(fcatools_handler::get_fca_data_concepts),
+    )
 }
 
 pub fn api_router() -> Router {

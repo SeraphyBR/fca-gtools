@@ -6,6 +6,7 @@ import rulesSlice from "./rules/slice"
 import editorSlice from "./editor/slice"
 import contextsSlice from "./contexts/slice"
 import settingsSlice from "./settings/slice"
+import conceptsSlice from "./concepts/slice"
 
 const persistedReducer = persistReducer(
   {
@@ -17,7 +18,8 @@ const persistedReducer = persistReducer(
     settings: settingsSlice.reducer,
     contexts: contextsSlice.reducer,
     rules: rulesSlice.reducer,
-    editor: editorSlice.reducer
+    editor: editorSlice.reducer,
+    concepts: conceptsSlice.reducer
   })
 )
 

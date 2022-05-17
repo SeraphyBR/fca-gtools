@@ -7,6 +7,7 @@ from fcatools.dyadic.dyadic_context import DyadicContext
 from fcatools.dyadic.dyadic_incidence import DyadicIncidence
 from .triadic_incidence import TriadicIncidence
 
+
 class TriadicContext:
     def __init__(self, incidences, objects, attributes, conditions):
         self.incidences: List[TriadicIncidence] = incidences
@@ -66,13 +67,17 @@ class TriadicContext:
 
     def write_triadic_context_data(self, path, entries_delimiter=' ', conditions_delimiter=','):
         with open(path, mode='w', newline='', encoding='utf-8') as triadic_file:
-            writer = csv.writer(triadic_file, delimiter=entries_delimiter)
+            writer = csv.writer(
+                triadic_file, delimiter=entries_delimiter, lineterminator='\n')
 
             for i in self.incidences:
                 conditions = conditions_delimiter.join(i.conditions)
                 writer.writerow([i.obj, i.attr, conditions])
 
-        triadic_file.close()
+        with open(path) as myFile:
+            lines = myFile.readlines()
+        with open(path, mode='w', newline='', encoding='utf-8') as myFile:
+            myFile.writelines([item for item in lines[:-1]])
 
     @staticmethod
     def read_triadic_context_data(path, entries_delimiter=' ', conditions_delimiter=',') -> TriadicContext:
@@ -85,8 +90,8 @@ class TriadicContext:
 
         incidences = []
         for rec in rdr:
-            assert len(rec) == 3, "Triadic contexts should contain only objects, attributes and conditions"
-
+            assert len(
+                rec) == 3, "Triadic contexts should contain only objects, attributes and conditions"
 
             obj = str(rec[0].strip())
             if obj not in objects:
@@ -95,7 +100,7 @@ class TriadicContext:
             attr = str(rec[1].strip())
             if attr not in attributes:
                 attributes.append(attr)
-            
+
             incidence_conditions = []
             for condition in str(rec[2].strip()).split(conditions_delimiter):
                 if condition not in conditions:
@@ -112,4 +117,3 @@ class TriadicContext:
 
     def __repr__(self):
         return f'TriadicContext({self.incidences}, {self.objects}, {self.attributes}, {self.conditions})'
-        

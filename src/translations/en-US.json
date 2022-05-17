@@ -27,6 +27,9 @@
     },
     "editor": {
       "title": "Context Editor"
+    },
+    "concepts": {
+      "title": "Concepts"
     }
   },
   "notifications": {

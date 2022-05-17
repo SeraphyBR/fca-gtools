@@ -7,6 +7,7 @@ from flask.json import JSONEncoder
 from fcatools.triadic.triadic_context import TriadicContext
 from fcatools.dyadic.dyadic_concept import DyadicConcept
 from fcatools.triadic.triadic_incidence import TriadicIncidence
+from fcatools.triadic.triadic_concept import TriadicConcept
 from fcatools.dyadic.dyadic_lattice import DyadicLattice
 from fcatools.dyadic.dyadic_generator import DyadicGenerator
 from fcatools.triadic.triadic_association_rule import TriadicAssociationRule
@@ -25,6 +26,12 @@ class MyJSONEncoder(JSONEncoder):
                 'support': obj.support,
                 'confidence': obj.confidence
             }
+        if isinstance(obj, TriadicConcept):
+            return {
+                'objects': list(obj.objects),
+                'attrs': list(obj.attrs),
+                'conditions': list(obj.conditions)
+            }
         return super(MyJSONEncoder, self).default(obj)
 
 
@@ -36,7 +43,7 @@ def hello_world():
     return "Hello World"
 
 
-@app.route('/fcatools', methods=['POST'])
+@app.route('/fcatools/rules', methods=['POST'])
 def fca_tools():
     if request.method == 'POST':
         data = request.json
@@ -75,6 +82,30 @@ def fca_tools():
             bcaars_association_rules=bcaars_association_rules,
             bcaars_implication_rules=bcaars_implication_rules
         )
+    return
+
+
+@app.route('/fcatools/concepts', methods=['POST'])
+def fca_tools_concepts():
+    if request.method == 'POST':
+        data = request.json
+        incidences: List[TriadicIncidence] = list()
+        for item in data['incidences']:
+            incidences.append(TriadicIncidence(
+                item['obj'], item['attr'], item['conditions']))
+        triadic_context = TriadicContext(
+            incidences, data['objects'], data['attributes'], data['conditions'])
+
+        tempdirname = tempfile.gettempdir()
+
+        filename_context = os.path.join(tempdirname, "context.data")
+        filename_concept = os.path.join(tempdirname, "concepts.data")
+
+        triadic_context.write_triadic_context_data(filename_context)
+        concepts = TriadicConcept.get_concepts_d_peeler(
+            filename_context, filename_concept)
+
+        return jsonify(concepts)
     return
 
 

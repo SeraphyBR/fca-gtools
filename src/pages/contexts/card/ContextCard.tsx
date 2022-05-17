@@ -1,4 +1,4 @@
-import { Analytics, Delete, FileDownload, GridOn } from "@mui/icons-material"
+import { Analytics, Assessment, Delete, FileDownload, GridOn } from "@mui/icons-material"
 import { Card, CardActions, CardContent, CardHeader, Chip, IconButton, Tooltip, Typography } from "@mui/material"
 import { useSnackbar } from "notistack"
 import React, { useState } from "react"
@@ -10,6 +10,7 @@ import { rulesActions } from "../../../redux/rules/slice"
 import { editorActions } from "../../../redux/editor/slice"
 import { useAppDispatch } from "../../../redux/store"
 import { deleteContext, getContextData } from "../../../services/backend"
+import { conceptsActions } from "../../../redux/concepts/slice"
 
 type ContextCardProps = {
   context: Context
@@ -21,7 +22,7 @@ const ContextCard: React.FC<ContextCardProps> = (props) => {
   const { enqueueSnackbar } = useSnackbar()
   const [displayIconMenu, setDisplayIconMenu] = useState(false)
 
-  const handleOnClickOpenData = () => {
+  const handleOnClickOpenRules = () => {
     dispatch(rulesActions.setWorkingContext(props.context))
     navigate("/rules")
   }
@@ -31,6 +32,11 @@ const ContextCard: React.FC<ContextCardProps> = (props) => {
       dispatch(editorActions.setEditableContext({ id: props.context.id, data: contextData }))
       navigate("/editor")
     })
+  }
+
+  const handleOnClickOpenConcepts = () => {
+    dispatch(conceptsActions.setWorkingContext(props.context))
+    navigate("/concepts")
   }
 
   const handleOnClickDelete = () => {
@@ -77,14 +83,14 @@ const ContextCard: React.FC<ContextCardProps> = (props) => {
             <GridOn />
           </Tooltip>
         </IconButton>
-        <IconButton color="primary" onClick={handleOnClickOpenData}>
+        <IconButton color="primary" onClick={handleOnClickOpenRules}>
           <Tooltip arrow title="Extrair regras">
             <Analytics />
           </Tooltip>
         </IconButton>
-        <IconButton color="primary" onClick={handleOnClickOpenData}>
-          <Tooltip arrow title="Extrair conceitos">
-            <Analytics />
+        <IconButton color="primary" onClick={handleOnClickOpenConcepts}>
+          <Tooltip arrow title="Obter conceitos">
+            <Assessment />
           </Tooltip>
         </IconButton>
       </CardActions>

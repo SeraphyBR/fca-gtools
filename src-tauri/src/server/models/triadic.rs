@@ -69,6 +69,13 @@ pub struct FcatoolsTriadicData {
   pub bcaars_association_rules: Vec<TriadicAssociationRule>,
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TriadicConcept {
+  pub objects: Vec<String>,
+  pub attrs: Vec<String>,
+  pub conditions: Vec<String>,
+}
+
 impl TriadicContext {
   pub fn get_list_incidences(&self) -> Vec<TriadicIncidence> {
     let mut incidences: Vec<TriadicIncidence> = Vec::new();

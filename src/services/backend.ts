@@ -3,6 +3,7 @@ import { TriadicContextData } from "../models/data"
 import { FcatoolsTriadicData } from "../models/rule"
 import { AddContextDto, Context } from "../models/context"
 import api from "./api"
+import { TriadicConcept } from "../models/concept"
 
 export const getTeste = async () => {
   const response = await api.get<string>("/")
@@ -49,7 +50,12 @@ export const postContextData = async (data: TriadicContextData) => {
   await api.post(`/contexts`, data)
 }
 
-export const getDataFromFcatools = async (id: string) => {
-  const response = await api.get<FcatoolsTriadicData>(`/fca/${id}`)
+export const getRulesFromFcatools = async (contextId: string) => {
+  const response = await api.get<FcatoolsTriadicData>(`/fca/${contextId}/rules`)
+  return response.data
+}
+
+export const getConceptsFromFcatools = async (contextId: string) => {
+  const response = await api.get<TriadicConcept[]>(`/fca/${contextId}/concepts`)
   return response.data
 }

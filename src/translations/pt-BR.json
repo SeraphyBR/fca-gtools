@@ -27,6 +27,9 @@
     },
     "editor": {
       "title": "Editor de contexto"
+    },
+    "concepts": {
+      "title": "Conceitos"
     }
   },
   "notifications": {

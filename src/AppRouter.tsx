@@ -11,6 +11,7 @@ import ContextsPage from "./pages/contexts/Contexts"
 import HomePage from "./pages/home/Home"
 import SettingsPage from "./pages/settings/Settings"
 import { getLanguageSettingsSelector, getThemeSettingsSelector } from "./redux/settings/selectors"
+import ConceptsPage from "./pages/concepts/Concepts"
 
 const AppRouter: React.FC = () => {
   const themeMode = useSelector(getThemeSettingsSelector)
@@ -45,8 +46,9 @@ const AppRouter: React.FC = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/contexts" element={<ContextsPage />} />
-            <Route path="/rules" element={<RulesPage />} />
             <Route path="/editor" element={<EditorPage />} />
+            <Route path="/rules" element={<RulesPage />} />
+            <Route path="/concepts" element={<ConceptsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Routes>
         </div>

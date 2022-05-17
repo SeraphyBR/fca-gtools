@@ -2,6 +2,7 @@ import React from "react"
 import { Box, BoxProps, Drawer, IconButton, SxProps, Theme, Tooltip } from "@mui/material"
 import {
   AnalyticsTwoTone,
+  Assessment,
   DashboardTwoTone,
   GridOnTwoTone,
   InsertDriveFileTwoTone,
@@ -12,7 +13,8 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { getEditorContextData } from "../../redux/editor/selectors"
 import { RootState } from "../../redux/store"
-import { getWorkingContext } from "../../redux/rules/selectors"
+import { getWorkingContext as getWorkingContextRules } from "../../redux/rules/selectors"
+import { getWorkingContext as getWorkingContextConcepts } from "../../redux/concepts/selectors"
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate()
@@ -20,7 +22,8 @@ const Sidebar: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages" })
 
   const haveContextData = useSelector((state: RootState) => getEditorContextData(state) !== undefined)
-  const haveWorkingContext = useSelector((state: RootState) => getWorkingContext(state) !== undefined)
+  const haveWorkingContextRules = useSelector((state: RootState) => getWorkingContextRules(state) !== undefined)
+  const haveWorkingContextConcepts = useSelector((state: RootState) => getWorkingContextConcepts(state) !== undefined)
 
   const activeBoxProps = (route: string) => {
     const isActive = location.pathname.includes(route)
@@ -52,7 +55,12 @@ const Sidebar: React.FC = () => {
     {
       id: "rules",
       IconComponent: AnalyticsTwoTone,
-      disabled: !haveWorkingContext
+      disabled: !haveWorkingContextRules
+    },
+    {
+      id: "concepts",
+      IconComponent: Assessment,
+      disabled: !haveWorkingContextConcepts
     },
     {
       id: "settings",

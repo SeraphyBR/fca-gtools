@@ -3,6 +3,7 @@ import { Box, BoxProps, Drawer, IconButton, SxProps, Theme, Tooltip } from "@mui
 import {
   AnalyticsTwoTone,
   Assessment,
+  AssessmentTwoTone,
   DashboardTwoTone,
   GridOnTwoTone,
   InsertDriveFileTwoTone,
@@ -59,7 +60,7 @@ const Sidebar: React.FC = () => {
     },
     {
       id: "concepts",
-      IconComponent: Assessment,
+      IconComponent: AssessmentTwoTone,
       disabled: !haveWorkingContextConcepts
     },
     {

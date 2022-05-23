@@ -87,8 +87,8 @@ const RulesPage: React.FC = () => {
           value={ruleType}
           exclusive
         >
-          <ToggleButton value="bacars">BACARS</ToggleButton>
           <ToggleButton value="bcaars">BCAARS</ToggleButton>
+          <ToggleButton value="bacars">BACARS</ToggleButton>
         </ToggleButtonGroup>
 
         <ToggleButtonGroup

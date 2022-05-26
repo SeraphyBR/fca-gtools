@@ -30,6 +30,7 @@ uuid = { version = "0.8", features = ["serde", "v4"] }
 tracing = "0.1"
 tracing-subscriber = { version="0.3", features = ["env-filter"] }
 directories = "4.0.1"
+port-selector = "0.1.6"
 
 [features]
 default = [ "custom-protocol" ]

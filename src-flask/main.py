@@ -1,4 +1,5 @@
 import os
+import sys
 from typing import List
 from flask import request
 from flask import Flask
@@ -110,4 +111,8 @@ def fca_tools_concepts():
 
 
 if __name__ == "__main__":
-    app.run()
+    args = sys.argv[1:]
+    if len(args) == 0:
+        app.run(host="127.0.0.1", port=5000)
+    else:
+        app.run(host=args[0], port=args[1])

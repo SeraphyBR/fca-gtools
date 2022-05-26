@@ -23,8 +23,8 @@ pub async fn get_fca_data_rules(
   if let Some(blob) = query_data.fileblob {
     let triadic_context: TriadicContext = serde_json::from_slice(blob.as_slice()).unwrap();
 
-    let resp = reqwest::Client::new()
-      .post("http://127.0.0.1:5000/fcatools/rules")
+    let resp = state.http_client
+      .post(state.fcatools_baseurl.clone() + "/rules")
       .json(&triadic_context.get_python_struct())
       .send()
       .await
@@ -56,8 +56,8 @@ pub async fn get_fca_data_concepts(
   if let Some(blob) = query_data.fileblob {
     let triadic_context: TriadicContext = serde_json::from_slice(blob.as_slice()).unwrap();
 
-    let resp = reqwest::Client::new()
-      .post("http://127.0.0.1:5000/fcatools/concepts")
+    let resp = state.http_client
+      .post(state.fcatools_baseurl.clone() + "/concepts")
       .json(&triadic_context.get_python_struct())
       .send()
       .await

@@ -17,10 +17,12 @@ mod utils;
 #[derive(Clone)]
 pub struct ApiState {
   db: SqlitePool,
+  http_client: reqwest::Client,
+  fcatools_baseurl: String
 }
 
 #[tokio::main]
-pub async fn start(addr: &'static str, local_data_dir: &PathBuf) {
+pub async fn start(addr: String, local_data_dir: &PathBuf, fcatools_baseurl: String) {
   dotenv().ok();
 
   let database_url: String;
@@ -43,7 +45,10 @@ pub async fn start(addr: &'static str, local_data_dir: &PathBuf) {
 
   sqlx::migrate!().run(&db).await.unwrap();
 
-  let shared_state = Arc::new(ApiState { db });
+  let http_client = reqwest::Client::new();
+
+  let shared_state = Arc::new(ApiState { db, http_client, fcatools_baseurl });
+
   let app = router::api_router().layer(Extension(shared_state));
 
   axum::Server::bind(&addr.parse().unwrap())

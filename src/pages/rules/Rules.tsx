@@ -106,7 +106,11 @@ const RulesPage: React.FC = () => {
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>
-      <Box>{rules && <RulesDataGrid rules={rules} loading={loadingData} sx={{ height: "calc(100vh - 200px)" }} />}</Box>
+      <Box>
+        {rules && (
+          <RulesDataGrid rules={rules} type={ruleType} loading={loadingData} sx={{ height: "calc(100vh - 200px)" }} />
+        )}
+      </Box>
     </BasePage>
   )
 }

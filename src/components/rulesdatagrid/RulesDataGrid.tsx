@@ -12,6 +12,7 @@ import { Box, SxProps, Theme } from "@mui/material"
 
 type RulesDataGridProps = {
   rules: TriadicAssociationRule[]
+  type: string
   loading?: boolean
   sx?: SxProps<Theme>
 }
@@ -28,7 +29,7 @@ const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
     },
     {
       field: "conditions",
-      headerName: "Condições",
+      headerName: props.type === "bcaars" ? "Condições" : "Atributos",
       headerAlign: "center",
       align: "center",
       width: 200,

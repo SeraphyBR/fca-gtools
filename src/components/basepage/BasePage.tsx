@@ -1,6 +1,5 @@
 import { Paper } from "@mui/material"
 import React from "react"
-import Sidebar from "../sidebar/Sidebar"
 
 type BasePageProps = {
   children: React.ReactNode

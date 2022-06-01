@@ -5,7 +5,6 @@ import {
   GridColDef,
   GridToolbarContainer,
   GridToolbarDensitySelector,
-  GridToolbarExport,
   GridToolbarFilterButton
 } from "@mui/x-data-grid"
 import { Box, SxProps, Theme } from "@mui/material"

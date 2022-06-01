@@ -79,7 +79,7 @@ const RulesPage: React.FC = () => {
     <BasePage>
       <Typography variant="h4">{t("title") + " - " + context?.name}</Typography>
       <Divider sx={{ margin: "8px 0px" }} />
-      <Typography>Selecione o tipo de regra abaixo:</Typography>
+      <Typography>{t("selectRuleType")}</Typography>
       <Box mb="24px" mt="16px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
         <ToggleButtonGroup
           color="primary"
@@ -99,10 +99,10 @@ const RulesPage: React.FC = () => {
           sx={{ ml: "16px" }}
         >
           <ToggleButton value="a" sx={{ textTransform: "none" }}>
-            Association
+            {t("buttons.association")}
           </ToggleButton>
           <ToggleButton value="i" sx={{ textTransform: "none" }}>
-            Implication
+            {t("buttons.implication")}
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>

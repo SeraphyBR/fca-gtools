@@ -23,13 +23,29 @@
       }
     },
     "rules": {
-      "title": "Rules"
+      "title": "Rules",
+      "selectRuleType": "Select the rule type below:",
+      "buttons": {
+        "association": "Association",
+        "implication": "Implication"
+      }
     },
     "editor": {
       "title": "Context Editor"
     },
     "concepts": {
       "title": "Concepts"
+    }
+  },
+  "components": {
+    "rulesDataGrid": {
+      "columns": {
+        "implication": "Implications",
+        "conditions": "Conditions",
+        "attributes": "Attributes",
+        "support": "Support",
+        "confidence": "Confidence"
+      }
     }
   },
   "notifications": {

@@ -8,6 +8,7 @@ import {
   GridToolbarFilterButton
 } from "@mui/x-data-grid"
 import { Box, SxProps, Theme } from "@mui/material"
+import { useTranslation } from "react-i18next"
 
 type RulesDataGridProps = {
   rules: TriadicAssociationRule[]
@@ -17,10 +18,12 @@ type RulesDataGridProps = {
 }
 
 const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
+  const { t } = useTranslation("translation", { keyPrefix: "components.rulesDataGrid" })
+
   const columns: GridColDef[] = [
     {
       field: "implication",
-      headerName: "Implicações",
+      headerName: t("columns.implication"),
       headerAlign: "center",
       align: "center",
       width: 200,
@@ -28,7 +31,7 @@ const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
     },
     {
       field: "conditions",
-      headerName: props.type === "bcaars" ? "Condições" : "Atributos",
+      headerName: props.type === "bcaars" ? t("columns.conditions") : t("columns.attributes"),
       headerAlign: "center",
       align: "center",
       width: 200,
@@ -36,7 +39,7 @@ const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
     },
     {
       field: "support",
-      headerName: "Suporte",
+      headerName: t("columns.support"),
       headerAlign: "center",
       type: "number",
       align: "center",
@@ -45,7 +48,7 @@ const RulesDataGrid: React.FC<RulesDataGridProps> = (props) => {
     },
     {
       field: "confidence",
-      headerName: "Confiança",
+      headerName: t("columns.confidence"),
       headerAlign: "center",
       type: "number",
       align: "center",

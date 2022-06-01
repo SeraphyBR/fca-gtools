@@ -23,13 +23,29 @@
       }
     },
     "rules": {
-      "title": "Regras"
+      "title": "Regras",
+      "selectRuleType": "Selecione o tipo de regra abaixo:",
+      "buttons": {
+        "association": "Associação",
+        "implication": "Implicação"
+      }
     },
     "editor": {
       "title": "Editor de contexto"
     },
     "concepts": {
       "title": "Conceitos"
+    }
+  },
+  "components": {
+    "rulesDataGrid": {
+      "columns": {
+        "implication": "Implicações",
+        "conditions": "Condições",
+        "attributes": "Atributos",
+        "support": "Suporte",
+        "confidence": "Confiança"
+      }
     }
   },
   "notifications": {

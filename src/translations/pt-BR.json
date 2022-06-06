@@ -75,6 +75,22 @@
       }
     }
   },
+  "dialogs": {
+    "newContext": {
+      "title": "Novo contexto",
+      "subtitle": "Preencha as informações abaixo:",
+      "labels": {
+        "name": "Nome do contexto",
+        "objects": "Número de objetos",
+        "attributes": "Número de atributos",
+        "conditions": "Número de condições"
+      },
+      "actions": {
+        "cancel": "Cancelar",
+        "create": "Criar contexto"
+      }
+    }
+  },
   "notifications": {
     "info": {
       "saving": "Salvando..."

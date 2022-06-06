@@ -1,5 +1,6 @@
 import { Box, TextField, Typography } from "@mui/material"
 import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 import DialogModal from "../../components/dialogmodal/DialogModal"
 
 type NewContextDialogProps = {
@@ -9,6 +10,7 @@ type NewContextDialogProps = {
 }
 
 const NewContextDialog: React.FC<NewContextDialogProps> = (props) => {
+  const { t } = useTranslation("translation", { keyPrefix: "dialogs.newContext" })
   const inputInitialState = { name: "", objects: "", attributes: "", conditions: "" }
   const [input, setInput] = useState(inputInitialState)
 
@@ -32,32 +34,32 @@ const NewContextDialog: React.FC<NewContextDialogProps> = (props) => {
 
   return (
     <DialogModal
-      title="Novo contexto"
+      title={t("title")}
       open={props.open}
       onClose={handleOnClose}
       showActions
-      actionLeft={{ label: "Cancelar", onClick: handleOnClose }}
-      actionRight={{ label: "Criar contexto", onClick: handleOnCreateContext, disabled: disabledActionRight }}
+      actionLeft={{ label: t("actions.cancel"), onClick: handleOnClose }}
+      actionRight={{ label: t("actions.create"), onClick: handleOnCreateContext, disabled: disabledActionRight }}
     >
       <Box component="form" display="flex" gap="16px" flexDirection="column">
-        <Typography mb="8px">Preencha as informações abaixo: </Typography>
-        <TextField value={input.name} onChange={handleTextFieldOnChange("name")} label="Nome do contexto" />
+        <Typography mb="8px">{t("subtitle")}</Typography>
+        <TextField value={input.name} onChange={handleTextFieldOnChange("name")} label={t("labels.name")} />
         <TextField
           value={input.objects}
           onChange={handleTextFieldOnChange("objects")}
-          label="Número de objetos"
+          label={t("labels.objects")}
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         />
         <TextField
           value={input.attributes}
           onChange={handleTextFieldOnChange("attributes")}
-          label="Número de atributos"
+          label={t("labels.attributes")}
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         />
         <TextField
           value={input.conditions}
           onChange={handleTextFieldOnChange("conditions")}
-          label="Número de condições"
+          label={t("labels.conditions")}
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         />
       </Box>

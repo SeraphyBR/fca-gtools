@@ -75,6 +75,22 @@
       }
     }
   },
+  "dialogs": {
+    "newContext": {
+      "title": "New context",
+      "subtitle": "Fill in the information below:",
+      "labels": {
+        "name": "Context name",
+        "objects": "Number of objects",
+        "attributes": "Number of attributes",
+        "conditions": "Number of conditions"
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "create": "Create context"
+      }
+    }
+  },
   "notifications": {
     "info": {
       "saving": "Saving..."

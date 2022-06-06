@@ -1,7 +1,7 @@
-import { SaveRounded, SaveTwoTone } from "@mui/icons-material"
-import { Box, Button, Divider, IconButton, Typography } from "@mui/material"
+import { SaveRounded } from "@mui/icons-material"
+import { Box, Button, Divider, Typography } from "@mui/material"
 import { useSnackbar } from "notistack"
-import React, { createRef, useEffect, useRef } from "react"
+import React, { createRef, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -14,6 +14,7 @@ import { postContextData, updateContextData } from "../../services/backend"
 
 const EditorPage: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.editor" })
+  const { t: tn } = useTranslation("translation", { keyPrefix: "notifications" })
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { enqueueSnackbar } = useSnackbar()
@@ -38,12 +39,12 @@ const EditorPage: React.FC = () => {
 
     let editedContext = grid.getContextWithChanges()
 
-    enqueueSnackbar("Salvando...", { variant: "info" })
+    enqueueSnackbar(tn("info.saving"), { variant: "info" })
 
     if (idContext) {
       updateContextData(idContext, editedContext)
         .then(() => {
-          enqueueSnackbar("As mudanças foram salvas com sucesso", { variant: "success" })
+          enqueueSnackbar(tn("success.changesSaved"), { variant: "success" })
           navigate("/contexts")
           dispatch(editorActions.clean())
         })
@@ -70,10 +71,18 @@ const EditorPage: React.FC = () => {
       {contextData && (
         <Box>
           <Box display="inline-flex" gap="8px" mb="16px">
-            <Typography>Nome: {contextData.name}</Typography>
-            <Typography>Objetos: {contextData.objects.length}</Typography>
-            <Typography>Atributos: {contextData.attributes.length}</Typography>
-            <Typography>Condições: {contextData.conditions.length}</Typography>
+            <Typography>
+              {t("infoLabel.contextName")} {contextData.name}
+            </Typography>
+            <Typography>
+              {t("infoLabel.objects")} {contextData.objects.length}
+            </Typography>
+            <Typography>
+              {t("infoLabel.attributes")} {contextData.attributes.length}
+            </Typography>
+            <Typography>
+              {t("infoLabel.conditions")} {contextData.conditions.length}
+            </Typography>
           </Box>
 
           <ContextDataGrid
@@ -85,10 +94,10 @@ const EditorPage: React.FC = () => {
 
           <Box mt="24px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
             <Button variant="outlined" startIcon={<SaveRounded />} onClick={handleOnClickSave}>
-              Salvar contexto
+              {t("buttons.saveChanges")}
             </Button>
             <Button variant="outlined" onClick={handleOnClickCancel}>
-              Cancelar
+              {t("buttons.cancel")}
             </Button>
           </Box>
         </Box>

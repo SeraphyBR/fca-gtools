@@ -48,7 +48,17 @@
       }
     },
     "editor": {
-      "title": "Editor de contexto"
+      "title": "Editor de contexto",
+      "infoLabel": {
+        "contextName": "Nome:",
+        "objects": "Objetos:",
+        "attributes": "Atributos:",
+        "conditions": "Condições:"
+      },
+      "buttons": {
+        "saveChanges": "Salvar contexto",
+        "cancel": "Cancelar"
+      }
     },
     "concepts": {
       "title": "Conceitos"
@@ -66,8 +76,12 @@
     }
   },
   "notifications": {
+    "info": {
+      "saving": "Salvando..."
+    },
     "success": {
-      "deleteAll": "Todos os dados foram apagados com sucesso!"
+      "deleteAll": "Todos os dados foram apagados com sucesso!",
+      "changesSaved": "As mudanças foram salvas com sucesso"
     },
     "error": {
       "deleteAll": "Algo de errado ocorreu ao deletar"

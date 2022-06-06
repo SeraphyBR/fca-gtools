@@ -48,7 +48,17 @@
       }
     },
     "editor": {
-      "title": "Context Editor"
+      "title": "Context Editor",
+      "infoLabel": {
+        "contextName": "Name:",
+        "objects": "Objects:",
+        "attributes": "Attributes:",
+        "conditions": "Conditions:"
+      },
+      "buttons": {
+        "saveChanges": "Save context",
+        "cancel": "Cancel"
+      }
     },
     "concepts": {
       "title": "Concepts"
@@ -66,8 +76,12 @@
     }
   },
   "notifications": {
+    "info": {
+      "saving": "Saving..."
+    },
     "success": {
-      "deleteAll": "All data has been sucessfully erased!"
+      "deleteAll": "All data has been sucessfully erased!",
+      "changesSaved": "Changes have been saved successfully"
     },
     "error": {
       "deleteAll": "Something went wrong while deleting"

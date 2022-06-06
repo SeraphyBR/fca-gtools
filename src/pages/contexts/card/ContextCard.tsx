@@ -11,12 +11,14 @@ import { editorActions } from "../../../redux/editor/slice"
 import { useAppDispatch } from "../../../redux/store"
 import { deleteContext, getContextData } from "../../../services/backend"
 import { conceptsActions } from "../../../redux/concepts/slice"
+import { useTranslation } from "react-i18next"
 
 type ContextCardProps = {
   context: Context
 }
 
 const ContextCard: React.FC<ContextCardProps> = (props) => {
+  const { t } = useTranslation("translation", { keyPrefix: "pages.contexts.card" })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
@@ -48,11 +50,11 @@ const ContextCard: React.FC<ContextCardProps> = (props) => {
 
   const menuItems: IconMenuItem[] = [
     {
-      label: "Fazer download",
+      label: t("actions.download"),
       icon: <FileDownload fontSize="small" />
     },
     {
-      label: "Remover",
+      label: t("actions.delete"),
       action: handleOnClickDelete,
       icon: <Delete fontSize="small" />
     }
@@ -72,24 +74,30 @@ const ContextCard: React.FC<ContextCardProps> = (props) => {
           </Typography>
         }
         subheader={
-          <Chip variant="outlined" color="info" size="small" sx={{ borderRadius: "4px", mt: "4px" }} label="Triadico" />
+          <Chip
+            variant="outlined"
+            color="info"
+            size="small"
+            sx={{ borderRadius: "4px", mt: "4px" }}
+            label={t("contextType.triadic")}
+          />
         }
         action={displayIconMenu && <IconMenu items={menuItems} />}
         disableTypography
       />
       <CardActions>
         <IconButton color="primary" onClick={handleOnClickOpenContext}>
-          <Tooltip arrow title="Abrir contexto">
+          <Tooltip arrow title={t("actions.openContext")}>
             <GridOn />
           </Tooltip>
         </IconButton>
         <IconButton color="primary" onClick={handleOnClickOpenRules}>
-          <Tooltip arrow title="Extrair regras">
+          <Tooltip arrow title={t("actions.extractRules")}>
             <Analytics />
           </Tooltip>
         </IconButton>
         <IconButton color="primary" onClick={handleOnClickOpenConcepts}>
-          <Tooltip arrow title="Obter conceitos">
+          <Tooltip arrow title={t("actions.getConcepts")}>
             <Assessment />
           </Tooltip>
         </IconButton>

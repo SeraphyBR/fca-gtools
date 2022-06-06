@@ -77,17 +77,19 @@ const ContextsPage: React.FC = () => {
       <Divider sx={{ margin: "8px 0px" }} />
       <Box>
         <Box mb="24px" width="100%" height="36px" alignItems="center" display="inline-flex" gap="12px">
-          <Typography variant="subtitle1">{contextCounter} Contextos adicionados</Typography>
+          <Typography variant="subtitle1">
+            {contextCounter} {t("counterLabel")}
+          </Typography>
           <Button
             variant="contained"
             sx={{ ml: "auto" }}
             startIcon={<ArrowDownwardRounded />}
             onClick={() => setOpenFileModal(true)}
           >
-            Importar contexto
+            {t("buttons.importContext")}
           </Button>
           <Button variant="contained" startIcon={<AddRounded />} onClick={() => setOpenNewContextDialog(true)}>
-            Criar novo contexto
+            {t("buttons.newContext")}
           </Button>
         </Box>
         <Grid container spacing={2}>

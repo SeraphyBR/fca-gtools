@@ -18,8 +18,25 @@
     },
     "contexts": {
       "title": "Contextos",
+      "counterLabel": "Contextos adicionados",
       "filedrop": {
         "label": "Arraste e solte o arquivo aqui, ou clique para selecionar"
+      },
+      "buttons": {
+        "importContext": "Importar contexto",
+        "newContext": "Criar novo contexto"
+      },
+      "card": {
+        "contextType": {
+          "triadic": "Triadico"
+        },
+        "actions": {
+          "openContext": "Abrir contexto",
+          "extractRules": "Extrair regras",
+          "getConcepts": "Obter conceitos",
+          "download": "Fazer download",
+          "delete": "Remover"
+        }
       }
     },
     "rules": {

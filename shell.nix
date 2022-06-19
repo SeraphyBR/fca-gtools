@@ -16,6 +16,7 @@ pkgs.mkShell {
         zlib
         glib
         pkg-config
+        dbus
         libsoup
         libappindicator
         webkitgtk

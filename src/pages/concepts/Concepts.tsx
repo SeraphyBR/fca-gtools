@@ -1,4 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material"
+import { useSnackbar } from "notistack"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
@@ -12,27 +13,40 @@ import { getConceptsFromFcatools } from "../../services/backend"
 const ConceptsPage: React.FC = () => {
   const { t } = useTranslation("translation", { keyPrefix: "pages.concepts" })
   const navigate = useNavigate()
+  const { enqueueSnackbar } = useSnackbar()
 
   const context = useSelector(getWorkingContext)
 
   const [concepts, setConcepts] = useState<TriadicConcept[]>([])
+  const [loadingData, setLoadingData] = useState(false)
 
   useEffect(() => {
     if (context === undefined) {
       navigate("/contexts")
     } else {
-      getConceptsFromFcatools(context.id).then((data) => {
-        setConcepts(data)
-      })
+      setConcepts([])
+      setLoadingData(true)
+      getConceptsFromFcatools(context.id)
+        .then((data) => {
+          setConcepts(data)
+        })
+        .catch(() => {
+          enqueueSnackbar("Ocorreu um erro ao processar os conceitos!", { variant: "error" })
+        })
+        .finally(() => {
+          setLoadingData(false)
+        })
     }
-  }, [context, navigate])
+  }, [context?.id, navigate])
 
   return (
     <BasePage>
       <Typography variant="h4">{t("title") + " - " + context?.name}</Typography>
       <Divider sx={{ margin: "8px 0px" }} />
       <Box>
-        {concepts && <ConceptsDataGrid concepts={concepts} loading={false} sx={{ height: "calc(100vh - 200px)" }} />}
+        {concepts && (
+          <ConceptsDataGrid concepts={concepts} loading={loadingData} sx={{ height: "calc(100vh - 200px)" }} />
+        )}
       </Box>
     </BasePage>
   )
